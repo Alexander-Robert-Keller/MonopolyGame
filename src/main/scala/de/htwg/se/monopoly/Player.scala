@@ -6,17 +6,11 @@ case class Player(t_id: Int) {
   private var jailed: Boolean = false
 
   // Getters and setters
-  def getId(): Int = {
-    id
-  }
+  def getId(): Int = t_id
 
-  def getLocation(): Int = {
-    location
-  }
+  def getLocation(): Int = location
 
-  def isJailed(): Boolean = {
-    jailed
-  }
+  def isJailed(): Boolean = jailed
 
   def setJailed(t_jailed: Boolean): Unit = {
     jailed = t_jailed
