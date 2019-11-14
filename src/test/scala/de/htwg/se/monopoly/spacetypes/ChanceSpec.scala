@@ -20,9 +20,6 @@ class ChanceSpec extends WordSpec with Matchers{
         chance.removePlayer(player)
         chance.isOnSpace(player) should be (false)
       }
-      "have a way to trigger a specific action if needed" in {
-        chance.action(player)
-      }
     }
   }
 }

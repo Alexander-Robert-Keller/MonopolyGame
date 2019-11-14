@@ -20,9 +20,6 @@ class PropertySpec extends WordSpec with Matchers{
         property.removePlayer(player)
         property.isOnSpace(player) should be (false)
       }
-      "have a way to trigger a specific action if needed" in {
-        //not jet implemented
-      }
     }
   }
 }

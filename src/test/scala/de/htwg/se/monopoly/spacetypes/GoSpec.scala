@@ -20,9 +20,6 @@ class GoSpec extends WordSpec with Matchers{
         go.removePlayer(player)
         go.isOnSpace(player) should be (false)
       }
-      "have a way to trigger a specific action if needed" in {
-        //not jet implemented
-      }
     }
   }
 }

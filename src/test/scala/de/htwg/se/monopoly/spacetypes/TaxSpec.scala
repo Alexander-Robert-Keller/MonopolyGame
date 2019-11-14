@@ -20,9 +20,6 @@ class TaxSpec extends WordSpec with Matchers{
         tax.removePlayer(player)
         tax.isOnSpace(player) should be (false)
       }
-      "have a way to trigger a specific action if needed" in {
-        //not jet implemented
-      }
     }
   }
 }

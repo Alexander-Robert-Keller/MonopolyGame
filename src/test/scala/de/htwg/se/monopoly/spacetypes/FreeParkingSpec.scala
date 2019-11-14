@@ -20,9 +20,6 @@ class FreeParkingSpec extends WordSpec with Matchers{
         freeParking.removePlayer(player)
         freeParking.isOnSpace(player) should be (false)
       }
-      "have a way to trigger a specific action if needed" in {
-        //not jet implemented
-      }
     }
   }
 }
