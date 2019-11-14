@@ -9,6 +9,7 @@ class TextualUserInterface {
   val controller = new Controller
 
   def runMenuPrompt(): Unit = {
+    // changed -> ok or revert?
     println(controller.mainMenu)
     var continue = true
     val input = StdIn.readInt()

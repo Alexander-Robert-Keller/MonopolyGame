@@ -24,7 +24,21 @@ class Board(t_numberOfPlayers: Int) {
     // index 2 a "community chest" etc.
     spaces(0) = Go()
     spaces(2) = CommunityChest()
+    spaces(5) = Railroad()
+    spaces(4) = Tax()
+    spaces(7) = Chance()
     spaces(10) = Jail()
+    spaces(15) = Railroad()
+    spaces(17) = CommunityChest()
+    spaces(20) = FreeParking()
+    spaces(25) = Railroad()
+    spaces(22) = Chance()
+    spaces(33) = CommunityChest()
+    spaces(35) = Railroad()
+    spaces(36) = Chance()
+    spaces(38) = Tax()
+
+
     // TODO redefine the rest of the spaces where applicable
     players(0).move()
     players(0).move()
