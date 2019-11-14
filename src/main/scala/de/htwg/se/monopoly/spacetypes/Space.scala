@@ -15,14 +15,15 @@ trait Space {
     availablePlayers -= t_player
   }
 
+  //maybe not needed?
   def isOnSpace(t_player: Player): Boolean = availablePlayers.contains(t_player)
 
-//dont think that this is needed if we have action
-/*  def actions(): Unit = {
+
+  def actions(): Unit = {
     for (player <- availablePlayers) {
       action(player)
     }
-  }*/
+  }
 
-  def action(t_player: Player): Unit
+  protected def action(t_player: Player): Unit
 }

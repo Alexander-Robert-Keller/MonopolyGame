@@ -69,6 +69,6 @@ class Board(t_numberOfPlayers: Int) {
     println(players(0).getLocation())
     spaces(10).addPlayer(players(0))
     spaces(10).addPlayer(players(1))
-    spaces(10).action(players(0))
+    spaces(10).actions()
   }
 }
