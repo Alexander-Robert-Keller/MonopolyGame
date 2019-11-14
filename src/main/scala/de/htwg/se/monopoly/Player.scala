@@ -1,7 +1,6 @@
 package de.htwg.se.monopoly
 
 case class Player(t_id: Int) {
-  private val id: Int = t_id
   private var location: Int = 0 // the location denotes the spaces array index
   private var jailed: Boolean = false
 
