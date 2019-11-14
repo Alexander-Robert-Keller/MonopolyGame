@@ -7,5 +7,5 @@ import scala.collection.mutable.ArrayBuffer
 case class Tax() extends Space {
   override protected val availablePlayers: ArrayBuffer[Player] = new ArrayBuffer[Player]()
 
-  override protected def action(t_player: Player): Unit = ???
+  override protected def action(t_player: Player): Unit = print()
 }

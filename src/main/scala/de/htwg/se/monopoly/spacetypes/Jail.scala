@@ -7,8 +7,6 @@ import scala.collection.mutable.ArrayBuffer
 case class Jail() extends Space {
   override protected val availablePlayers: ArrayBuffer[Player] = new ArrayBuffer[Player]()
 
-  override protected def action(t_player: Player): Unit = {
-    t_player.setJailed(true)
-    printf("Player %d got jailed\n", t_player.getId())
-  }
+  //deleted action, because no action on normal visit in case of Jail
+  override def action(t_player: Player): Unit = print()
 }
