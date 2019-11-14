@@ -11,7 +11,7 @@ class PlayerSpec extends WordSpec with Matchers{
         player.t_id should be (0)
       }
       "have a getter for his ID" in {
-        player.getId() should be ("0")
+        player.getId() should be (0)
       }
       "have a location which has a Int representation" in {
         player.getLocation() should be (0)

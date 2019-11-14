@@ -21,7 +21,7 @@ class ChanceSpec extends WordSpec with Matchers{
         chance.isOnSpace(player) should be (false)
       }
       "have a way to trigger a specific action if needed" in {
-        chance.action(player) should be (5)
+        chance.action(player)
       }
     }
   }
