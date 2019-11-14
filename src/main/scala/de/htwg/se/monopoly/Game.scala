@@ -19,9 +19,9 @@ object Game {
   def run(): Unit = {
     init()
 
-    val t: TextualUserInterface = new TextualUserInterface()
+    val tui: TextualUserInterface = new TextualUserInterface()
 
-    t.runMenuPrompt()
+    tui.runMenuPrompt()
 
 
     while (isRunning) {
