@@ -41,9 +41,7 @@ class TextualUserInterface(controller: Controller) extends Observer {
       case "1" =>
         println(controller.rollDie())  //roll Dice
       case "2" =>
-        println(controller.exitCurrentGameMessage)  //exit game
-        Game.setRunning(false)
-        Game.currentGameState = "MainMenu"
+        println(controller.exitCurrentGame())  //exit game
       case _ =>
         println(controller.wrongCommand)
     }

@@ -17,9 +17,7 @@ class Controller extends Observable {
     Game.board.toString
   }
 
-  val exitProgramMessage: String = "Exit game!"
 
-  val exitCurrentGameMessage: String = "Returns to main menu!"
 
   def rollDie(): String = {
     val eyes1 = Game.board.die.roll
@@ -53,4 +51,12 @@ class Controller extends Observable {
     Game.board.spaces(newLocation).addPlayer(Game.board.players(Game.currentPlayer))
     Game.board.players(Game.currentPlayer).setLocation(newLocation)
   }
+
+  def exitCurrentGame(): String = {
+    Game.setRunning(false)
+    Game.currentGameState = "MainMenu"
+    exitProgramMessage
+  }
+  val exitCurrentGameMessage: String = "Returns to main menu!"
+  val exitProgramMessage: String = "Exit game!"
 }
