@@ -20,7 +20,11 @@ class BoardSpec extends WordSpec with Matchers{
       "have a Die" in {
         board.die should be (Die())
       }
-      "have an array filled with different spaces, which is as long as the total number of spaces" in {
+      "have an array with the total number of spaces and be filled with property spaces" in {
+        board.spaces should be (Array.fill[Space](40)(Property()))
+      }
+      "have a method that initializes the board" in {
+        board.init()
         board.spaces.length should be (40)
         board.spaces(0) should be (Go())
         board.spaces(1) should be (Property())

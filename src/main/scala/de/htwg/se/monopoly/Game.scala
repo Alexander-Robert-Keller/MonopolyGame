@@ -44,6 +44,6 @@ object Game {
 
   // Initializes game
   private def init(): Unit = {
-
+    board.init()
   }
 }

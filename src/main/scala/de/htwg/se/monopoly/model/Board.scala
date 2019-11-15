@@ -18,8 +18,6 @@ class Board(t_numberOfPlayers: Int) {
     buffer
   }
 
-  this.init()
-
   def init(): Unit = {
     // Redefine the space layout such that it matches an actual Monopoly board layout.
     // The spaces are ordered clock-wise, i.e, index 0 denotes a "go" space, index 1 a "property" space,
