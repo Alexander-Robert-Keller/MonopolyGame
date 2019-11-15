@@ -66,6 +66,7 @@ object Game extends Observer {
 
   //
   override def update(): Unit = {
+    //Observer changes currentPlayer. Can be expanded to change currentGameState with buy and other menu expansions
     if (currentGameState == "RollDice") {
       currentPlayer = currentPlayer + 1
       if (currentPlayer >= numberOfPlayers) {
