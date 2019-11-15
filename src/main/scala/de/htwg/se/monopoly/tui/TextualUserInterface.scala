@@ -5,41 +5,38 @@ import scala.io.StdIn
 /**
  * TODO Come up with a suitable observer pattern for the textual user interface
  */
-class TextualUserInterface {
-  val controller = new Controller
+class TextualUserInterface(controller: Controller) {
 
-  def runMenuPrompt(): Unit = {
-    // changed -> ok or revert?
+  def runMainMenuPrompt(): Boolean = {
     println(controller.mainMenu)
-    var continue = true
-    val input = StdIn.readInt()
-    continue = processInputLineMainMenu(input)
-    if (!continue) {
-      return
-    }
-    do {
-      println(controller.gameMenu)
-      val input = StdIn.readInt()
-      continue = processInputLineGameMenu(input)
-    } while (continue)
+    val input = StdIn.readLine()
+    processInputLineMainMenu(input)
   }
 
-  def processInputLineMainMenu(input: Int): Boolean = {
+  def processInputLineMainMenu(input: String): Boolean = {
     input match {
-      case 1 => //start game
+      case "1" => //start game
         println("Start Game")
         true
-      case 2 => //exit
+      case "2" => //exit
         false
     }
   }
 
-  def processInputLineGameMenu(input: Int): Boolean = {
+  def runGameMenuPrompt(): Boolean = {
+    // changed -> ok or revert?
+    println(controller.mainMenu)
+    val input = StdIn.readLine()
+    processInputLineMainMenu(input)
+  }
+
+
+  def processInputLineGameMenu(input: String): Boolean = {
     input match {
-      case 1 =>
+      case "1" =>
         println("roll:")
         true //roll dice
-      case 2 =>
+      case "2" =>
         false //exit game
     }
   }

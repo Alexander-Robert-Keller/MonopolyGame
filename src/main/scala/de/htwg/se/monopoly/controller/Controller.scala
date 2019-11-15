@@ -10,4 +10,6 @@ class Controller {
   def printGameBoard(): String = {
     "s"
   }
+
+  val exitGameMessage: String = "Exit Game!"
 }

@@ -23,8 +23,6 @@ class PlayerSpec extends WordSpec with Matchers{
         player.setJailed(true)
         player.isJailed() should be (true)
       }
-
-
     }
   }
 }

@@ -1,5 +1,6 @@
 package de.htwg.se.monopoly
 
+import de.htwg.se.monopoly.controller._
 import de.htwg.se.monopoly.tui.TextualUserInterface
 
 /*
@@ -15,18 +16,21 @@ object Game {
   private val board: Board = new Board(numberOfPlayers)
   private var running: Boolean = true
 
+
   // Runs the game
   def run(): Unit = {
     init()
 
-    val tui: TextualUserInterface = new TextualUserInterface()
-
-    tui.runMenuPrompt()
-
-
-    while (isRunning) {
-      setRunning(false)
+    val controller = new Controller()
+    val tui: TextualUserInterface = new TextualUserInterface(controller)
+    //run main menu
+    setRunning(tui.runMainMenuPrompt())
+    if (!isRunning()) {
+      return
     }
+    do {  //runs game menu
+      setRunning(tui.runGameMenuPrompt())
+    } while (isRunning())
   } // end of run()
 
   // Setters and getters
