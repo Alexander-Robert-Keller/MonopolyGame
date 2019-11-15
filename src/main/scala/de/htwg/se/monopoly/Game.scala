@@ -14,7 +14,7 @@ import de.htwg.se.monopoly.tui.TextualUserInterface
 
 object Game {
   private val numberOfPlayers = 2
-  private val board: Board = new Board(numberOfPlayers)
+  val board: Board = new Board(numberOfPlayers)
   private var running: Boolean = true
 
   // Runs the game

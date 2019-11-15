@@ -11,6 +11,14 @@ trait Space {
     availablePlayers.append(t_player)
   }
 
+  def getAvailablePlayer: String = {
+    var playerList: String = ""
+    for(player <- availablePlayers) {
+      playerList = playerList + player.toString + "  "
+    }
+    playerList
+  }
+
   def removePlayer(t_player: Player): Unit = {
     availablePlayers -= t_player
   }

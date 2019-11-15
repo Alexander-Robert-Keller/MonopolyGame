@@ -2,6 +2,7 @@ package de.htwg.se.monopoly.model
 
 import de.htwg.se.monopoly.spacetypes._
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 class Board(t_numberOfPlayers: Int) {
@@ -42,8 +43,12 @@ class Board(t_numberOfPlayers: Int) {
     spaces(36) = Chance()
     spaces(38) = Tax()
 
+    for (i <- 0 until totalNumberOfPlayers) {
+      spaces(0).addPlayer(players(i))
+      players(i).setLocation(0)
+    }
 
-    players(0).move()
+/*    players(0).move()
     players(0).move()
     players(0).move()
     players(0).move()
@@ -86,6 +91,18 @@ class Board(t_numberOfPlayers: Int) {
     println(players(0).getLocation)
     spaces(10).addPlayer(players(0))
     spaces(10).addPlayer(players(1))
-    spaces(10).actions()
+    spaces(10).actions()*/
+  }
+
+  override def toString: String = {
+    val boardString = new mutable.StringBuilder("")
+    boardString ++= "field ID:\t type: \t\t player:\n"
+    var i = 0
+    while (i < 40) {
+      boardString ++= "%d\t\t\t %s\t\t".format(i, spaces(i).getClass.toString)
+      boardString ++= "%s\n".format(spaces(i).getAvailablePlayer)
+      i = i + 1
+    }
+    boardString.toString()
   }
 }

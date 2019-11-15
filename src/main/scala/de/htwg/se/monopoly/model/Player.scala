@@ -9,11 +9,14 @@ case class Player(t_id: Int) {
 
   def getLocation: Int = location
 
+  def setLocation(newLocation: Int) { location = newLocation }
+
   def isJailed: Boolean = jailed
 
   def setJailed(t_jailed: Boolean): Unit = {
     jailed = t_jailed
   }
+  override def toString: String = "Player " + getId
 
   def move(): Unit = {
     if (location < 39) {
