@@ -34,9 +34,10 @@ class TextualUserInterface(controller: Controller) {
   def processInputLineGameMenu(input: String): Boolean = {
     input match {
       case "1" =>
-        println("roll:")
+        println(controller.rollDie())
         true //roll dice
       case "2" =>
+        println(controller.exitGameMessage)
         false //exit game
     }
   }

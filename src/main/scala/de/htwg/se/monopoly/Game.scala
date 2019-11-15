@@ -1,6 +1,7 @@
 package de.htwg.se.monopoly
 
 import de.htwg.se.monopoly.controller._
+import de.htwg.se.monopoly.model.Board
 import de.htwg.se.monopoly.tui.TextualUserInterface
 
 /*
@@ -16,7 +17,6 @@ object Game {
   private val board: Board = new Board(numberOfPlayers)
   private var running: Boolean = true
 
-
   // Runs the game
   def run(): Unit = {
     init()
@@ -25,12 +25,12 @@ object Game {
     val tui: TextualUserInterface = new TextualUserInterface(controller)
     //run main menu
     setRunning(tui.runMainMenuPrompt())
-    if (!isRunning()) {
+    if (!isRunning) {
       return
     }
     do {  //runs game menu
       setRunning(tui.runGameMenuPrompt())
-    } while (isRunning())
+    } while (isRunning)
   } // end of run()
 
   // Setters and getters
@@ -38,7 +38,7 @@ object Game {
     running = t_running
   }
 
-  def isRunning(): Boolean = {
+  def isRunning: Boolean = {
     running
   }
 

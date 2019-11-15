@@ -12,4 +12,8 @@ class Controller {
   }
 
   val exitGameMessage: String = "Exit Game!"
+
+  def rollDie(): String = {
+    "s"
+  }
 }

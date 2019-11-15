@@ -1,4 +1,4 @@
-package de.htwg.se.monopoly
+package de.htwg.se.monopoly.model
 
 import de.htwg.se.monopoly.spacetypes._
 
@@ -82,7 +82,7 @@ class Board(t_numberOfPlayers: Int) {
     players(0).move()
     players(0).move()
     players(0).move()
-    println(players(0).getLocation())
+    println(players(0).getLocation)
     spaces(10).addPlayer(players(0))
     spaces(10).addPlayer(players(1))
     spaces(10).actions()

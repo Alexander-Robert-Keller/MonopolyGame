@@ -1,4 +1,4 @@
-package de.htwg.se.monopoly
+package de.htwg.se.monopoly.model
 
 import de.htwg.se.monopoly.spacetypes._
 import org.scalatest.{Matchers, WordSpec}
@@ -14,8 +14,8 @@ class BoardSpec extends WordSpec with Matchers{
         board.totalNumberOfPlayers should be (2)
       }
       "have a list of all the players in the game" in {
-        board.players(0).getId() should be (1)
-        board.players(1).getId() should be (2)
+        board.players(0).getId should be (1)
+        board.players(1).getId should be (2)
       }
       "have an array filled with different spaces, which is as long as the total number of spaces" in {
         board.spaces.length should be (40)
