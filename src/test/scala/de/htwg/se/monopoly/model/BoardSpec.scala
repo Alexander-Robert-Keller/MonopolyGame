@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.spacetypes._
+import de.htwg.se.monopoly.model.spacetypes._
 import org.scalatest.{Matchers, WordSpec}
 
 class BoardSpec extends WordSpec with Matchers{

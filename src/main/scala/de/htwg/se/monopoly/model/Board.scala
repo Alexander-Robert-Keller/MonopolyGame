@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.spacetypes._
+import de.htwg.se.monopoly.model.spacetypes._
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer

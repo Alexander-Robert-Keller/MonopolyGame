@@ -1,4 +1,4 @@
-package de.htwg.se.monopoly.tui
+package de.htwg.se.monopoly.aview
 
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.Controller
