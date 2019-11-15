@@ -17,17 +17,19 @@ class Controller extends Observable {
     Game.board.toString
   }
 
-  val exitGameMessage: String = "Exit Game!"
+  val exitProgramMessage: String = "Exit game!"
+
+  val exitCurrentGameMessage: String = "Returns to main menu!"
 
   def rollDie(): String = {
     val eyes1 = Game.board.die.roll
     val eyes2 = Game.board.die.roll
-    val currentLocation = Game.board.players(0).getLocation
+    val currentLocation = Game.board.players(Game.currentPlayer).getLocation
     var newLocation = currentLocation + eyes1 + eyes2
     val eyes1_eyes2toString: String = "You rolled: %d and %d. Move %d spaces!\n".format(eyes1, eyes2, eyes1 + eyes2)
     if (newLocation > 39) {
       newLocation = newLocation % 40
-      movePlayer(Game.board.players(0).getId, currentLocation, newLocation)
+      movePlayer(Game.board.players(Game.currentPlayer).getId, currentLocation, newLocation)
       if (eyes1 == eyes2) {
         if (newLocation == 0) {
           notifyObservers()
@@ -40,15 +42,15 @@ class Controller extends Observable {
         eyes1_eyes2toString
       }
     } else {
-      movePlayer(Game.board.players(0).getId, currentLocation, newLocation)
+      movePlayer(Game.board.players(Game.currentPlayer).getId, currentLocation, newLocation)
       notifyObservers()
       eyes1_eyes2toString
     }
   }
 
   def movePlayer(playerID: Int, currentLocation: Int, newLocation: Int): Unit = {
-    Game.board.spaces(currentLocation).removePlayer(Game.board.players(0))
-    Game.board.spaces(newLocation).addPlayer(Game.board.players(0))
-    Game.board.players(0).setLocation(newLocation)
+    Game.board.spaces(currentLocation).removePlayer(Game.board.players(Game.currentPlayer))
+    Game.board.spaces(newLocation).addPlayer(Game.board.players(Game.currentPlayer))
+    Game.board.players(Game.currentPlayer).setLocation(newLocation)
   }
 }

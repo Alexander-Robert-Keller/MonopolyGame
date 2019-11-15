@@ -5,6 +5,8 @@ import de.htwg.se.monopoly.model.Board
 import de.htwg.se.monopoly.aview.TextualUserInterface
 import de.htwg.se.monopoly.util.{Observable, Observer}
 
+import scala.io.StdIn
+
 /*
  * The game loop
  * for our Monopoly game implemented in Scala.
@@ -16,28 +18,39 @@ import de.htwg.se.monopoly.util.{Observable, Observer}
 object Game extends Observer {
   private val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
-  private var running: Boolean = true
+  private var running: Boolean = false
+  var currentGameState: String = "MainMenu"
+  var currentPlayer: Int = 0
 
   // Runs the game
   def run(): Unit = {
-    init()
-
     val controller = new Controller()
     controller.add(this)
-
     val tui: TextualUserInterface = new TextualUserInterface(controller)
-    //run main menu
-    setRunning(tui.runMainMenuPrompt())
-    if (!isRunning) {
-      return
-    }
-    do {  //runs game menu
-      setRunning(tui.runGameMenuPrompt())
-    } while (isRunning)
+    //Main Menu loop
+    var input: String = ""
+    do {
+      tui.mainMenuOptions()
+      input = StdIn.readLine()
+      tui.processInputLineMainMenu(input)
+      if (isRunning) {
+        gameMenuLoop(tui)
+      }
+    } while (input != "2")
   } // end of run()
 
+  //Game Loop
+  def gameMenuLoop(tui: TextualUserInterface): Unit = {
+    do {
+      tui.gameMenuOptions()
+      val input = StdIn.readLine()
+      tui.processInputLineGameMenu(input)
+    } while (isRunning)
+  } // on exit returns to main menu
+
+
   // Setters and getters
-  private def setRunning(t_running: Boolean): Unit = {
+  def setRunning(t_running: Boolean): Unit = {
     running = t_running
   }
 
@@ -46,12 +59,18 @@ object Game extends Observer {
   }
 
   // Initializes game
-  private def init(): Unit = {
+  def init(): Unit = {
     board.init()
+    currentGameState = "RollDice"
   }
 
   //
   override def update(): Unit = {
-    setRunning(true)
+    if (currentGameState == "RollDice") {
+      currentPlayer = currentPlayer + 1
+      if (currentPlayer >= numberOfPlayers) {
+        currentPlayer = currentPlayer % numberOfPlayers
+      }
+    }
   }
 }

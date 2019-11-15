@@ -1,5 +1,6 @@
 package de.htwg.se.monopoly.aview
 
+import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.Controller
 import de.htwg.se.monopoly.util.{Observable, Observer}
 
@@ -12,46 +13,39 @@ class TextualUserInterface(controller: Controller) extends Observer {
   //Adds Controller to Observable list
   controller.add(this)
 
-  def runMainMenuPrompt(): Boolean = {
+  def mainMenuOptions(): Unit = {
     println(controller.mainMenu)
-    val input = StdIn.readLine()
-    processInputLineMainMenu(input)
   }
 
-  def processInputLineMainMenu(input: String): Boolean = {
+  def processInputLineMainMenu(input: String): Unit = {
     input match {
       case "1" => //start game
         println("Start Game:")
+        Game.init()
+        Game.setRunning(true)
         println(controller.StringGameBoard())
-        true
       case "2" => //exit
-        println(controller.exitGameMessage)
-        false
+        println(controller.exitProgramMessage)
       case _ =>
         println(controller.wrongCommand)
-        false
     }
   }
 
-  def runGameMenuPrompt(): Boolean = {
-    // changed -> ok or revert?
+  def gameMenuOptions(): Unit = {
     println(controller.gameMenu)
-    val input = StdIn.readLine()
-    processInputLineGameMenu(input)
   }
 
 
-  def processInputLineGameMenu(input: String): Boolean = {
+  def processInputLineGameMenu(input: String): Unit = {
     input match {
       case "1" =>
-        println(controller.rollDie())
-        true //roll dice
+        println(controller.rollDie())  //roll Dice
       case "2" =>
-        println(controller.exitGameMessage)
-        false //exit game
+        println(controller.exitCurrentGameMessage)  //exit game
+        Game.setRunning(false)
+        Game.currentGameState = "MainMenu"
       case _ =>
         println(controller.wrongCommand)
-        true
     }
   }
 
