@@ -59,4 +59,9 @@ class Controller extends Observable {
   }
   val exitCurrentGameMessage: String = "Returns to main menu!"
   val exitProgramMessage: String = "Exit game!"
+
+  def initializeGame(): Unit = {
+    Game.init()
+    Game.setRunning(true)
+  }
 }

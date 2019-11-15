@@ -21,8 +21,7 @@ class TextualUserInterface(controller: Controller) extends Observer {
     input match {
       case "1" => //start game
         println("Start Game:")
-        Game.init()
-        Game.setRunning(true)
+        controller.initializeGame()
         println(controller.StringGameBoard())
       case "2" => //exit
         println(controller.exitProgramMessage)
