@@ -1,13 +1,16 @@
 package de.htwg.se.monopoly.aview
 
-import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.Controller
+import de.htwg.se.monopoly.util.{Observable, Observer}
 
 import scala.io.StdIn
 /**
  * TODO Come up with a suitable observer pattern for the textual user interface
  */
-class TextualUserInterface(controller: Controller) {
+class TextualUserInterface(controller: Controller) extends Observer {
+
+  //Adds Controller to Observable list
+  controller.add(this)
 
   def runMainMenuPrompt(): Boolean = {
     println(controller.mainMenu)
@@ -24,6 +27,9 @@ class TextualUserInterface(controller: Controller) {
       case "2" => //exit
         println(controller.exitGameMessage)
         false
+      case _ =>
+        println(controller.wrongCommand)
+        false
     }
   }
 
@@ -39,11 +45,17 @@ class TextualUserInterface(controller: Controller) {
     input match {
       case "1" =>
         println(controller.rollDie())
-        println(controller.StringGameBoard())
         true //roll dice
       case "2" =>
         println(controller.exitGameMessage)
         false //exit game
+      case _ =>
+        println(controller.wrongCommand)
+        true
     }
+  }
+
+  override def update(): Unit = {
+    println(controller.StringGameBoard())
   }
 }

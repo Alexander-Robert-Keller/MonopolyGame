@@ -94,10 +94,10 @@ class Board(t_numberOfPlayers: Int) {
 
   override def toString: String = {
     val boardString = new mutable.StringBuilder("")
-    boardString ++= "field ID:\t type: \t\t player:\n"
+    boardString ++= "field ID:\t type: \t\t\t\t player:\n"
     var i = 0
     while (i < 40) {
-      boardString ++= "%d\t\t\t %s\t\t".format(i, spaces(i).getClass.toString)
+      boardString ++= "%d\t\t\t %-20s".format(i, spaces(i).getClass.toString.substring(43))
       boardString ++= "%s\n".format(spaces(i).getAvailablePlayer)
       i = i + 1
     }

@@ -3,6 +3,7 @@ package de.htwg.se.monopoly
 import de.htwg.se.monopoly.controller._
 import de.htwg.se.monopoly.model.Board
 import de.htwg.se.monopoly.aview.TextualUserInterface
+import de.htwg.se.monopoly.util.{Observable, Observer}
 
 /*
  * The game loop
@@ -12,7 +13,7 @@ import de.htwg.se.monopoly.aview.TextualUserInterface
  * - https://www.youtube.com/watch?v=AuWvMgYv03g
  */
 
-object Game {
+object Game extends Observer {
   private val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
   private var running: Boolean = true
@@ -22,6 +23,8 @@ object Game {
     init()
 
     val controller = new Controller()
+    controller.add(this)
+
     val tui: TextualUserInterface = new TextualUserInterface(controller)
     //run main menu
     setRunning(tui.runMainMenuPrompt())
@@ -45,5 +48,10 @@ object Game {
   // Initializes game
   private def init(): Unit = {
     board.init()
+  }
+
+  //
+  override def update(): Unit = {
+    setRunning(true)
   }
 }

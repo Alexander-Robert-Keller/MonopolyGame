@@ -11,7 +11,7 @@ class PlayerSpec extends WordSpec with Matchers{
         player.t_id should be (0)
       }
       "have a Sting representation" in {
-        player.toString should be ("Player 1")
+        player.toString should be ("Player 0")
       }
       "have a getter for his ID" in {
         player.getId should be (0)
