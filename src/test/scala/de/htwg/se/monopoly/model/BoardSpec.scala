@@ -17,6 +17,9 @@ class BoardSpec extends WordSpec with Matchers{
         board.players(0).getId should be (1)
         board.players(1).getId should be (2)
       }
+      "have a Die" in {
+        board.die should be (Die())
+      }
       "have an array filled with different spaces, which is as long as the total number of spaces" in {
         board.spaces.length should be (40)
         board.spaces(0) should be (Go())
