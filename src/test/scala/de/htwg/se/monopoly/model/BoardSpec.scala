@@ -67,6 +67,10 @@ class BoardSpec extends WordSpec with Matchers{
         board.spaces(38) should be (Tax())
         board.spaces(39) should be (Property())
       }
+      "have a way to return the board as String" in {
+        val test = board.toString
+        board.toString should be (test)
+      }
     }
   }
 }

@@ -18,11 +18,11 @@ case class Player(t_id: Int) {
   }
   override def toString: String = "Player " + getId
 
-  def move(): Unit = {
+/*  def move(): Unit = {
     if (location < 39) {
       location += 1
     } else if (location == 39) {
       location = 0
     }
-  }
+  }*/
 }
