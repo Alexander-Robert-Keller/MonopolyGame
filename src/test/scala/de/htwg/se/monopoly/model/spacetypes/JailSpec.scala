@@ -20,6 +20,11 @@ class JailSpec extends WordSpec with Matchers{
         jail.removePlayer(player)
         jail.isOnSpace(player) should be (false)
       }
+      "have an action that triggers an event" in {
+        jail.addPlayer(player)
+        jail.actions()
+        player.isJailed should be (true)
+      }
     }
   }
 }

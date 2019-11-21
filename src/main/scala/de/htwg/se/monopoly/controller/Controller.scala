@@ -13,7 +13,7 @@ class Controller extends Observable {
 
   val wrongCommand = "Command Option does not exist"
 
-  def StringGameBoard(): String = {
+  def stringGameBoard(): String = {
     Game.board.toString
   }
 
@@ -55,7 +55,7 @@ class Controller extends Observable {
   def exitCurrentGame(): String = {
     Game.setRunning(false)
     Game.currentGameState = "MainMenu"
-    exitProgramMessage
+    exitCurrentGameMessage
   }
   val exitCurrentGameMessage: String = "Returns to main menu!"
   val exitProgramMessage: String = "Exit game!"

@@ -22,7 +22,7 @@ class TextualUserInterface(controller: Controller) extends Observer {
       case "1" => //start game
         println("Start Game:")
         controller.initializeGame()
-        println(controller.StringGameBoard())
+        println(controller.stringGameBoard())
       case "2" => //exit
         println(controller.exitProgramMessage)
       case _ =>
@@ -47,6 +47,6 @@ class TextualUserInterface(controller: Controller) extends Observer {
   }
 
   override def update(): Unit = {
-    println(controller.StringGameBoard())
+    println(controller.stringGameBoard())
   }
 }
