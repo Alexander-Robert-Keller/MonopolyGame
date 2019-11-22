@@ -20,6 +20,8 @@ class GameSpec extends WordSpec with Matchers {
       Game.currentPlayer = 0
       Game.update()
       Game.currentPlayer should be (1)
+      Game.update()
+      Game.currentPlayer should be (0)
     }
   }
 }
