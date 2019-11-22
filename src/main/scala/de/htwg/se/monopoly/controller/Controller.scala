@@ -17,8 +17,6 @@ class Controller extends Observable {
     Game.board.toString
   }
 
-
-
   def rollDie(): String = {
     val eyes1 = Game.board.die.roll
     val eyes2 = Game.board.die.roll
@@ -63,5 +61,6 @@ class Controller extends Observable {
   def initializeGame(): Unit = {
     Game.init()
     Game.setRunning(true)
+    Game.currentGameState = "RollDice"
   }
 }

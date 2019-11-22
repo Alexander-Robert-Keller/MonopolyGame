@@ -6,6 +6,6 @@ import de.htwg.se.monopoly.Game
 
 object Main {
   def main(args: Array[String]): Unit = {
-    Game.run()
+    Game.run(args)
   }
 }

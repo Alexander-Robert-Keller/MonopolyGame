@@ -23,25 +23,30 @@ object Game extends Observer {
   var currentPlayer: Int = 0
 
   // Runs the game
-  def run(): Unit = {
+  def run(args: Array[String]): Unit = {
     val controller = new Controller()
     controller.add(this)
     val tui: TextualUserInterface = new TextualUserInterface(controller)
     //Main Menu loop
     var input: String = ""
-    do {
+    if (!args.isEmpty) {
+      tui.processInputLineMainMenu(args(0))
+      gameLoop(tui, args(1))
+    } else do {
       tui.mainMenuOptions()
       input = StdIn.readLine()
       tui.processInputLineMainMenu(input)
       if (isRunning) {
-        gameLoop(tui)
+        gameLoop(tui, "")
       }
     } while (input != "2")
   } // end of run()
 
   //Game Loop
-  def gameLoop(tui: TextualUserInterface): Unit = {
-    do {
+  def gameLoop(tui: TextualUserInterface, args: String): Unit = {
+    if (args.length > 0) {
+      tui.processInputLineGameMenu(args)
+    } else do {
       tui.gameMenuOptions()
       val input = StdIn.readLine()
       tui.processInputLineGameMenu(input)
