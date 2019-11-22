@@ -62,6 +62,7 @@ object Game extends Observer {
   def init(): Unit = {
     board.init()
     currentGameState = "RollDice"
+    currentPlayer = 0
   }
 
   //

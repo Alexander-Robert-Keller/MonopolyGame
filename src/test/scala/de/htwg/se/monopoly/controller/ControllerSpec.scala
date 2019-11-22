@@ -28,6 +28,12 @@ class ControllerSpec extends WordSpec with Matchers{
         controller.rollDie()
         Game.board.players(0).getLocation should be > 0
         Game.board.players(0).getLocation should be < 13
+
+        Game.board.init()
+        controller.movePlayer(0, Game.board.players(0).getLocation, 39)
+        controller.rollDie()
+        Game.board.players(0).getLocation should be > 0
+        Game.board.players(0).getLocation should be < 40
       }
       "have a method that moves the player to a specific location" in {
         controller.movePlayer(Game.board.players(0).getId, Game.board.players(0).getLocation, 0)
