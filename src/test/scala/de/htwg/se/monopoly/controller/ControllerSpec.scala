@@ -55,6 +55,11 @@ class ControllerSpec extends WordSpec with Matchers{
       "have a String that contains a message when u exit the program" in {
         controller.exitProgramMessage should be ("Exit game!")
       }
+      "have a way to notify his Observers" in {
+        Game.currentPlayer = 0
+        controller.notifyObservers()
+        Game.currentPlayer = 1
+      }
     }
   }
 }

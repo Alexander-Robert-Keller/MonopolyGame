@@ -34,13 +34,13 @@ object Game extends Observer {
       input = StdIn.readLine()
       tui.processInputLineMainMenu(input)
       if (isRunning) {
-        gameMenuLoop(tui)
+        gameLoop(tui)
       }
     } while (input != "2")
   } // end of run()
 
   //Game Loop
-  def gameMenuLoop(tui: TextualUserInterface): Unit = {
+  def gameLoop(tui: TextualUserInterface): Unit = {
     do {
       tui.gameMenuOptions()
       val input = StdIn.readLine()
