@@ -20,12 +20,12 @@ class Controller extends Observable {
   def rollDie(): String = {
     val eyes1 = Game.board.die.roll
     val eyes2 = Game.board.die.roll
-    val currentLocation = Game.board.players(Game.currentPlayer).getLocation
+    val currentLocation = Game.board.players(GameState.getCurrentPlayer).getLocation
     var newLocation = currentLocation + eyes1 + eyes2
     val eyes1_eyes2toString: String = "You rolled: %d and %d. Move %d spaces!\n".format(eyes1, eyes2, eyes1 + eyes2)
     if (newLocation > 39) {
       newLocation = newLocation % 40
-      movePlayer(Game.board.players(Game.currentPlayer).getId, currentLocation, newLocation)
+      movePlayer(Game.board.players(GameState.getCurrentPlayer).getId, currentLocation, newLocation)
       if (eyes1 == eyes2) {
         if (newLocation == 0) {
           notifyObservers()
@@ -38,29 +38,29 @@ class Controller extends Observable {
         eyes1_eyes2toString
       }
     } else {
-      movePlayer(Game.board.players(Game.currentPlayer).getId, currentLocation, newLocation)
+      movePlayer(Game.board.players(GameState.getCurrentPlayer).getId, currentLocation, newLocation)
       notifyObservers()
       eyes1_eyes2toString
     }
   }
 
   def movePlayer(playerID: Int, currentLocation: Int, newLocation: Int): Unit = {
-    Game.board.spaces(currentLocation).removePlayer(Game.board.players(Game.currentPlayer))
-    Game.board.spaces(newLocation).addPlayer(Game.board.players(Game.currentPlayer))
-    Game.board.players(Game.currentPlayer).setLocation(newLocation)
+    Game.board.spaces(currentLocation).removePlayer(Game.board.players(GameState.getCurrentPlayer))
+    Game.board.spaces(newLocation).addPlayer(Game.board.players(GameState.getCurrentPlayer))
+    Game.board.players(GameState.getCurrentPlayer).setLocation(newLocation)
   }
 
   def exitCurrentGame(): String = {
     Game.setRunning(false)
-    Game.currentGameState = "MainMenu"
+    GameState.setState("MAIN_MENU")
     exitCurrentGameMessage
   }
+
   val exitCurrentGameMessage: String = "Returns to main menu!"
+
   val exitProgramMessage: String = "Exit game!"
 
   def initializeGame(): Unit = {
     Game.init()
-    Game.setRunning(true)
-    Game.currentGameState = "RollDice"
   }
 }

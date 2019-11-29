@@ -5,6 +5,26 @@ object GameState extends Enumeration {
   val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
   state = MAIN_MENU
 
+  var currentPlayer = 0
+  var numberOfPlayer = 0
+
+  def setCurrentPlayer(player: Int): Unit = {
+    currentPlayer = player
+  }
+
+  def setNumberOfPlayer(maxPlayers: Int): Unit = {
+    numberOfPlayer = maxPlayers
+  }
+
+  def getCurrentPlayer: Int = currentPlayer
+
+  def nextPlayer(): Unit = {
+    currentPlayer = currentPlayer + 1
+    if (currentPlayer >= numberOfPlayer) {
+      currentPlayer = currentPlayer % numberOfPlayer
+    }
+  }
+
   def setState(e: String): Unit = {
     e match {
       case "ROLL_DICE" => state = ROLL_DICE
@@ -16,7 +36,9 @@ object GameState extends Enumeration {
   def nextState(): Unit = {
     state match {
       case MAIN_MENU => state = ROLL_DICE
-      case ROLL_DICE => state = BUY_OR_UPGRADE_PROPERTY
+      case ROLL_DICE => state = ROLL_DICE
+        nextPlayer() //change to later point if BUY_OR_UPGRADE_PROPERTY is implemented
+      //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
       case BUY_OR_UPGRADE_PROPERTY => state = ROLL_DICE
     }
   }
