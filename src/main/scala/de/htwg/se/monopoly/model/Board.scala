@@ -5,10 +5,9 @@ import de.htwg.se.monopoly.model.spacetypes._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Board(t_numberOfPlayers: Int) {
+class Board(totalNumberOfPlayers: Int) {
   val die = Die()
   val totalNumberOfSpaces: Int = 40
-  val totalNumberOfPlayers: Int = t_numberOfPlayers
   val spaces: Array[Space] = Array.fill[Space](totalNumberOfSpaces)(Property()) // hint: most spaces are property spaces
   val players: ArrayBuffer[Player] = {
     val buffer: ArrayBuffer[Player] = new ArrayBuffer[Player]
@@ -41,55 +40,6 @@ class Board(t_numberOfPlayers: Int) {
     spaces(36) = Chance()
     spaces(38) = Tax()
 
-    for (i <- 0 until totalNumberOfPlayers) {
-      spaces(0).addPlayer(players(i))
-      players(i).setLocation(0)
-    }
-
-/*    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    players(0).move()
-    println(players(0).getLocation)
-    spaces(10).addPlayer(players(0))
-    spaces(10).addPlayer(players(1))
-    spaces(10).actions()*/
   }
 
   override def toString: String = {
@@ -98,7 +48,12 @@ class Board(t_numberOfPlayers: Int) {
     var i = 0
     while (i < 40) {
       boardString ++= "%d\t\t\t %-20s".format(i, spaces(i).getClass.toString.substring(43))
-      boardString ++= "%s\n".format(spaces(i).getAvailablePlayer)
+      for (player <- players) {
+        if (player.getLocation == i) {
+          boardString ++= "Player %d  ".format(player.getId)
+        }
+      }
+      boardString ++= "\n"
       i = i + 1
     }
     boardString.toString()

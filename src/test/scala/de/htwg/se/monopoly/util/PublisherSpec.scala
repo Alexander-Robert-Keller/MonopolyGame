@@ -2,10 +2,10 @@ package de.htwg.se.monopoly.util
 
 import org.scalatest.{Matchers, WordSpec}
 
-class ObservableSpec extends WordSpec with Matchers {
+class PublisherSpec extends WordSpec with Matchers {
   "An Observable" should {
-    val observable = new Observable
-    val observer = new Observer {
+    val observable = new Publisher
+    val observer = new Subscriber {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
       override def update(): Unit = {updated = true}

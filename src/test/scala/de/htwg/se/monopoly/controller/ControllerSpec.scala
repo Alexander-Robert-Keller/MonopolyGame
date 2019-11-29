@@ -38,7 +38,6 @@ class ControllerSpec extends WordSpec with Matchers{
       "have a method that moves the player to a specific location" in {
         controller.movePlayer(Game.board.players(0).getId, Game.board.players(0).getLocation, 0)
         Game.board.players(0).getLocation should be (0)
-        Game.board.spaces(0).getAvailablePlayer should be ("Player 2  Player 1  ")
       }
       "have a method that initializes the game" in {
         controller.initializeGame()
