@@ -1,9 +1,9 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.util.Observable
+import de.htwg.se.monopoly.util.Publisher
 
-class Controller extends Observable {
+class Controller extends Publisher {
 
   val mainMenu = "option | description\n [1]   | Start new game\n [2]   | Exit game"
 
@@ -45,8 +45,6 @@ class Controller extends Observable {
   }
 
   def movePlayer(playerID: Int, currentLocation: Int, newLocation: Int): Unit = {
-    Game.board.spaces(currentLocation).removePlayer(Game.board.players(Game.currentPlayer))
-    Game.board.spaces(newLocation).addPlayer(Game.board.players(Game.currentPlayer))
     Game.board.players(Game.currentPlayer).setLocation(newLocation)
   }
 

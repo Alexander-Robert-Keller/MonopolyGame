@@ -2,13 +2,13 @@ package de.htwg.se.monopoly.aview
 
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.Controller
-import de.htwg.se.monopoly.util.{Observable, Observer}
+import de.htwg.se.monopoly.util.{Publisher, Subscriber}
 
 import scala.io.StdIn
 /**
  * TODO Come up with a suitable observer pattern for the textual user interface
  */
-class TextualUserInterface(controller: Controller) extends Observer {
+class TextualUserInterface(controller: Controller) extends Subscriber {
 
   //Adds Controller to Observable list
   controller.add(this)
