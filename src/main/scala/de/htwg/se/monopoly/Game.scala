@@ -19,8 +19,6 @@ object Game extends Subscriber {
   private val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
   private var running: Boolean = false
-  var currentGameState: String = "MainMenu"
-  var currentPlayer: Int = 0
 
   // Runs the game
   def run(args: Array[String]): Unit = {
@@ -65,19 +63,15 @@ object Game extends Subscriber {
 
   // Initializes game
   def init(): Unit = {
+    Game.setRunning(true)
     board.init()
-    currentGameState = "RollDice"
-    currentPlayer = 0
+    GameState.setCurrentPlayer(0)
+    GameState.setNumberOfPlayer(numberOfPlayers)
+    GameState.nextState()
   }
 
   //
   override def update(): Unit = {
-    //Observer changes currentPlayer. Can be expanded to change currentGameState with buy and other menu expansions
-    if (currentGameState == "RollDice") {
-      currentPlayer = currentPlayer + 1
-      if (currentPlayer >= numberOfPlayers) {
-        currentPlayer = currentPlayer % numberOfPlayers
-      }
-    }
+    GameState.nextState()
   }
 }

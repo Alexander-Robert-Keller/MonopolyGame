@@ -16,12 +16,7 @@ class GameSpec extends WordSpec with Matchers {
       Game.gameLoop(tui, args(1))
     }
     "be able to update the gameboard state, if the controller notifies him" in {
-      Game.currentGameState = "RollDice"
-      Game.currentPlayer = 0
-      Game.update()
-      Game.currentPlayer should be (1)
-      Game.update()
-      Game.currentPlayer should be (0)
+      //TODO:
     }
   }
 }
