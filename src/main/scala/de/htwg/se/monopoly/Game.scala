@@ -3,7 +3,7 @@ package de.htwg.se.monopoly
 import de.htwg.se.monopoly.controller._
 import de.htwg.se.monopoly.model.Board
 import de.htwg.se.monopoly.aview.TextualUserInterface
-import de.htwg.se.monopoly.util.{Publisher, Subscriber}
+import de.htwg.se.monopoly.util.{Observable, Observer}
 
 import scala.io.StdIn
 
@@ -15,10 +15,10 @@ import scala.io.StdIn
  * - https://www.youtube.com/watch?v=AuWvMgYv03g
  */
 
-object Game extends Subscriber {
-  private val numberOfPlayers = 2
+object Game extends Observer {
+  val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
-  private var running: Boolean = false
+  var running: Boolean = false
 
   // Runs the game
   def run(args: Array[String]): Unit = {

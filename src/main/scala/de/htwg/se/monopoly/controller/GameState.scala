@@ -6,17 +6,20 @@ object GameState extends Enumeration {
   state = MAIN_MENU
 
   var currentPlayer = 0
-  var numberOfPlayer = 0
+
 
   def setCurrentPlayer(player: Int): Unit = {
     currentPlayer = player
   }
 
+  def getCurrentPlayer: Int = currentPlayer
+
+  var numberOfPlayer = 0
+
   def setNumberOfPlayer(maxPlayers: Int): Unit = {
     numberOfPlayer = maxPlayers
   }
 
-  def getCurrentPlayer: Int = currentPlayer
 
   def nextPlayer(): Unit = {
     currentPlayer = currentPlayer + 1
