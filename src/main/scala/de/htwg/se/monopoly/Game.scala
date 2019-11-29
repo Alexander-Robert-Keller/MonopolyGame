@@ -16,7 +16,7 @@ import scala.io.StdIn
  */
 
 object Game extends Subscriber {
-  private val numberOfPlayers = 2
+  val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
   var running: Boolean = false
 
@@ -65,11 +65,11 @@ object Game extends Subscriber {
   def init(): Unit = {
     Game.setRunning(true)
     board.init()
-    currentGameState = "RollDice"
-    currentPlayer = 0
+    GameState.nextState()
+    GameState.setCurrentPlayer(0)
+    GameState.setNumberOfPlayer(numberOfPlayers)
   }
 
-  //
   override def update(): Unit = {
     GameState.nextState()
   }

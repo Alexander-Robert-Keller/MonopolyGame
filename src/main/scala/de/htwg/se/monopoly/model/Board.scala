@@ -5,8 +5,9 @@ import de.htwg.se.monopoly.model.spacetypes._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Board(totalNumberOfPlayers: Int) {
+class Board(t_NumberOfPlayers: Int) {
   val die = Die()
+  val totalNumberOfPlayers: Int = t_NumberOfPlayers
   val totalNumberOfSpaces: Int = 40
   val spaces: Array[Space] = Array.fill[Space](totalNumberOfSpaces)(Property()) // hint: most spaces are property spaces
   val players: ArrayBuffer[Player] = {
