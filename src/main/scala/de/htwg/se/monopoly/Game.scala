@@ -16,9 +16,9 @@ import scala.io.StdIn
  */
 
 object Game extends Observer {
-  private val numberOfPlayers = 2
+  val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
-  private var running: Boolean = false
+  var running: Boolean = false
 
   // Runs the game
   def run(args: Array[String]): Unit = {

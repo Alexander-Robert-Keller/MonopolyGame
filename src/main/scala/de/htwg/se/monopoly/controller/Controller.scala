@@ -45,8 +45,6 @@ class Controller extends Observable {
   }
 
   def movePlayer(playerID: Int, currentLocation: Int, newLocation: Int): Unit = {
-    Game.board.spaces(currentLocation).removePlayer(Game.board.players(GameState.getCurrentPlayer))
-    Game.board.spaces(newLocation).addPlayer(Game.board.players(GameState.getCurrentPlayer))
     Game.board.players(GameState.getCurrentPlayer).setLocation(newLocation)
   }
 
