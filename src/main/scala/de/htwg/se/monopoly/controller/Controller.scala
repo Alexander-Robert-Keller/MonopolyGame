@@ -67,7 +67,12 @@ class Controller extends Publisher {
 
   val exitProgramMessage: String = "Exit game!"
 
-  val nextPlayersRoundMessage: String = "It is " + Game.board.players(GameState.currentPlayer).toString + "turn!"
+  def nextPlayersRoundMessage(): String = {
+    val playerString = Game.board.players(GameState.currentPlayer).toString
+    "It´s " + playerString + "´s turn!\n"
+  }
+
+  val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
 
   def initializeGame(): Unit = {
     Game.init()

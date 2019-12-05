@@ -34,9 +34,9 @@ class Board(t_NumberOfPlayers: Int) {
       players(currentPlayerID).isJailed, newMoney)
   }
 
-  def jailPlayer(currentPlayerID: Int): Unit = {
+  def setPlayerJailedOrUnJailed(currentPlayerID: Int, jailed: Boolean): Unit = {
     players(currentPlayerID) = Player(players(currentPlayerID).getId, players(currentPlayerID).getLocation,
-      jailed = true, players(currentPlayerID).getMoney)
+      jailed, players(currentPlayerID).getMoney)
   }
   def init(): Unit = {
     // Redefine the space layout such that it matches an actual Monopoly board layout.
