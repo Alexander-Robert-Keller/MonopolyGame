@@ -18,34 +18,43 @@ class Controller extends Observable {
   }
 
   def rollDie(): String = {
-    val eyes1 = Game.board.die.roll
-    val eyes2 = Game.board.die.roll
-    val currentLocation = Game.board.players(GameState.getCurrentPlayer).getLocation
-    var newLocation = currentLocation + eyes1 + eyes2
-    val eyes1_eyes2toString: String = "You rolled: %d and %d. Move %d spaces!\n".format(eyes1, eyes2, eyes1 + eyes2)
-    if (newLocation > 39) {
-      newLocation = newLocation % 40
-      movePlayer(Game.board.players(GameState.getCurrentPlayer).getId, currentLocation, newLocation)
-      if (eyes1 == eyes2) {
-        if (newLocation == 0) {
-          notifyObservers()
-          return eyes1_eyes2toString + "You went over Go: here are 3000$"
-        }
+    Game.board.rollDice()
+    val currentDice = Game.board.getDice
+    if (Game.board.getDice.gotDoublets()) {
+      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
         notifyObservers()
-        eyes1_eyes2toString + "You went over Go: here are 1500$"
-      } else {
-        notifyObservers()
-        eyes1_eyes2toString
+        GameState.nextState()
+        return currentDice.toString + "You landed on Go: here are 400$\n"
       }
-    } else {
-      movePlayer(Game.board.players(GameState.getCurrentPlayer).getId, currentLocation, newLocation)
+      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
+        notifyObservers()
+        GameState.nextState()
+        return currentDice.toString + "You went over Go: here are 200$\n"
+      }
+      Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
       notifyObservers()
-      eyes1_eyes2toString
+      GameState.nextState()
+      currentDice.toString
+    } else {
+      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
+        notifyObservers()
+        GameState.nextState()
+        return currentDice.toString + "You went over Go: here are 400$\n"
+      }
+      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
+        notifyObservers()
+        GameState.nextState()
+        return currentDice.toString + "You went over Go: here are 200$\n"
+      }
+      Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
+      notifyObservers()
+      GameState.nextState()
+      currentDice.toString
     }
-  }
-
-  def movePlayer(playerID: Int, currentLocation: Int, newLocation: Int): Unit = {
-    Game.board.players(GameState.getCurrentPlayer).setLocation(newLocation)
   }
 
   def exitCurrentGame(): String = {

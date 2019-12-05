@@ -37,10 +37,5 @@ class GameSpec extends WordSpec with Matchers {
       GameState.numberOfPlayer should be (2)
       GameState.state should be (GameState.ROLL_DICE)
     }
-    "be able to update the game board state, if the controller notifies him" in {
-      GameState.setState("MAIN_MENU")
-      Game.update()
-      GameState.state should be (GameState.ROLL_DICE)
-    }
   }
 }

@@ -15,7 +15,7 @@ import scala.io.StdIn
  * - https://www.youtube.com/watch?v=AuWvMgYv03g
  */
 
-object Game extends Subscriber {
+object Game {
   val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
   var running: Boolean = false
@@ -23,7 +23,6 @@ object Game extends Subscriber {
   // Runs the game
   def run(args: Array[String]): Unit = {
     val controller = new Controller()
-    controller.add(this)
     val tui: TextualUserInterface = new TextualUserInterface(controller)
     //Main Menu loop
     var input: String = ""
@@ -68,9 +67,5 @@ object Game extends Subscriber {
     GameState.nextState()
     GameState.setCurrentPlayer(0)
     GameState.setNumberOfPlayer(numberOfPlayers)
-  }
-
-  override def update(): Unit = {
-    GameState.nextState()
   }
 }
