@@ -39,6 +39,7 @@ class TextualUserInterface(controller: Controller) extends Subscriber {
     input match {
       case "1" =>
         println(controller.rollDie())  //roll Dice
+        println(controller.nextPlayersRoundMessage)  //place at later Stage, when buying/selling spaces is implemented
       case "2" =>
         println(controller.exitCurrentGame())  //exit game
       case _ =>

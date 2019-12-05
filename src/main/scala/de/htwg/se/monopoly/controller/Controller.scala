@@ -67,6 +67,8 @@ class Controller extends Observable {
 
   val exitProgramMessage: String = "Exit game!"
 
+  val nextPlayersRoundMessage: String = "It is " + Game.board.players(GameState.currentPlayer).toString + "turn!"
+
   def initializeGame(): Unit = {
     Game.init()
   }
