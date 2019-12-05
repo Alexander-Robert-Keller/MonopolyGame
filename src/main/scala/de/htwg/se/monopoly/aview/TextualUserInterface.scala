@@ -1,10 +1,9 @@
 package de.htwg.se.monopoly.aview
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.Controller
-import de.htwg.se.monopoly.util.{Publisher, Subscriber}
+import de.htwg.se.monopoly.controller.{Controller, GameState}
+import de.htwg.se.monopoly.util.Subscriber
 
-import scala.io.StdIn
 /**
  * TODO Come up with a suitable observer pattern for the textual user interface
  */
@@ -23,6 +22,7 @@ class TextualUserInterface(controller: Controller) extends Subscriber {
         println("Start Game:")
         controller.initializeGame()
         println(controller.stringGameBoard())
+        println(controller.nextPlayersRoundMessage())
       case "2" => //exit
         println(controller.exitProgramMessage)
       case _ =>
@@ -39,7 +39,7 @@ class TextualUserInterface(controller: Controller) extends Subscriber {
     input match {
       case "1" =>
         println(controller.rollDie())  //roll Dice
-        println(controller.nextPlayersRoundMessage)  //place at later Stage, when buying/selling spaces is implemented
+        println(controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
       case "2" =>
         println(controller.exitCurrentGame())  //exit game
       case _ =>
