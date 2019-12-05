@@ -1,5 +1,7 @@
 package de.htwg.se.monopoly.controller
 
+import de.htwg.se.monopoly.Game
+
 object GameState extends Enumeration {
   var state: GameState.Value = Value
   val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
@@ -40,8 +42,9 @@ object GameState extends Enumeration {
     state match {
       case MAIN_MENU => state = ROLL_DICE
       case ROLL_DICE => state = ROLL_DICE
-        nextPlayer() //change to later point if BUY_OR_UPGRADE_PROPERTY is implemented
-      //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
+        if (!Game.board.dice.gotDoublets()) { //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
+          nextPlayer()
+        }
       case BUY_OR_UPGRADE_PROPERTY => state = ROLL_DICE
     }
   }

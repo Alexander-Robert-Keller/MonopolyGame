@@ -1,6 +1,5 @@
 package de.htwg.se.monopoly.controller
 
-import com.sun.jdi.Value
 import org.scalatest.{Matchers, WordSpec}
 
 class GameStateSpec extends WordSpec with Matchers {

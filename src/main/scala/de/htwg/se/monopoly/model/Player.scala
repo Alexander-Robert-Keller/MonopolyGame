@@ -1,28 +1,14 @@
 package de.htwg.se.monopoly.model
 
-case class Player(t_id: Int) {
-  private var location: Int = 0 // the location denotes the spaces array index
-  private var jailed: Boolean = false
+case class Player(t_id: Int, location: Int, jailed: Boolean, money: Int) {
 
-  // Getters and setters
   def getId: Int = t_id
 
   def getLocation: Int = location
 
-  def setLocation(newLocation: Int) { location = newLocation }
-
   def isJailed: Boolean = jailed
 
-  def setJailed(t_jailed: Boolean): Unit = {
-    jailed = t_jailed
-  }
-  override def toString: String = "Player " + getId
+  def getMoney: Int = money
 
-/*  def move(): Unit = {
-    if (location < 39) {
-      location += 1
-    } else if (location == 39) {
-      location = 0
-    }
-  }*/
+  override def toString: String = "Player " + getId
 }

@@ -9,7 +9,7 @@ class GoToJailSpec extends WordSpec with Matchers{
   "a GoToJail spacetype" when {
     "new" should {
       val goToJail = GoToJail()
-      val player = Player(0)
+      val player = Player(0, 0, jailed = false, 0)
       "have an action which jails the player" in {
         goToJail.action(player)
       }

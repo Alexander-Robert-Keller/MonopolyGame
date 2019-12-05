@@ -6,18 +6,38 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 class Board(t_NumberOfPlayers: Int) {
-  val die = Die()
+  var dice = Dice()
   val totalNumberOfPlayers: Int = t_NumberOfPlayers
   val totalNumberOfSpaces: Int = 40
   val spaces: Array[Space] = Array.fill[Space](totalNumberOfSpaces)(Property()) // hint: most spaces are property spaces
   val players: ArrayBuffer[Player] = {
     val buffer: ArrayBuffer[Player] = new ArrayBuffer[Player]
     for (i <- 1 to totalNumberOfPlayers) {
-      buffer.append(Player(i))
+      buffer.append(Player(i, 0, jailed = false, 1500))
     }
     buffer
   }
 
+  def getDice: Dice = dice
+
+  def rollDice(): Unit = dice = Dice()
+
+  def movePlayer(moveByXSpaces: Int, currentPlayerID: Int): Unit = {
+    val newPosition = (players(currentPlayerID).getLocation + moveByXSpaces) % totalNumberOfSpaces
+    players(currentPlayerID) = Player(players(currentPlayerID).getId, newPosition,
+      players(currentPlayerID).isJailed, players(currentPlayerID).getMoney)
+  }
+
+  def updatePlayerMoney(playerGetsXMoney: Int , currentPlayerID: Int): Unit = {
+    val newMoney = players(currentPlayerID).getMoney + playerGetsXMoney
+    players(currentPlayerID) = Player(players(currentPlayerID).getId, players(currentPlayerID).getLocation,
+      players(currentPlayerID).isJailed, newMoney)
+  }
+
+  def jailPlayer(currentPlayerID: Int): Unit = {
+    players(currentPlayerID) = Player(players(currentPlayerID).getId, players(currentPlayerID).getLocation,
+      jailed = true, players(currentPlayerID).getMoney)
+  }
   def init(): Unit = {
     // Redefine the space layout such that it matches an actual Monopoly board layout.
     // The spaces are ordered clock-wise, i.e, index 0 denotes a "go" space, index 1 a "property" space,

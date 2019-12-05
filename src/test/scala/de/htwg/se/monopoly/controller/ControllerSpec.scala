@@ -24,21 +24,6 @@ class ControllerSpec extends WordSpec with Matchers{
         Game.init()
         controller.stringGameBoard() should be (Game.board.toString())
       }
-      "have a method that rolls two dice and moves the player to the appropriate field (also creates a String return)" in {
-        controller.rollDie()
-        Game.board.players(0).getLocation should be > 0
-        Game.board.players(0).getLocation should be < 13
-
-        Game.board.init()
-        controller.movePlayer(0, Game.board.players(0).getLocation, 39)
-        controller.rollDie()
-        Game.board.players(0).getLocation should be > 0
-        Game.board.players(0).getLocation should be < 40
-      }
-      "have a method that moves the player to a specific location" in {
-        controller.movePlayer(Game.board.players(0).getId, Game.board.players(0).getLocation, 0)
-        Game.board.players(0).getLocation should be (0)
-      }
       "have a method that initializes the game" in {
         controller.initializeGame()
         Game.isRunning should be (true)
