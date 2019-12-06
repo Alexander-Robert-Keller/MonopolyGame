@@ -61,7 +61,7 @@ class ControllerSpec extends WordSpec with Matchers{
         Game.setRunning(true)
         controller.exitCurrentGame() should be (controller.exitCurrentGameMessage)
         Game.isRunning should be (false)
-        GameState.currentGameStateMessage should be ("Main Menu:")
+        GameState.state should be (GameState.MAIN_MENU)
       }
       "have a String that contains a message when u exit a Game" in {
         controller.exitCurrentGameMessage should be ("Returns to main menu!")
