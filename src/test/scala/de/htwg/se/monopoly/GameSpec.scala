@@ -34,7 +34,7 @@ class GameSpec extends WordSpec with Matchers {
       GameState.setState("MAIN_MENU")
       Game.init()
       GameState.getCurrentPlayer should be (0)
-      GameState.numberOfPlayer should be (2)
+      GameState.numberOfPlayers should be (2)
       GameState.state should be (GameState.ROLL_DICE)
     }
   }

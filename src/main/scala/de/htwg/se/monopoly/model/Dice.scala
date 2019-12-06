@@ -10,9 +10,9 @@ case class Dice() {
 
   val die2: Int = random.nextInt(6) + 1
 
-  def getEyes: Int = {die1 + die2}
+  def getFaceValue: Int = {die1 + die2}
 
-  def gotDoublets(): Boolean = {die1 == die2}
+  def hasDoublets: Boolean = {die1 == die2}
 
   override def toString: String = "You rolled: %d and %d. Move %d spaces!\n".format(die1, die2, die1 + die2)
 }

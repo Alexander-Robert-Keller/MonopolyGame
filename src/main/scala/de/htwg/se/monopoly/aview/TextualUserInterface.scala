@@ -12,7 +12,7 @@ class TextualUserInterface(controller: Controller) extends Subscriber {
   //Adds Controller to Observable list
   controller.add(this)
 
-  def mainMenuOptions(): Unit = {
+  def displayMainMenuOptions(): Unit = {
     println(controller.mainMenu)
   }
 
@@ -38,7 +38,7 @@ class TextualUserInterface(controller: Controller) extends Subscriber {
   def processInputLineGameMenu(input: String): Unit = {
     input match {
       case "1" =>
-        println(controller.rollDie())  //roll Dice
+        println(controller.rollDice())  //roll Dice
         println(controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
       case "2" =>
         println(controller.exitCurrentGame())  //exit game

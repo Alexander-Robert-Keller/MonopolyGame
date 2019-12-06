@@ -15,7 +15,7 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
       controller.subscribers.contains(tui) should be (true)
     }
     "have a method that prints the main menu" in {
-      tui.mainMenuOptions()
+      tui.displayMainMenuOptions()
     }
     "have a method that prints the ingame menu" in {
       tui.gameMenuOptions()

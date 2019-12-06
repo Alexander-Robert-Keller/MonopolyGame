@@ -21,13 +21,13 @@ class GameStateSpec extends WordSpec with Matchers {
       GameState.getCurrentPlayer should be (1)
     }
     "have a variable which represents the total number of players in the current game" in {
-      GameState.setNumberOfPlayer(2)
-      GameState.numberOfPlayer should be (2)
+      GameState.setNumberOfPlayers(2)
+      GameState.numberOfPlayers should be (2)
     }
     "have a method which sets the total number of players in the current game" in {
-      GameState.setNumberOfPlayer(100)
-      GameState.numberOfPlayer should be (100)
-      GameState.setNumberOfPlayer(2)
+      GameState.setNumberOfPlayers(100)
+      GameState.numberOfPlayers should be (100)
+      GameState.setNumberOfPlayers(2)
     }
     "have a method which sets the current player to the next one" in {
       GameState.setCurrentPlayer(0)

@@ -39,9 +39,6 @@ class Board(t_NumberOfPlayers: Int) {
       jailed, players(currentPlayerID).getMoney)
   }
   def init(): Unit = {
-    // Redefine the space layout such that it matches an actual Monopoly board layout.
-    // The spaces are ordered clock-wise, i.e, index 0 denotes a "go" space, index 1 a "property" space,
-    // index 2 a "community chest" etc.
     spaces(0) = Go()
     spaces(2) = CommunityChest()
     spaces(5) = Railroad()
@@ -60,7 +57,6 @@ class Board(t_NumberOfPlayers: Int) {
     spaces(35) = Railroad()
     spaces(36) = Chance()
     spaces(38) = Tax()
-
   }
 
   override def toString: String = {
