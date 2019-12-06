@@ -4,24 +4,24 @@ import org.scalatest.{Matchers, WordSpec}
 
 class PublisherSpec extends WordSpec with Matchers {
   "An Observable" should {
-    val observable = new Publisher
-    val observer = new Subscriber {
+    val publisher = new Publisher
+    val subscriber = new Subscriber {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
       override def update(): Unit = {updated = true}
     }
     "add an Observer" in {
-      observable.add(observer)
-      observable.subscribers should contain (observer)
+      publisher.add(subscriber)
+      publisher.subscribers should contain (subscriber)
     }
     "notify an Observer" in {
-      observer.isUpdated should be(false)
-      observable.notifyObservers()
-      observer.isUpdated should be(true)
+      subscriber.isUpdated should be(false)
+      publisher.notifyObservers()
+      subscriber.isUpdated should be(true)
     }
     "remove an Observer" in {
-      observable.remove(observer)
-      observable.subscribers should not contain observer
+      publisher.remove(subscriber)
+      publisher.subscribers should not contain subscriber
     }
   }
 }
