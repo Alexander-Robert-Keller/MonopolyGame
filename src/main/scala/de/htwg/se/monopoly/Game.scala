@@ -68,4 +68,6 @@ object Game {
     GameState.setCurrentPlayer(0)
     GameState.setNumberOfPlayer(numberOfPlayers)
   }
+
+  // TEST DANIEL
 }
