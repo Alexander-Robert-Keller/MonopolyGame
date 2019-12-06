@@ -4,11 +4,7 @@ import de.htwg.se.monopoly.model.{Dice, Player}
 
 trait PlayerState {
 
-  def determinePlayerState(currentPlayer: Player): Unit =  {
-    playerState.determinePlayerState(currentPlayer)
-  }
+  def determinePlayerState(currentPlayer: Player): PlayerState
 
   def rollDice(dice: Dice): String
-
-  var playerState: PlayerState = FreePlayerState
 }

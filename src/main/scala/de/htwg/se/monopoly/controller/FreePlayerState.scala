@@ -4,11 +4,11 @@ import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.model.{Dice, Player}
 
 object FreePlayerState extends PlayerState {
-  override def determinePlayerState(currentPlayer: Player): Unit = {
+  override def determinePlayerState(currentPlayer: Player): PlayerState = {
     if (currentPlayer.isJailed) {
-      playerState = JailedPlayerState
+      JailedPlayerState
     } else {
-      playerState = FreePlayerState
+      FreePlayerState
     }
   }
 

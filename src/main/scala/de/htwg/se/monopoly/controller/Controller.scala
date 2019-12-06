@@ -17,54 +17,16 @@ class Controller extends Observable {
     Game.board.toString
   }
 
-  val playerState: PlayerState = FreePlayerState
+  var playerState: PlayerState = FreePlayerState
 
   def rollDie(): String = {
     Game.board.rollDice()
     val currentDice = Game.board.getDice
-    playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
+    playerState = playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
     val message = playerState.rollDice(currentDice)
     notifyObservers()
     GameState.nextState()
     message
-
-
-
-    /*if (Game.board.getDice.gotDoublets()) {
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You landed on Go: here are 400$\n"
-      }
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You went over Go: here are 200$\n"
-      }
-      Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-      notifyObservers()
-      GameState.nextState()
-      currentDice.toString
-    } else {
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You went over Go: here are 400$\n"
-      }
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You went over Go: here are 200$\n"
-      }
-      Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-      notifyObservers()
-      GameState.nextState()
-      currentDice.toString
-    }*/
   }
 
   def exitCurrentGame(): String = {
