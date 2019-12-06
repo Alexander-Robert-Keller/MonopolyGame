@@ -19,6 +19,7 @@ object Game {
   val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
   var running: Boolean = false
+  val exitValue = "2"
 
   // Runs the game
   def run(args: Array[String]): Unit = {
@@ -30,13 +31,13 @@ object Game {
       tui.processInputLineMainMenu(args(0))
       gameLoop(tui, args(1))
     } else do {
-      tui.mainMenuOptions()
+      tui.displayMainMenuOptions()
       input = StdIn.readLine()
       tui.processInputLineMainMenu(input)
       if (isRunning) {
         gameLoop(tui, "")
       }
-    } while (input != "2")
+    } while (input != exitValue)
   } // end of run()
 
   //Game Loop

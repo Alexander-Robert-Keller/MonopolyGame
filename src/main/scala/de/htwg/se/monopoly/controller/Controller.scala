@@ -20,7 +20,7 @@ class Controller extends Publisher {
 
   val playerState: PlayerState = FreePlayerState
 
-  def rollDie(): String = {
+  def rollDice(): String = {
     Game.board.rollDice()
     val currentDice = Game.board.getDice
     playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))

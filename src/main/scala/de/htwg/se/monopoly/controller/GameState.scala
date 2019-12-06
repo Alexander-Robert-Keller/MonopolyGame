@@ -15,16 +15,16 @@ object GameState extends Enumeration {
 
   def getCurrentPlayer: Int = currentPlayer
 
-  var numberOfPlayer = 0
+  var numberOfPlayers = 0
 
-  def setNumberOfPlayer(maxPlayers: Int): Unit = {
-    numberOfPlayer = maxPlayers
+  def setNumberOfPlayers(maxPlayers: Int): Unit = {
+    numberOfPlayers = maxPlayers
   }
 
   def nextPlayer(): Unit = {
     currentPlayer = currentPlayer + 1
-    if (currentPlayer >= numberOfPlayer) {
-      currentPlayer = currentPlayer % numberOfPlayer
+    if (currentPlayer >= numberOfPlayers) {
+      currentPlayer = currentPlayer % numberOfPlayers
     }
   }
 
@@ -40,7 +40,7 @@ object GameState extends Enumeration {
     state match {
       case MAIN_MENU => state = ROLL_DICE
       case ROLL_DICE => state = ROLL_DICE
-        if (!Game.board.dice.gotDoublets()) { //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
+        if (!Game.board.dice.hasDoublets) { //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
           nextPlayer()
         }
       case BUY_OR_UPGRADE_PROPERTY => state = ROLL_DICE
@@ -58,6 +58,6 @@ object GameState extends Enumeration {
   def init(): Unit = {
     nextState()
     setCurrentPlayer(0)
-    setNumberOfPlayer(Game.numberOfPlayers)
+    setNumberOfPlayers(Game.numberOfPlayers)
   }
 }

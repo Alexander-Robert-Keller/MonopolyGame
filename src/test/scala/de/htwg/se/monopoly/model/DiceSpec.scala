@@ -17,13 +17,13 @@ class DiceSpec extends WordSpec with Matchers{
         dice.die2 should be < 7
       }
       "have a method getEyes that returns the value of eyes1 and eyes2 combined" in {
-        dice.getEyes should be (dice.die1 + dice.die2)
+        dice.getFaceValue should be (dice.die1 + dice.die2)
       }
       "have a method doublets that returns true if eyes1 == eyes2" in {
-        if (dice.gotDoublets()) {
-          dice.gotDoublets() should equal (true)
+        if (dice.hasDoublets) {
+          dice.hasDoublets should equal (true)
         } else {
-          dice.gotDoublets() should equal (false)
+          dice.hasDoublets should equal (false)
         }
       }
       "have a method toString which contains a nice String representation for die1 and die2" in {

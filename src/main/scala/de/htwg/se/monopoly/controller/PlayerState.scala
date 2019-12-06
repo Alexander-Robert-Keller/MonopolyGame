@@ -20,27 +20,27 @@ object FreePlayerState extends PlayerState {
   }
 
   override def rollDice(dice: Dice): String = {
-    if (Game.board.getDice.gotDoublets()) {
-      if (dice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(dice.getEyes, GameState.currentPlayer)
+    if (Game.board.getDice.hasDoublets) {
+      if (dice.getFaceValue + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
         return dice.toString + "You landed on Go: here are 400$\n"
       }
-      if (dice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(dice.getEyes, GameState.currentPlayer)
+      if (dice.getFaceValue + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
         return dice.toString + "You went over Go: here are 200$\n"
       }
-      Game.board.movePlayer(dice.getEyes, GameState.currentPlayer)
+      Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
       dice.toString
     } else {
-      if (dice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(dice.getEyes, GameState.currentPlayer)
+      if (dice.getFaceValue + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
         return dice.toString + "You went over Go: here are 400$\n"
       }
-      if (dice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(dice.getEyes, GameState.currentPlayer)
+      if (dice.getFaceValue + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
+        Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
         return dice.toString + "You went over Go: here are 200$\n"
       }
-      Game.board.movePlayer(dice.getEyes, GameState.currentPlayer)
+      Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
       dice.toString
     }
   }
@@ -57,7 +57,7 @@ object JailedPlayerState extends PlayerState {
   }
 
   override def rollDice(dice: Dice): String = {
-    if (dice.gotDoublets()) {
+    if (dice.hasDoublets) {
       Game.board.setPlayerJailedOrUnJailed(GameState.currentPlayer, jailed = false)
       val freePlayerState: PlayerState = determinePlayerState(Game.board.players(GameState.currentPlayer))
       return "You got doublets, you are now a free man!\n" + freePlayerState.rollDice(dice)

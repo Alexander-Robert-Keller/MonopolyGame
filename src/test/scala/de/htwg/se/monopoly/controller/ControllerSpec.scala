@@ -28,8 +28,8 @@ class ControllerSpec extends WordSpec with Matchers{
         // roll dice test from start
         GameState.setCurrentPlayer(0)
         Game.board.players(0) = Player(Game.board.players(0).getId, 0, jailed = false, Game.board.players(0).getMoney)
-        controller.rollDie()
-        if (Game.board.dice.gotDoublets()) {
+        controller.rollDice()
+        if (Game.board.dice.hasDoublets) {
           GameState.getCurrentPlayer should be (0)
         } else {
           GameState.getCurrentPlayer should be (1)
@@ -38,8 +38,8 @@ class ControllerSpec extends WordSpec with Matchers{
         GameState.setCurrentPlayer(0)
         Game.board.players(0) = Player(Game.board.players(0).getId, Game.board.totalNumberOfSpaces - 1, jailed = false,
           Game.board.players(0).getMoney)
-        controller.rollDie()
-        if (Game.board.dice.gotDoublets()) {
+        controller.rollDice()
+        if (Game.board.dice.hasDoublets) {
           GameState.getCurrentPlayer should be (0)
         } else {
           GameState.getCurrentPlayer should be (1)
@@ -48,9 +48,9 @@ class ControllerSpec extends WordSpec with Matchers{
         GameState.setCurrentPlayer(0)
         Game.board.players(0) = Player(Game.board.players(0).getId, Game.board.totalNumberOfSpaces - 6, jailed = false,
           Game.board.players(0).getMoney)
-        controller.rollDie()
+        controller.rollDice()
         if (Game.board.players(0).getLocation == 0) {
-          if (Game.board.dice.gotDoublets()) {
+          if (Game.board.dice.hasDoublets) {
             GameState.getCurrentPlayer should be(0)
           } else {
             GameState.getCurrentPlayer should be(1)
