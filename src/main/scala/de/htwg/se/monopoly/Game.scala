@@ -24,7 +24,7 @@ object Game {
   def run(args: Array[String]): Unit = {
     val controller = new Controller()
     val tui: TextualUserInterface = new TextualUserInterface(controller)
-    //Main Menu loop
+    // Main Menu loop
     var input: String = ""
     if (!args.isEmpty) {
       tui.processInputLineMainMenu(args(0))
@@ -64,10 +64,6 @@ object Game {
   def init(): Unit = {
     Game.setRunning(true)
     board.init()
-    GameState.nextState()
-    GameState.setCurrentPlayer(0)
-    GameState.setNumberOfPlayer(numberOfPlayers)
   }
 
-  // TEST DANIEL
 }
