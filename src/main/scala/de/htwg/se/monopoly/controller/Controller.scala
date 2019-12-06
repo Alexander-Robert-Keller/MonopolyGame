@@ -17,10 +17,20 @@ class Controller extends Observable {
     Game.board.toString
   }
 
+  val playerState: PlayerState = FreePlayerState
+
   def rollDie(): String = {
     Game.board.rollDice()
     val currentDice = Game.board.getDice
-    if (Game.board.getDice.gotDoublets()) {
+    playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
+    val message = playerState.rollDice(currentDice)
+    notifyObservers()
+    GameState.nextState()
+    message
+
+
+
+    /*if (Game.board.getDice.gotDoublets()) {
       if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
         Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
         notifyObservers()
@@ -54,7 +64,7 @@ class Controller extends Observable {
       notifyObservers()
       GameState.nextState()
       currentDice.toString
-    }
+    }*/
   }
 
   def exitCurrentGame(): String = {
