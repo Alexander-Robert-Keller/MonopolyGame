@@ -4,7 +4,7 @@ import scala.util.Random
 
 case class Dice() {
 
-  val random: Random.type = scala.util.Random
+  val random: Random = scala.util.Random
 
   val die1: Int = random.nextInt(6) + 1
 

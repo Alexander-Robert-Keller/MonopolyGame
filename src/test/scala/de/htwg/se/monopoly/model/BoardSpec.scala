@@ -8,7 +8,7 @@ class BoardSpec extends WordSpec with Matchers{
     "new" should {
       val board = new Board(2)
       "have a variable which contains a Dice Object" in {
-        board.dice should be (Dice)
+        board.dice shouldBe a [Dice]
       }
       "have a total number of Players" in {
         board.totalNumberOfPlayers should be (2)
@@ -40,7 +40,7 @@ class BoardSpec extends WordSpec with Matchers{
       "have a way to create a new player object in order to update the money a player has" in {
         val oldValue = board.players(0).getMoney
         board.updatePlayerMoney(100, 0)
-        (oldValue + 1) should be (board.players(0).getMoney)
+        (oldValue + 100) should be (board.players(0).getMoney)
       }
       "have a way to create a new palyer object in order to update a players jailed status" in {
         val oldValue = board.players(0).isJailed
