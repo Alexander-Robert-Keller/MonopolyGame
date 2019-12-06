@@ -54,4 +54,10 @@ object GameState extends Enumeration {
       case BUY_OR_UPGRADE_PROPERTY => "Buy or Upgrade your property now!"
     }
   }
+
+  def init(): Unit = {
+    nextState()
+    setCurrentPlayer(0)
+    setNumberOfPlayer(Game.numberOfPlayers)
+  }
 }

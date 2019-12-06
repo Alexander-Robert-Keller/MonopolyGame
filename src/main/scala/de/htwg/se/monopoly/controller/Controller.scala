@@ -2,6 +2,7 @@ package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.util.Publisher
+import de.htwg.se.monopoly.util.InitializerFacade
 
 class Controller extends Publisher {
 
@@ -47,6 +48,6 @@ class Controller extends Publisher {
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
 
   def initializeGame(): Unit = {
-    Game.init()
+    InitializerFacade.initializeGame()
   }
 }
