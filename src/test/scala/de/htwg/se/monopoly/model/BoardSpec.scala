@@ -7,18 +7,46 @@ class BoardSpec extends WordSpec with Matchers{
   "A Board" when {
     "new" should {
       val board = new Board(2)
-      "have a total Number of Spaces" in {
-        board.totalNumberOfSpaces should be (40)
+      "have a variable which contains a Dice Object" in {
+        board.dice should be (Dice)
       }
       "have a total number of Players" in {
         board.totalNumberOfPlayers should be (2)
+      }
+      "have a total Number of Spaces" in {
+        board.totalNumberOfSpaces should be (40)
+      }
+      "have an array with the total number of spaces and be filled with property spaces" in {
+        board.spaces should be (Array.fill[Space](40)(Property()))
       }
       "have a list of all the players in the game" in {
         board.players(0).getId should be (1)
         board.players(1).getId should be (2)
       }
-      "have an array with the total number of spaces and be filled with property spaces" in {
-        board.spaces should be (Array.fill[Space](40)(Property()))
+      "have a method which returns the current dice" in {
+        board.getDice should be (board.dice)
+      }
+      "have a method to roll a new dice and replace the current dice variable" in {
+        val dice1 = board.getDice
+        board.rollDice()
+        val dice2 = board.getDice
+        dice1 should not be theSameInstanceAs (dice2)
+      }
+      "have a way to create a new player object if he moves his position" in {
+        val oldValue= board.players(0).getLocation
+        board.movePlayer(1, 0)
+        (oldValue + 1) should be (board.players(0).getLocation)
+      }
+      "have a way to create a new player object in order to update the money a player has" in {
+        val oldValue = board.players(0).getMoney
+        board.updatePlayerMoney(100, 0)
+        (oldValue + 1) should be (board.players(0).getMoney)
+      }
+      "have a way to create a new palyer object in order to update a players jailed status" in {
+        val oldValue = board.players(0).isJailed
+        board.setPlayerJailedOrUnJailed(0, jailed = true)
+        !oldValue should be (board.players(0).isJailed)
+        board.setPlayerJailedOrUnJailed(0, jailed = false)
       }
       "have a method that initializes the board" in {
         board.init()
