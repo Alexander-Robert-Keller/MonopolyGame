@@ -15,6 +15,9 @@ class BoardCanvas extends Component{
     val gameBoardImage = getMonopolyBoardImage
     g.drawImage(gameBoardImage, 0, 0, null)
     //TODO: add algorithm that draws at certain positions players -> maybe with an Image
+    g.drawLine(100,0,100, 900)
+    g.drawLine(0,233,100, 900)
+    g.drawLine(200,231,100, 900)
   }
 
   def getMonopolyBoardImage: Image = {
