@@ -3,7 +3,6 @@ package de.htwg.se.monopoly
 import de.htwg.se.monopoly.controller._
 import de.htwg.se.monopoly.model.Board
 import de.htwg.se.monopoly.aview.TextualUserInterface
-import de.htwg.se.monopoly.util.{Publisher, Subscriber}
 
 import scala.io.StdIn
 
