@@ -40,6 +40,7 @@ class GUI(controller: Controller) extends MainFrame {
   }
 
   visible = true
+  centerOnScreen()
 
   def getMonopolyBoardImage: Image = {
     val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolyMascot.jpg"

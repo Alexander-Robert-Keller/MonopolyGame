@@ -8,7 +8,7 @@ import de.htwg.se.monopoly.util.Subscriber
 import java.io.File
 
 import javax.imageio.ImageIO
-import javax.swing.ImageIcon
+import javax.swing.{ImageIcon, JLayeredPane}
 
 import scala.swing.MainFrame
 import scala.swing._
@@ -51,6 +51,7 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
     contents += Swing.Glue
     contents += jailedLabel
     updatePlayerInfo()
+
   }
 
   def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
@@ -65,7 +66,6 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
     contents += buyPropertyButton
     listenTo(rollDiceButton)
     listenTo(buyPropertyButton)
-
     reactions += {
       case ButtonClicked(`rollDiceButton`) => //TODO: add controller Commands
       case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
@@ -80,18 +80,9 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
     contents += currentPlayerPanel
   }
 
-  def getMonopolyBoardImage: Image = {
-    val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolygameBoard.jpg"
-    val gameBoardImage = ImageIO.read(new File(path))
-    val resized = gameBoardImage.getScaledInstance(900, 900, Image.SCALE_DEFAULT)
-    resized
-  }
 
-  def gameBoardPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
-    val gameBoardImageLabel = new Label()
-    gameBoardImageLabel.icon = new ImageIcon(getMonopolyBoardImage)
-    gameBoardImageLabel.opaque = true
-    contents += gameBoardImageLabel
+  def gameBoardPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    contents += new BoardCanvas
   }
 
   contents = new BoxPanel(Orientation.Horizontal) {
@@ -100,6 +91,7 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
   }
 
   centerOnScreen()
+  visible = false
 
   def updatePlayerInfo(): Unit = { //Into Controller
     playerName.text = Game.board.players(GameState.currentPlayer).toString
