@@ -44,8 +44,8 @@ class GUI(controller: Controller) extends MainFrame {
   def getMonopolyBoardImage: Image = {
     val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolyMascot.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
-    val resized = gameBoardImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT)
-    resized
+    val resizedImage = gameBoardImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT)
+    resizedImage
   }
 
   reactions += {

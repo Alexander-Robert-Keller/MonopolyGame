@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.aview.gui
 
-import java.awt.{Dimension, Image, MenuItem}
+import java.awt.{Dimension, Image}
 
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.{Controller, GameState}
@@ -15,6 +15,7 @@ import scala.swing._
 import scala.swing.event.ButtonClicked
 
 
+
 class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with Subscriber {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
   controller.add(this)
@@ -23,6 +24,10 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
 
   menuBar = new MenuBar {
     contents += new Menu("Game") {
+      contents += new MenuItem(Action("Undo") {/*TODO: Implement action */})
+      contents += new MenuItem(Action("Redo") {/*TODO: Implement action */})
+      contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
+      contents += new MenuItem(Action("Quit") { mainMenuGui.endGame()})
     }
   }
 
@@ -48,11 +53,15 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
     updatePlayerInfo()
   }
 
-  def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
+  def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Commands:"))
     val rollDiceButton = new Button("roll Dice!")
     val buyPropertyButton = new Button("Buy Property")
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
     contents += rollDiceButton
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
     contents += buyPropertyButton
     listenTo(rollDiceButton)
     listenTo(buyPropertyButton)
@@ -65,8 +74,10 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
 
   def combinedCurrentGamePanelAndGameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     border = Swing.EmptyBorder(10, 10, 10, 10)
-    contents += currentPlayerPanel
     contents += gameCommandsPanel
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += currentPlayerPanel
   }
 
   def getMonopolyBoardImage: Image = {
