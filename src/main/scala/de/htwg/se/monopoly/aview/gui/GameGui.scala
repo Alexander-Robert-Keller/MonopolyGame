@@ -1,7 +1,6 @@
 package de.htwg.se.monopoly.aview.gui
 
-import java.awt.{Dimension, Image}
-import java.awt.image.BufferedImage
+import java.awt.{Dimension, Image, MenuItem}
 
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.{Controller, GameState}
@@ -9,20 +8,23 @@ import de.htwg.se.monopoly.util.Subscriber
 import java.io.File
 
 import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
-
 import javax.swing.ImageIcon
 
 import scala.swing.MainFrame
 import scala.swing._
+import scala.swing.event.ButtonClicked
 
 
-class Gui(controller: Controller) extends MainFrame with Subscriber {
-
+class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with Subscriber {
+  //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
   controller.add(this)
   title = "HTWG Monopoly"
   resizable = false
-  //size = new Dimension(1000, 500)
+
+  menuBar = new MenuBar {
+    contents += new Menu("Game") {
+    }
+  }
 
   val playerName = new TextField(15)
   val playerMoney = new TextField(15)
@@ -30,10 +32,10 @@ class Gui(controller: Controller) extends MainFrame with Subscriber {
 
   def currentPlayerPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Player Info:"))
+    preferredSize = new Dimension(200, 200)
     playerName.editable = false
     playerMoney.editable = false
     jailedLabel.editable = false
-
     contents += Swing.VStrut(10)
     contents += Swing.Glue
     contents += playerName
@@ -46,28 +48,47 @@ class Gui(controller: Controller) extends MainFrame with Subscriber {
     updatePlayerInfo()
   }
 
+  def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
+    border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Commands:"))
+    val rollDiceButton = new Button("roll Dice!")
+    val buyPropertyButton = new Button("Buy Property")
+    contents += rollDiceButton
+    contents += buyPropertyButton
+    listenTo(rollDiceButton)
+    listenTo(buyPropertyButton)
+
+    reactions += {
+      case ButtonClicked(`rollDiceButton`) => //TODO: add controller Commands
+      case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
+    }
+  }
+
+  def combinedCurrentGamePanelAndGameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    border = Swing.EmptyBorder(10, 10, 10, 10)
+    contents += currentPlayerPanel
+    contents += gameCommandsPanel
+  }
+
   def getMonopolyBoardImage: Image = {
-    val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/MonopolygameBoard.jpg"
+    val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolygameBoard.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
-    val resized = gameBoardImage.getScaledInstance(800, 800, Image.SCALE_DEFAULT)
+    val resized = gameBoardImage.getScaledInstance(900, 900, Image.SCALE_DEFAULT)
     resized
   }
 
-  val gameBoardImageLabel = new Label()
-
   def gameBoardPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
+    val gameBoardImageLabel = new Label()
     gameBoardImageLabel.icon = new ImageIcon(getMonopolyBoardImage)
     gameBoardImageLabel.opaque = true
     contents += gameBoardImageLabel
   }
 
   contents = new BoxPanel(Orientation.Horizontal) {
-    contents += currentPlayerPanel
+    contents += combinedCurrentGamePanelAndGameCommandsPanel
     contents += gameBoardPanel
   }
 
   centerOnScreen()
-  visible = true
 
   def updatePlayerInfo(): Unit = { //Into Controller
     playerName.text = Game.board.players(GameState.currentPlayer).toString
@@ -75,6 +96,14 @@ class Gui(controller: Controller) extends MainFrame with Subscriber {
     if (Game.board.players(GameState.currentPlayer).isJailed) {
      jailedLabel.text = "This Player is currently Jailed!"
     }
+  }
+
+  def openGui(): Unit = {
+    visible = true
+  }
+
+  def closeGui(): Unit = {
+    visible = false
   }
 
   override def update(): Unit = {
