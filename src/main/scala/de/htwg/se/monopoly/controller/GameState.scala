@@ -21,6 +21,8 @@ object GameState extends Enumeration {
     numberOfPlayers = maxPlayers
   }
 
+  def getNumberOfPlayers: Int = numberOfPlayers
+
   def nextPlayer(): Unit = {
     currentPlayer = currentPlayer + 1
     if (currentPlayer >= numberOfPlayers) {
