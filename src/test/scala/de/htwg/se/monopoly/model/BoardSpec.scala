@@ -7,9 +7,6 @@ class BoardSpec extends WordSpec with Matchers{
   "A Board" when {
     "new" should {
       val board = new Board(2)
-      "have a variable which contains a Dice Object" in {
-        board.dice shouldBe a [Dice]
-      }
       "have a total number of Players" in {
         board.totalNumberOfPlayers should be (2)
       }
@@ -22,15 +19,6 @@ class BoardSpec extends WordSpec with Matchers{
       "have a list of all the players in the game" in {
         board.players(0).getId should be (1)
         board.players(1).getId should be (2)
-      }
-      "have a method which returns the current dice" in {
-        board.getDice should be (board.dice)
-      }
-      "have a method to roll a new dice and replace the current dice variable" in {
-        val dice1 = board.getDice
-        board.rollDice()
-        val dice2 = board.getDice
-        dice1 should not be theSameInstanceAs (dice2)
       }
       "have a way to create a new player object if he moves his position" in {
         val oldValue= board.players(0).getLocation

@@ -40,11 +40,6 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
       val y = Game.board.players(0).getLocation
       (x < y) should be (true)
     }
-    "process a Input '2' from the GameMenu" in {
-      Game.setRunning(true)
-      tui.processInputLineGameMenu("2")
-      Game.isRunning should be (false)
-    }
     "process a Input _ from the GameMenu" in {
       tui.processInputLineGameMenu("x")
       //do nothing

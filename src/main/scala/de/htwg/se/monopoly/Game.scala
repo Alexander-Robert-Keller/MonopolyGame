@@ -3,6 +3,7 @@ package de.htwg.se.monopoly
 import de.htwg.se.monopoly.controller._
 import de.htwg.se.monopoly.model.Board
 import de.htwg.se.monopoly.aview.TextualUserInterface
+import de.htwg.se.monopoly.aview.gui.GUI
 
 import scala.io.StdIn
 
@@ -18,51 +19,29 @@ object Game {
   val numberOfPlayers = 2
   val board: Board = new Board(numberOfPlayers)
   var running: Boolean = false
-  val exitValue = "2"
+  val exitValue = "200"
 
   // Runs the game
   def run(args: Array[String]): Unit = {
     val controller = new Controller()
+    GameState.setController(controller)
     val tui: TextualUserInterface = new TextualUserInterface(controller)
+    val gui: GUI = new GUI(controller)
+
+    tui.displayMainMenuOptions()
+
     // Main Menu loop
     var input: String = ""
     if (!args.isEmpty) {
-      tui.processInputLineMainMenu(args(0))
-      gameLoop(tui, args(1))
+      tui.processInputLine(args(0), args(1))
     } else do {
-      tui.displayMainMenuOptions()
       input = StdIn.readLine()
-      tui.processInputLineMainMenu(input)
-      if (isRunning) {
-        gameLoop(tui, "")
-      }
+      tui.processInputLine(input)
     } while (input != exitValue)
   } // end of run()
 
-  //Game Loop
-  def gameLoop(tui: TextualUserInterface, args: String): Unit = {
-    if (args.length > 0) {
-      tui.processInputLineGameMenu(args)
-    } else do {
-      tui.gameMenuOptions()
-      val input = StdIn.readLine()
-      tui.processInputLineGameMenu(input)
-    } while (isRunning)
-  } // on exit returns to main menu
-
-
-  // Setters and getters
-  def setRunning(t_running: Boolean): Unit = {
-    running = t_running
-  }
-
-  def isRunning: Boolean = {
-    running
-  }
-
   // Initializes game
   def init(): Unit = {
-    Game.setRunning(true)
     board.init()
   }
 

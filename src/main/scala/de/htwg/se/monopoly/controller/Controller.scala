@@ -1,12 +1,14 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
+import de.htwg.se.monopoly.model.Dice
 import de.htwg.se.monopoly.util.Publisher
 import de.htwg.se.monopoly.util.InitializerFacade
+import de.htwg.se.monopoly.util.Event
 
 class Controller extends Publisher {
 
-  val mainMenu = "option | description\n [1]   | Start new game\n [2]   | Exit game"
+  val mainMenu = "option | description\n [1]   | Start new game\n [200]   | Exit game"
 
   val gameMenu = "option | description\n [1]   | roll dice\n [2]   | Exit game"
 
@@ -18,59 +20,26 @@ class Controller extends Publisher {
     Game.board.toString
   }
 
-  val playerState: PlayerState = FreePlayerState
+  var currentDice: Dice = _
 
-  def rollDice(): String = {
-    Game.board.rollDice()
-    val currentDice = Game.board.getDice
-    playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
-    val message = playerState.rollDice(currentDice)
-    notifyObservers()
+  def getCurrentDice: Dice = currentDice
+
+  def rollDice(): Unit = {
+    currentDice = Dice()
+    notifyObservers(Event("ROLLED_DICE"))
     GameState.nextState()
-    message
+  }
 
+  var playerState: PlayerState = FreePlayerState
 
-
-    /*if (Game.board.getDice.gotDoublets()) {
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You landed on Go: here are 400$\n"
-      }
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You went over Go: here are 200$\n"
-      }
-      Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-      notifyObservers()
-      GameState.nextState()
-      currentDice.toString
-    } else {
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You went over Go: here are 400$\n"
-      }
-      if (currentDice.getEyes + Game.board.players(GameState.currentPlayer).getLocation > Game.board.totalNumberOfSpaces) {
-        Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-        notifyObservers()
-        GameState.nextState()
-        return currentDice.toString + "You went over Go: here are 200$\n"
-      }
-      Game.board.movePlayer(currentDice.getEyes, GameState.currentPlayer)
-      notifyObservers()
-      GameState.nextState()
-      currentDice.toString
-    }*/
+  def stringRolledDice: String = {
+    playerState = playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
+    playerState.rollDice(currentDice)
   }
 
   def exitCurrentGame(): String = {
-    Game.setRunning(false)
     GameState.setState("MAIN_MENU")
+    notifyObservers(Event("EXIT_CURRENT_GAME"))
     exitCurrentGameMessage
   }
 

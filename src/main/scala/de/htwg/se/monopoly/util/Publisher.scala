@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.util
 
 trait Subscriber {
-  def update(): Unit
+  def update(event: Event): Unit
 }
 
 class Publisher {
@@ -11,5 +11,9 @@ class Publisher {
 
   def remove(s: Subscriber): Unit = subscribers = subscribers.filterNot(o => o == s)
 
-  def notifyObservers(): Unit = subscribers.foreach(o => o.update())
+  def notifyObservers(event: Event): Unit = subscribers.foreach(o => o.update(event))
+}
+
+case class Event(name: String) {
+  def getEvent: String = name
 }
