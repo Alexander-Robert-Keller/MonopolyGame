@@ -5,10 +5,7 @@ import java.awt.{Dimension, Image}
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.controller.{Controller, GameState}
 import de.htwg.se.monopoly.util.Subscriber
-import java.io.File
-
-import javax.imageio.ImageIO
-import javax.swing.{ImageIcon, JLayeredPane}
+import de.htwg.se.monopoly.util.Event
 
 import scala.swing.MainFrame
 import scala.swing._
@@ -16,7 +13,7 @@ import scala.swing.event.ButtonClicked
 
 
 
-class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with Subscriber {
+class GameGui(controller: Controller) extends MainFrame with Subscriber {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
   controller.add(this)
   title = "HTWG Monopoly"
@@ -27,7 +24,7 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
       contents += new MenuItem(Action("Undo") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Redo") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
-      contents += new MenuItem(Action("Quit") { mainMenuGui.endGame()})
+      contents += new MenuItem(Action("Quit") { controller.notifyObservers(Event("EXIT_CURRENT_GAME"))})
     }
   }
 
@@ -67,7 +64,9 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
     listenTo(rollDiceButton)
     listenTo(buyPropertyButton)
     reactions += {
-      case ButtonClicked(`rollDiceButton`) => //TODO: add controller Commands
+      case ButtonClicked(`rollDiceButton`) =>
+        controller.rollDice()
+        controller.notifyObservers(Event("ROLLED_DICE"))
       case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
     }
   }
@@ -109,8 +108,11 @@ class GameGui(controller: Controller, mainMenuGui : GUI) extends MainFrame with 
     visible = false
   }
 
-  override def update(): Unit = {
-    //TODO: Switch case for different updates depending on gamestate and current player
+  override def update(event: Event): Unit = {
+    event.getEvent match {
+      case "ROLLED_DICE" => this.repaint()
+      case _ =>
+    }
   }
 }
 

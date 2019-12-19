@@ -20,7 +20,7 @@ object FreePlayerState extends PlayerState {
   }
 
   override def rollDice(dice: Dice): String = {
-    if (Game.board.getDice.hasDoublets) {
+    if (GameState.controller.getCurrentDice.hasDoublets) {
       if (dice.getFaceValue + Game.board.players(GameState.currentPlayer).getLocation == Game.board.totalNumberOfSpaces) {
         Game.board.movePlayer(dice.getFaceValue, GameState.currentPlayer)
         return dice.toString + "You landed on Go: here are 400$\n"

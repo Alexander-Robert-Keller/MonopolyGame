@@ -1,12 +1,14 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
+import de.htwg.se.monopoly.model.Dice
 import de.htwg.se.monopoly.util.Publisher
 import de.htwg.se.monopoly.util.InitializerFacade
+import de.htwg.se.monopoly.util.Event
 
 class Controller extends Publisher {
 
-  val mainMenu = "option | description\n [1]   | Start new game\n [2]   | Exit game"
+  val mainMenu = "option | description\n [1]   | Start new game\n [200]   | Exit game"
 
   val gameMenu = "option | description\n [1]   | roll dice\n [2]   | Exit game"
 
@@ -18,21 +20,26 @@ class Controller extends Publisher {
     Game.board.toString
   }
 
+  var currentDice: Dice = _
+
+  def getCurrentDice: Dice = currentDice
+
+  def rollDice(): Unit = {
+    currentDice = Dice()
+    notifyObservers(Event("ROLLED_DICE"))
+    GameState.nextState()
+  }
+
   var playerState: PlayerState = FreePlayerState
 
-  def rollDice(): String = {
-    Game.board.rollDice()
-    val currentDice = Game.board.getDice
+  def stringRolledDice: String = {
     playerState = playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
-    val message = playerState.rollDice(currentDice)
-    notifyObservers()
-    GameState.nextState()
-    message
+    playerState.rollDice(currentDice)
   }
 
   def exitCurrentGame(): String = {
-    Game.setRunning(false)
     GameState.setState("MAIN_MENU")
+    notifyObservers(Event("EXIT_CURRENT_GAME"))
     exitCurrentGameMessage
   }
 

@@ -6,7 +6,6 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 class Board(t_NumberOfPlayers: Int) {
-  var dice = Dice()
   val totalNumberOfPlayers: Int = t_NumberOfPlayers
   val totalNumberOfSpaces: Int = 40
   val spaces: Array[Space] = Array.fill[Space](totalNumberOfSpaces)(Property()) // hint: most spaces are property spaces
@@ -17,10 +16,6 @@ class Board(t_NumberOfPlayers: Int) {
     }
     buffer
   }
-
-  def getDice: Dice = dice
-
-  def rollDice(): Unit = dice = Dice()
 
   def movePlayer(moveByXSpaces: Int, currentPlayerID: Int): Unit = {
     val newPosition = (players(currentPlayerID).getLocation + moveByXSpaces) % totalNumberOfSpaces
