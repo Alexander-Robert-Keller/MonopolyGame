@@ -11,9 +11,6 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
     val controller = new Controller
     val tui = new TextualUserInterface(controller)
     Game.init()
-    "should be added to the list of notified observers" in {
-      controller.subscribers.contains(tui) should be (true)
-    }
     "have a method that prints the main menu" in {
       tui.displayMainMenuOptions()
     }

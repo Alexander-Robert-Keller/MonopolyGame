@@ -3,9 +3,7 @@ package de.htwg.se.monopoly.aview.gui
 import java.awt.Image
 import java.io.File
 
-import de.htwg.se.monopoly.controller.{Controller, GameState}
-import de.htwg.se.monopoly.util.Subscriber
-import de.htwg.se.monopoly.util.Event
+import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, GameState, StartGame}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
@@ -13,8 +11,8 @@ import scala.swing._
 import scala.swing.event.ButtonClicked
 import scala.swing.{BoxPanel, MainFrame}
 
-class GUI(controller: Controller) extends MainFrame with Subscriber {
-  controller.add(this)
+class GUI(controller: Controller) extends MainFrame {
+  listenTo(controller)
 
   title = "HTWG Monopoly"
 
@@ -54,9 +52,11 @@ class GUI(controller: Controller) extends MainFrame with Subscriber {
   }
 
   reactions += {
-    case ButtonClicked(`startGameButton`) => controller.notifyObservers(Event("START_GAME"))
+    case ButtonClicked(`startGameButton`) =>
+      controller.initializeGame()
+      controller.publish(new StartGame)
     case ButtonClicked(`exitMainMenuButton`) =>
-      controller.notifyObservers(Event("EXIT_PROGRAM"))
+      controller.publish(new ExitCurrentGame)
       System.exit(0)
     case ButtonClicked(`infoButton`) => //TODO: Popup Field with some info
   }
@@ -74,11 +74,9 @@ class GUI(controller: Controller) extends MainFrame with Subscriber {
     GameState.setState("MAIN_MENU")
   }
 
-  override def update(event: Event): Unit = {
-    event.getEvent match {
-      case "EXIT_CURRENT_GAME" => endGame()
-      case "START_GAME" => startGame()
-      case _ =>
-    }
+  reactions += {
+    case event: ExitCurrentGame => endGame()
+    case event: StartGame => startGame()
+    case _ =>
   }
 }

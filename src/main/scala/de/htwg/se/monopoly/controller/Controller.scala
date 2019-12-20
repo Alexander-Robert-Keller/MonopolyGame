@@ -2,9 +2,8 @@ package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.model.Dice
-import de.htwg.se.monopoly.util.Publisher
+import scala.swing.Publisher
 import de.htwg.se.monopoly.util.InitializerFacade
-import de.htwg.se.monopoly.util.Event
 
 class Controller extends Publisher {
 
@@ -26,7 +25,7 @@ class Controller extends Publisher {
 
   def rollDice(): Unit = {
     currentDice = Dice()
-    notifyObservers(Event("ROLLED_DICE"))
+    publish(new RolledDice)
     GameState.nextState()
   }
 
@@ -39,7 +38,7 @@ class Controller extends Publisher {
 
   def exitCurrentGame(): String = {
     GameState.setState("MAIN_MENU")
-    notifyObservers(Event("EXIT_CURRENT_GAME"))
+    publish(new ExitCurrentGame)
     exitCurrentGameMessage
   }
 

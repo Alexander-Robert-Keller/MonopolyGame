@@ -1,11 +1,10 @@
 package de.htwg.se.monopoly.aview.gui
 
-import java.awt.{Dimension, Image}
+import java.awt.Dimension
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.{Controller, GameState}
-import de.htwg.se.monopoly.util.Subscriber
-import de.htwg.se.monopoly.util.Event
+import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, GameState, RolledDice}
+
 
 import scala.swing.MainFrame
 import scala.swing._
@@ -13,9 +12,9 @@ import scala.swing.event.ButtonClicked
 
 
 
-class GameGui(controller: Controller) extends MainFrame with Subscriber {
+class GameGui(controller: Controller) extends MainFrame {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
-  controller.add(this)
+  listenTo(controller)
   title = "HTWG Monopoly"
   resizable = false
 
@@ -24,7 +23,7 @@ class GameGui(controller: Controller) extends MainFrame with Subscriber {
       contents += new MenuItem(Action("Undo") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Redo") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
-      contents += new MenuItem(Action("Quit") { controller.notifyObservers(Event("EXIT_CURRENT_GAME"))})
+      contents += new MenuItem(Action("Quit") { controller.publish(new ExitCurrentGame)})
     }
   }
 
@@ -66,7 +65,7 @@ class GameGui(controller: Controller) extends MainFrame with Subscriber {
     reactions += {
       case ButtonClicked(`rollDiceButton`) =>
         controller.rollDice()
-        controller.notifyObservers(Event("ROLLED_DICE"))
+        controller.publish(new RolledDice)
       case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
     }
   }
@@ -108,11 +107,9 @@ class GameGui(controller: Controller) extends MainFrame with Subscriber {
     visible = false
   }
 
-  override def update(event: Event): Unit = {
-    event.getEvent match {
-      case "ROLLED_DICE" => this.repaint()
+  reactions += {
+      case event: RolledDice => this.repaint()
       case _ =>
-    }
   }
 }
 
