@@ -65,7 +65,6 @@ class GameGui(controller: Controller) extends MainFrame {
     reactions += {
       case ButtonClicked(`rollDiceButton`) =>
         controller.rollDice()
-        controller.publish(new RolledDice)
       case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
     }
   }

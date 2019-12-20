@@ -49,8 +49,7 @@ class TextualUserInterface(controller: Controller) extends Reactor {
   def processInputLineGameMenu(input: String): Unit = {
     input match {
       case "1" =>
-        println(controller.rollDice())  //roll Dice
-        println(controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
+        controller.rollDice() //roll Dice
       case "2" =>
         GameState.setState("MAIN_MENU")
         controller.publish(new ExitCurrentGame)
@@ -67,6 +66,8 @@ class TextualUserInterface(controller: Controller) extends Reactor {
     case event: RolledDice =>
       println(controller.stringRolledDice)
       println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
+      println(controller.gameMenu)
     case event: ExitCurrentGame =>
       println(controller.exitCurrentGameMessage)
       println(controller.mainMenu)
