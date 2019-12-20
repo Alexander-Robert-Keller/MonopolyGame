@@ -8,7 +8,7 @@ class PublisherSpec extends WordSpec with Matchers {
     val subscriber = new Subscriber {
       var updated: Boolean = false
       def isUpdated: Boolean = updated
-      override def update(event: Event): Unit = {updated = true}
+      override def update(): Unit = {updated = true}
     }
     "add an Observer" in {
       publisher.add(subscriber)
