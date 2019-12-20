@@ -11,10 +11,10 @@ import scala.swing.{Component, Graphics2D}
 
 class BoardCanvas extends Component{
 
-  preferredSize = new Dimension(1000, 1000)
+  preferredSize = new Dimension(900, 900)
 
   override def paintComponent(g: Graphics2D): Unit = {
-    preferredSize = new Dimension(1000, 1000)
+    preferredSize = new Dimension(900, 900)
     val gameBoardImage = getMonopolyBoardImage
     g.drawImage(gameBoardImage, 0, 0, null)
 
@@ -26,26 +26,26 @@ class BoardCanvas extends Component{
       val location = Game.board.players(currentPlayer).getLocation  //TODO: implement in controller getplayers -> returns list
       val playerImage = getPlayerImage(currentPlayer, numberofPlayers)
       if (location < 10) {
-        val x = 925 - (location * 100)
-        val y = 900 + yOffSet
+        val x = 794 - (location * 74)
+        val y = 820 + yOffSet
         g.drawImage(playerImage, x, y, null)
         currentPlayer += 1
         yOffSet += 10
       } else if (location < 20) {
         val x = 25
-        val y = 900 - ((location - 10) * 100) + yOffSet
+        val y = 794 - ((location - 10) * 74) + yOffSet
         g.drawImage(playerImage, x, y, null)
         currentPlayer += 1
         yOffSet += 10
       } else if (location < 30) {
-        val x = 25 + ((location - 20) * 100)
-        val y = 25 + yOffSet
+        val x = 56 + ((location - 20) * 74)
+        val y = 20 + yOffSet
         g.drawImage(playerImage, x, y, null)
         currentPlayer += 1
         yOffSet += 10
       } else if (location < 40) {
-        val x = 925
-        val y = 25  + ((location - 30) * 100) + yOffSet
+        val x = 834
+        val y = 50  + ((location - 30) * 74) + yOffSet
         g.drawImage(playerImage, x, y, null)
         currentPlayer += 1
         yOffSet += 10
@@ -68,7 +68,7 @@ class BoardCanvas extends Component{
   def getMonopolyBoardImage: Image = {
     val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolygameBoard.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
-    val resized = gameBoardImage.getScaledInstance(1000, 1000, Image.SCALE_DEFAULT)
+    val resized = gameBoardImage.getScaledInstance(900, 900, Image.SCALE_DEFAULT)
     resized
   }
 }

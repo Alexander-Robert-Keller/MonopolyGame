@@ -14,6 +14,7 @@ import scala.swing.{BoxPanel, MainFrame}
 class GUI(controller: Controller) extends MainFrame {
   listenTo(controller)
 
+  resizable = false
   title = "HTWG Monopoly"
 
 
