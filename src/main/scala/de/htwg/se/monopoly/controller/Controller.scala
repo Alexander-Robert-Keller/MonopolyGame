@@ -32,8 +32,9 @@ class Controller extends Publisher {
   var playerState: PlayerState = FreePlayerState
 
   def stringRolledDice: String = {
-    playerState = playerState.determinePlayerState(Game.board.players(GameState.currentPlayer))
-    playerState.rollDice(currentDice)
+    val message = playerState.stringRollDice(currentDice)
+    playerState = playerState.rollDice(currentDice)
+    message
   }
 
   def exitCurrentGame(): String = {
