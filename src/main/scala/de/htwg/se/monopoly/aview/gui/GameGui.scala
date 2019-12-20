@@ -16,7 +16,7 @@ class GameGui(controller: Controller) extends MainFrame {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
   listenTo(controller)
   title = "HTWG Monopoly"
-  resizable = false
+  resizable = true
 
   menuBar = new MenuBar {
     contents += new Menu("Game") {
