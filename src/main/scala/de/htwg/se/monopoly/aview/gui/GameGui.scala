@@ -27,30 +27,30 @@ class GameGui(controller: Controller) extends MainFrame {
     }
   }
 
-  val playerName = new TextField(15)
+  // TODO: delete unnecessary Fields
+  val currentPlayerName = new TextField(15)
   val playerMoney = new TextField(15)
   val jailedLabel = new TextField(15)
 
   def currentPlayerPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
-    border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Player Info:"))
+    border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Player:"))
     preferredSize = new Dimension(200, 200)
-    playerName.editable = false
+    currentPlayerName.editable = false
     playerMoney.editable = false
     jailedLabel.editable = false
     contents += Swing.VStrut(10)
     contents += Swing.Glue
-    contents += playerName
+    contents += currentPlayerName
     contents += Swing.VStrut(10)
     contents += Swing.Glue
-    contents += playerMoney
+    contents += gameCommandsPanel
     contents += Swing.VStrut(10)
     contents += Swing.Glue
-    contents += jailedLabel
     updatePlayerInfo()
-
   }
 
   def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    preferredSize = new Dimension(200, 100)
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Commands:"))
     val rollDiceButton = new Button("roll Dice!")
     val buyPropertyButton = new Button("Buy Property")
@@ -69,12 +69,55 @@ class GameGui(controller: Controller) extends MainFrame {
     }
   }
 
-  def combinedCurrentGamePanelAndGameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+  val infoPlayerName = new TextField("")
+  infoPlayerName.editable = false
+
+  def nextPrevPlayerPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
+    preferredSize = new Dimension(200, 42)
     border = Swing.EmptyBorder(10, 10, 10, 10)
-    contents += gameCommandsPanel
+    val prevButton = new Button("Prev")
+    val nextButton = new Button("Next")
+    contents += prevButton
     contents += Swing.VStrut(10)
     contents += Swing.Glue
+    contents += infoPlayerName
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += nextButton
+    listenTo(prevButton)
+    listenTo(nextButton)
+    reactions += {
+      case ButtonClicked(`prevButton`) => //TODO: Implement Show Player Info
+      case ButtonClicked(`nextButton`) => //TODO: Implement Show Player Info
+    }
+  }
+
+  def playerInfoTextArea: TextArea = new TextArea(" \n")
+  playerInfoTextArea.editable = false
+
+  def playerInfoPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    preferredSize = new Dimension(600, 700)
+    contents += playerInfoTextArea
+  }
+
+  def playerInfoAndPlayerTextAreaPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    border = Swing.EmptyBorder(10, 10, 10, 10)
+    preferredSize = new Dimension(200, 660)
+    border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Player Info:"))
+    contents += nextPrevPlayerPanel
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += playerInfoPanel
+    playerInfoTextArea.editable = false
+
+  }
+
+  def combinedCurrentGamePanelAndGameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    border = Swing.EmptyBorder(10, 10, 10, 10)
     contents += currentPlayerPanel
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += playerInfoAndPlayerTextAreaPanel
   }
 
 
@@ -91,7 +134,7 @@ class GameGui(controller: Controller) extends MainFrame {
   visible = false
 
   def updatePlayerInfo(): Unit = { //Into Controller
-    playerName.text = Game.board.players(GameState.currentPlayer).toString
+    currentPlayerName.text = Game.board.players(GameState.currentPlayer).toString
     playerMoney.text = "Capital: %d".format(Game.board.players(GameState.currentPlayer).getMoney)
     if (Game.board.players(GameState.currentPlayer).isJailed) {
      jailedLabel.text = "This Player is currently Jailed!"
