@@ -17,7 +17,6 @@ class GUI(controller: Controller) extends MainFrame {
   resizable = false
   title = "HTWG Monopoly"
 
-
   val startGameButton = new Button("Start Game")
   val infoButton = new Button("Info")
   val exitMainMenuButton = new Button("Exit")

@@ -1,7 +1,8 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.model.Dice
+import de.htwg.se.monopoly.model.{Dice, FreePlayerState, PlayerState}
+
 import scala.swing.Publisher
 import de.htwg.se.monopoly.util.InitializerFacade
 
