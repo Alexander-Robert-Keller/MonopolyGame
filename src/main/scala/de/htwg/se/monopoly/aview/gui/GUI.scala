@@ -3,7 +3,8 @@ package de.htwg.se.monopoly.aview.gui
 import java.awt.Image
 import java.io.File
 
-import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, GameState, StartGame}
+import de.htwg.se.monopoly.Game
+import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, StartGame}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
@@ -71,7 +72,7 @@ class GUI(controller: Controller) extends MainFrame {
   def endGame(): Unit = {
     visible = true
     inGameGui.closeGui()
-    GameState.setState("MAIN_MENU")
+    Game.controller.gameState.setState("MAIN_MENU")
   }
 
   reactions += {

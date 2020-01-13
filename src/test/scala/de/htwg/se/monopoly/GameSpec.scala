@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly
 
 import de.htwg.se.monopoly.aview.TextualUserInterface
-import de.htwg.se.monopoly.controller.{Controller, GameState}
+import de.htwg.se.monopoly.controller.Controller
 import org.scalatest.{Matchers, WordSpec}
 
 class GameSpec extends WordSpec with Matchers {
@@ -16,11 +16,6 @@ class GameSpec extends WordSpec with Matchers {
       Game.numberOfPlayers should be (2)
     }
     "have a way to initialize a new Game" in {
-      GameState.setState("MAIN_MENU")
-      Game.init()
-      GameState.getCurrentPlayer should be (0)
-      GameState.numberOfPlayers should be (2)
-      GameState.state should be (GameState.ROLL_DICE)
     }
   }
 }

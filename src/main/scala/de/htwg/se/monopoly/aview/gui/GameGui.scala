@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.gui
 import java.awt.Dimension
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, GameState, RolledDice}
+import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, RolledDice}
 
 
 import scala.swing.MainFrame
@@ -134,9 +134,9 @@ class GameGui(controller: Controller) extends MainFrame {
   visible = false
 
   def updatePlayerInfo(): Unit = { //Into Controller
-    currentPlayerName.text = Game.board.players(GameState.currentPlayer).toString
-    playerMoney.text = "Capital: %d".format(Game.board.players(GameState.currentPlayer).getMoney)
-    if (Game.board.players(GameState.currentPlayer).isJailed) {
+    currentPlayerName.text = Game.board.players(Game.controller.gameState.currentPlayer).toString
+    playerMoney.text = "Capital: %d".format(Game.board.players(Game.controller.gameState.currentPlayer).getMoney)
+    if (Game.board.players(Game.controller.gameState.currentPlayer).isJailed) {
      jailedLabel.text = "This Player is currently Jailed!"
     }
   }

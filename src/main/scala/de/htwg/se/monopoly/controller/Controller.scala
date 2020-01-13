@@ -1,12 +1,13 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.model.{Dice, FreePlayerState, PlayerState}
+import de.htwg.se.monopoly.model.Dice
 
 import scala.swing.Publisher
-import de.htwg.se.monopoly.util.InitializerFacade
 
 class Controller extends Publisher {
+
+  val gameState = new GameState(this)
 
   val mainMenu = "option | description\n [1]   | Start new game\n [200]   | Exit game"
 
@@ -27,7 +28,7 @@ class Controller extends Publisher {
   def rollDice(): Unit = {
     currentDice = Dice()
     publish(new RolledDice)
-    GameState.nextState()
+    gameState.nextState()
   }
 
   var playerState: PlayerState = FreePlayerState
@@ -39,7 +40,7 @@ class Controller extends Publisher {
   }
 
   def exitCurrentGame(): String = {
-    GameState.setState("MAIN_MENU")
+    gameState.setState("MAIN_MENU")
     publish(new ExitCurrentGame)
     exitCurrentGameMessage
   }
@@ -49,13 +50,15 @@ class Controller extends Publisher {
   val exitProgramMessage: String = "Exit game!"
 
   def nextPlayersRoundMessage(): String = {
-    val playerString = Game.board.players(GameState.currentPlayer).toString
+    val playerString = Game.board.players(gameState.currentPlayer).toString
     "It´s " + playerString + "´s turn!\n"
   }
 
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
 
   def initializeGame(): Unit = {
-    InitializerFacade.initializeGame()
+
+    //change if selectable how much players are playing
+    gameState.startGame(Game.numberOfPlayers)
   }
 }

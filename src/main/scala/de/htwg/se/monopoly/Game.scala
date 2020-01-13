@@ -17,14 +17,13 @@ import scala.io.StdIn
 
 object Game {
   val numberOfPlayers = 2
-  val board: Board = new Board(numberOfPlayers)
+  val board: Board = new Board(numberOfPlayers, 40)
   var running: Boolean = false
   val exitValue = "200"
+  val controller = new Controller()
 
   // Runs the game
   def run(args: Array[String]): Unit = {
-    val controller = new Controller()
-    GameState.setController(controller)
     val tui: TextualUserInterface = new TextualUserInterface(controller)
     val gui: GUI = new GUI(controller)
 
