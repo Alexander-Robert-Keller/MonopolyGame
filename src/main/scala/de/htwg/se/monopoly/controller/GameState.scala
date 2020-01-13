@@ -1,16 +1,16 @@
 package de.htwg.se.monopoly.controller
 
-import de.htwg.se.monopoly.Game
+class GameState(controller: Controller) extends Enumeration {
 
-object GameState extends Enumeration {
-  var state: GameState.Value = Value
   val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
-  state = MAIN_MENU
-  var controller: Controller = _
 
-  def setController(newController: Controller): Unit = {controller = newController}
+  var state: Value = _
 
   var currentPlayer = 0
+
+  var numberOfPlayers = 0
+
+  state = MAIN_MENU
 
   def setCurrentPlayer(player: Int): Unit = {
     currentPlayer = player
@@ -18,7 +18,7 @@ object GameState extends Enumeration {
 
   def getCurrentPlayer: Int = currentPlayer
 
-  var numberOfPlayers = 0
+
 
   def setNumberOfPlayers(maxPlayers: Int): Unit = {
     numberOfPlayers = maxPlayers
@@ -60,9 +60,9 @@ object GameState extends Enumeration {
     }
   }
 
-  def init(): Unit = {
+  def startGame(numberOfPlayers: Int): Unit = {
     nextState()
     setCurrentPlayer(0)
-    setNumberOfPlayers(Game.numberOfPlayers)
+    setNumberOfPlayers(numberOfPlayers)
   }
 }

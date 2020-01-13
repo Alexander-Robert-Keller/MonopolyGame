@@ -5,10 +5,14 @@ import de.htwg.se.monopoly.model.spacetypes._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Board(t_NumberOfPlayers: Int) {
-  val totalNumberOfPlayers: Int = t_NumberOfPlayers
-  val totalNumberOfSpaces: Int = 40
+class Board(totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
+
+  val getTotalNumberOfSpaces: Int = totalNumberOfPlayers
+
+  val jailLocation: Int = 10
+
   val spaces: Array[Space] = Array.fill[Space](totalNumberOfSpaces)(Property()) // hint: most spaces are property spaces
+
   val players: ArrayBuffer[Player] = {
     val buffer: ArrayBuffer[Player] = new ArrayBuffer[Player]
     for (i <- 1 to totalNumberOfPlayers) {
@@ -18,21 +22,21 @@ class Board(t_NumberOfPlayers: Int) {
   }
 
   def movePlayer(moveByXSpaces: Int, currentPlayerID: Int): Unit = {
-    val newPosition = (players(currentPlayerID).getLocation + moveByXSpaces) % totalNumberOfSpaces
-    players(currentPlayerID) = Player(players(currentPlayerID).getId, newPosition,
-      players(currentPlayerID).isJailed, players(currentPlayerID).getMoney)
+    players(currentPlayerID) = players(currentPlayerID).move(moveByXSpaces, totalNumberOfPlayers)
   }
 
-  def updatePlayerMoney(playerGetsXMoney: Int , currentPlayerID: Int): Unit = {
-    val newMoney = players(currentPlayerID).getMoney + playerGetsXMoney
-    players(currentPlayerID) = Player(players(currentPlayerID).getId, players(currentPlayerID).getLocation,
-      players(currentPlayerID).isJailed, newMoney)
+  def increasePlayerMoney(playerGetsXMoney: Int , currentPlayerID: Int): Unit = {
+    players(currentPlayerID) = players(currentPlayerID).increaseMoney(playerGetsXMoney)
+  }
+
+  def decreasePlayerMoney(playerPaysXMoney: Int , currentPlayerID: Int): Unit = {
+    players(currentPlayerID) = players(currentPlayerID).decreaseMoney(playerPaysXMoney)
   }
 
   def setPlayerJailedOrUnJailed(currentPlayerID: Int, jailed: Boolean): Unit = {
-    players(currentPlayerID) = Player(players(currentPlayerID).getId, players(currentPlayerID).getLocation,
-      jailed, players(currentPlayerID).getMoney)
+    players(currentPlayerID) = players(currentPlayerID).setJailed(jailed, jailLocation)
   }
+
   def init(): Unit = {
     spaces(0) = Go()
     spaces(2) = CommunityChest()

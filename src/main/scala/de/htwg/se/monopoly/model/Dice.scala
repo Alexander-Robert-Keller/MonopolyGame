@@ -14,5 +14,7 @@ case class Dice() {
 
   def hasDoublets: Boolean = {die1 == die2}
 
+  def rollDice(): Dice = Dice()
+
   override def toString: String = "You rolled: %d and %d. Move %d spaces!\n".format(die1, die2, die1 + die2)
 }

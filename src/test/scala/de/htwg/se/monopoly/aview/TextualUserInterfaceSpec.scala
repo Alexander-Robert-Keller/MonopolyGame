@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.aview
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.{Controller, GameState}
+import de.htwg.se.monopoly.controller.Controller
 import de.htwg.se.monopoly.model.Player
 import org.scalatest.{Matchers, WordSpec}
 
@@ -30,7 +30,6 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
       //do nothing
     }
     "process a Input '1' from the GameMenu" in {
-      GameState.setCurrentPlayer(0)
       Game.board.players(0) = Player(0, 0, Game.board.players(0).isJailed, Game.board.players(0).getMoney)
       val x = Game.board.players(0).getLocation
       tui.processInputLineGameMenu("1")

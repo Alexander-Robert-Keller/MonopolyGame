@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.aview
 
-import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, ExitProgram, GameState, RolledDice, StartGame}
+import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, ExitProgram, RolledDice, StartGame}
 
 import scala.swing.Reactor
 
