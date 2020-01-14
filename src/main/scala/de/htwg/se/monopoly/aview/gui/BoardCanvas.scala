@@ -3,8 +3,7 @@ package de.htwg.se.monopoly.aview.gui
 import java.awt.{Dimension, Image}
 import java.io.File
 
-import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.{Controller, GameState}
+import de.htwg.se.monopoly.controller.{Controller, Game, GameState}
 import javax.imageio.ImageIO
 
 import scala.swing.{Component, Graphics2D}

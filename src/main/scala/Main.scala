@@ -1,4 +1,4 @@
-import de.htwg.se.monopoly.Game
+import de.htwg.se.monopoly.controller.Game
 
 /*
  * The starting point of this program.

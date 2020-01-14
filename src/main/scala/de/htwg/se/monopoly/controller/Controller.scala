@@ -1,6 +1,5 @@
 package de.htwg.se.monopoly.controller
 
-import de.htwg.se.monopoly.Game
 import de.htwg.se.monopoly.model.{Dice, FreePlayerState, PlayerState}
 import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, RolledDice, StartGame}
 
