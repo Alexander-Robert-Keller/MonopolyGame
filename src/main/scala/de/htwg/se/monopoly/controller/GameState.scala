@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.controller
 
-class GameState(controller: Controller) extends Enumeration {
+class GameState extends Enumeration {
 
   val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
 
@@ -45,7 +45,7 @@ class GameState(controller: Controller) extends Enumeration {
     state match {
       case MAIN_MENU => state = ROLL_DICE
       case ROLL_DICE => state = ROLL_DICE
-        if (!controller.getCurrentDice.hasDoublets) { //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
+        if (!Controller.getCurrentDice.hasDoublets) { //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
           nextPlayer()
         }
       case BUY_OR_UPGRADE_PROPERTY => state = ROLL_DICE

@@ -22,7 +22,7 @@ class Board(totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
   }
 
   def movePlayer(moveByXSpaces: Int, currentPlayerID: Int): Unit = {
-    players(currentPlayerID) = players(currentPlayerID).move(moveByXSpaces, totalNumberOfPlayers)
+    players(currentPlayerID) = players(currentPlayerID).move(moveByXSpaces, totalNumberOfSpaces)
   }
 
   def increasePlayerMoney(playerGetsXMoney: Int , currentPlayerID: Int): Unit = {

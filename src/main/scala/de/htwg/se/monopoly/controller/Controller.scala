@@ -5,49 +5,35 @@ import de.htwg.se.monopoly.model.Dice
 
 import scala.swing.Publisher
 
-class Controller extends Publisher {
+object Controller extends Publisher {
 
-  val gameState = new GameState(this)
+  val gameState = new GameState
 
-  val mainMenu = "option | description\n [1]   | Start new game\n [200]   | Exit game"
+  def getCurrentDice: Dice = Game.dice
 
-  val gameMenu = "option | description\n [1]   | roll dice\n [2]   | Exit game"
+  var playerState: PlayerState = FreePlayerState
 
-  val jailMenu = "option | description\n [1]   | roll dice\n [2]   | Exit game"
+  def rollDice(): Unit = {
+    Game.dice = Dice()
+    playerState = playerState.determinePlayerState(Game.board.players(gameState.getCurrentPlayer))
+    playerState = playerState.rollDice(getCurrentDice)
+    publish(new RolledDice)
+    gameState.nextState()
+  }
 
-  val wrongCommand = "Command Option does not exist"
+  def stringRolledDice: String = {
+    val message = playerState.stringRollDice(getCurrentDice)
+    message
+  }
 
   def stringGameBoard(): String = {
     Game.board.toString
   }
 
-  var currentDice: Dice = _
-
-  def getCurrentDice: Dice = currentDice
-
-  def rollDice(): Unit = {
-    currentDice = Dice()
-    publish(new RolledDice)
-    gameState.nextState()
-  }
-
-  var playerState: PlayerState = FreePlayerState
-
-  def stringRolledDice: String = {
-    val message = playerState.stringRollDice(currentDice)
-    playerState = playerState.rollDice(currentDice)
-    message
-  }
-
-  def exitCurrentGame(): String = {
-    gameState.setState("MAIN_MENU")
-    publish(new ExitCurrentGame)
-    exitCurrentGameMessage
-  }
-
   val exitCurrentGameMessage: String = "Returns to main menu!"
 
   val exitProgramMessage: String = "Exit game!"
+
 
   def nextPlayersRoundMessage(): String = {
     val playerString = Game.board.players(gameState.currentPlayer).toString
@@ -56,9 +42,20 @@ class Controller extends Publisher {
 
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
 
-  def initializeGame(): Unit = {
+  def exitMainMenu(): Unit = {
+    publish(new ExitProgram)
+    System.exit(0)
+  }
 
-    //change if selectable how much players are playing
+  def exitGameMenu(): Unit = {
+    gameState.setState("MAIN_MENU")
+    publish(new ExitCurrentGame)
+  }
+
+  def initializeGame(): Unit = {
+    //change if you can select how much players are playing
     gameState.startGame(Game.numberOfPlayers)
+    Game.board.init()
+    publish(new StartGame)
   }
 }

@@ -12,9 +12,9 @@ import scala.swing.event.ButtonClicked
 
 
 
-class GameGui(controller: Controller) extends MainFrame {
+class GameGui extends MainFrame {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
-  listenTo(controller)
+  listenTo(Controller)
   title = "HTWG Monopoly"
   resizable = true
 
@@ -23,7 +23,7 @@ class GameGui(controller: Controller) extends MainFrame {
       contents += new MenuItem(Action("Undo") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Redo") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
-      contents += new MenuItem(Action("Quit") { controller.publish(new ExitCurrentGame)})
+      contents += new MenuItem(Action("Quit") { Controller.exitGameMenu()})
     }
   }
 
@@ -64,7 +64,7 @@ class GameGui(controller: Controller) extends MainFrame {
     listenTo(buyPropertyButton)
     reactions += {
       case ButtonClicked(`rollDiceButton`) =>
-        controller.rollDice()
+        Controller.rollDice()
       case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
     }
   }
@@ -134,9 +134,9 @@ class GameGui(controller: Controller) extends MainFrame {
   visible = false
 
   def updatePlayerInfo(): Unit = { //Into Controller
-    currentPlayerName.text = Game.board.players(Game.controller.gameState.currentPlayer).toString
-    playerMoney.text = "Capital: %d".format(Game.board.players(Game.controller.gameState.currentPlayer).getMoney)
-    if (Game.board.players(Game.controller.gameState.currentPlayer).isJailed) {
+    currentPlayerName.text = Game.board.players(Controller.gameState.currentPlayer).toString
+    playerMoney.text = "Capital: %d".format(Game.board.players(Controller.gameState.currentPlayer).getMoney)
+    if (Game.board.players(Controller.gameState.currentPlayer).isJailed) {
      jailedLabel.text = "This Player is currently Jailed!"
     }
   }

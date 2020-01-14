@@ -1,9 +1,9 @@
 package de.htwg.se.monopoly
 
 import de.htwg.se.monopoly.controller._
-import de.htwg.se.monopoly.model.Board
-import de.htwg.se.monopoly.aview.TextualUserInterface
+import de.htwg.se.monopoly.model.{Board, Dice}
 import de.htwg.se.monopoly.aview.gui.GUI
+import de.htwg.se.monopoly.aview.tui.TextualUserInterface
 
 import scala.io.StdIn
 
@@ -17,17 +17,16 @@ import scala.io.StdIn
 
 object Game {
   val numberOfPlayers = 2
-  val board: Board = new Board(numberOfPlayers, 40)
-  var running: Boolean = false
-  val exitValue = "200"
-  val controller = new Controller()
+  val numberOfSpaces = 40
+  val board: Board = new Board(numberOfPlayers, numberOfSpaces)
+  var dice: Dice = Dice()
 
   // Runs the game
   def run(args: Array[String]): Unit = {
-    val tui: TextualUserInterface = new TextualUserInterface(controller)
-    val gui: GUI = new GUI(controller)
+    val tui: TextualUserInterface = new TextualUserInterface
+    val gui: GUI = new GUI
 
-    tui.displayMainMenuOptions()
+    tui.displayMenuOptions()
 
     // Main Menu loop
     var input: String = ""
@@ -36,12 +35,6 @@ object Game {
     } else do {
       input = StdIn.readLine()
       tui.processInputLine(input)
-    } while (input != exitValue)
+    } while (true)
   } // end of run()
-
-  // Initializes game
-  def init(): Unit = {
-    board.init()
-  }
-
 }
