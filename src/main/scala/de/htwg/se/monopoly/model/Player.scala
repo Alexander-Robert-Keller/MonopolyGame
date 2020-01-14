@@ -8,7 +8,7 @@ case class Player(t_id: Int, location: Int, jailed: Boolean, money: Int) {
 
   def getLocation: Int = location
 
-  def move(spaces: Int, totalNumberOfSpaces: Int): Player = Player(t_id, location + spaces % totalNumberOfSpaces, jailed, money)
+  def move(spaces: Int, totalNumberOfSpaces: Int): Player = Player(t_id, (location + spaces) % totalNumberOfSpaces, jailed, money)
 
   def isJailed: Boolean = jailed
 

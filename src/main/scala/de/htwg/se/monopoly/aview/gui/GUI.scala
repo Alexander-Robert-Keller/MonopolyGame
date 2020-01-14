@@ -12,8 +12,8 @@ import scala.swing._
 import scala.swing.event.ButtonClicked
 import scala.swing.{BoxPanel, MainFrame}
 
-class GUI(controller: Controller) extends MainFrame {
-  listenTo(controller)
+class GUI extends MainFrame {
+  listenTo(Controller)
 
   resizable = false
   title = "HTWG Monopoly"
@@ -54,15 +54,13 @@ class GUI(controller: Controller) extends MainFrame {
 
   reactions += {
     case ButtonClicked(`startGameButton`) =>
-      controller.initializeGame()
-      controller.publish(new StartGame)
+      Controller.initializeGame()
     case ButtonClicked(`exitMainMenuButton`) =>
-      controller.publish(new ExitCurrentGame)
-      System.exit(0)
+      Controller.exitMainMenu()
     case ButtonClicked(`infoButton`) => //TODO: Popup Field with some info
   }
 
-  val inGameGui = new GameGui(controller)
+  val inGameGui = new GameGui
 
   def startGame(): Unit = {
     visible = false
@@ -72,7 +70,6 @@ class GUI(controller: Controller) extends MainFrame {
   def endGame(): Unit = {
     visible = true
     inGameGui.closeGui()
-    Game.controller.gameState.setState("MAIN_MENU")
   }
 
   reactions += {

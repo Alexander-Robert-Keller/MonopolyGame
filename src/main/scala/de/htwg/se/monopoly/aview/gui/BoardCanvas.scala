@@ -4,7 +4,7 @@ import java.awt.{Dimension, Image}
 import java.io.File
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.GameState
+import de.htwg.se.monopoly.controller.{Controller, GameState}
 import javax.imageio.ImageIO
 
 import scala.swing.{Component, Graphics2D}
@@ -18,7 +18,7 @@ class BoardCanvas extends Component{
     val gameBoardImage = getMonopolyBoardImage
     g.drawImage(gameBoardImage, 0, 0, null)
 
-    val numberofPlayers = GameState.getNumberOfPlayers
+    val numberofPlayers = Controller.gameState.getNumberOfPlayers
     var currentPlayer = 0
     var yOffSet = 0
     //TODO: adjust prefeerd size back to 900 x 900 and tweak x and y calculation
