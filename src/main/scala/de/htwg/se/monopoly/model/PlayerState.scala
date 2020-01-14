@@ -7,7 +7,7 @@ trait PlayerState {
 
   def determinePlayerState(currentPlayer: Player): PlayerState
 
-  def rollDice(dice: Dice, currentPlayerIndex: Int): PlayerState
+  def rollDice(dice: Dice, currentPlayerIndex: Int): Unit
 
   def stringRollDice(dice: Dice, currentPlayerIndex: Int): String
 }
@@ -21,9 +21,8 @@ object FreePlayerState extends PlayerState {
     }
   }
 
-  override def rollDice(dice: Dice, currentPlayerIndex: Int): PlayerState= {
+  override def rollDice(dice: Dice, currentPlayerIndex: Int): Unit = {
       Game.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
-      FreePlayerState
   }
 
   override def stringRollDice(dice: Dice, currentPlayerIndex: Int): String = {
@@ -57,20 +56,16 @@ object JailedPlayerState extends PlayerState {
     }
   }
 
-  override def rollDice(dice: Dice, currentPlayerIndex: Int): PlayerState = {
+  override def rollDice(dice: Dice, currentPlayerIndex: Int): Unit = {
     if (dice.hasDoublets) {
       Game.board.setPlayerJailedOrUnJailed(currentPlayerIndex, jailed = false)
       Game.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
-      return FreePlayerState
     }
-    JailedPlayerState
   }
 
   override def stringRollDice(dice: Dice, currentPlayerIndex: Int): String = {
     if (dice.hasDoublets) {
-      val freePlayerState: PlayerState = determinePlayerState(Game.board.players(currentPlayerIndex))
-      freePlayerState.rollDice(dice, currentPlayerIndex)
-      "You got doublets, you are now a free man!\n" + freePlayerState.stringRollDice(dice, currentPlayerIndex)
+      "You got doublets, you are now a free man!\n" + FreePlayerState.stringRollDice(dice, currentPlayerIndex)
     } else {
       "You rolled %d and %d. ".format(dice.die1, dice.die2)  + "You are still jailed!\n"
     }
