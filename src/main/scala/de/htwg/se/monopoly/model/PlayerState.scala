@@ -1,7 +1,6 @@
 package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.Controller
+import de.htwg.se.monopoly.controller.{Controller, Game}
 
 trait PlayerState {
 

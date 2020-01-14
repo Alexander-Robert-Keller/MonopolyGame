@@ -2,8 +2,7 @@ package de.htwg.se.monopoly.aview.gui
 
 import java.awt.Dimension
 
-import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.Controller
+import de.htwg.se.monopoly.controller.{Controller, Game}
 import de.htwg.se.monopoly.util.RolledDice
 
 import scala.swing.MainFrame
