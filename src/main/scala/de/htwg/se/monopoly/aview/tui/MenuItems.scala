@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.aview.tui
 
-import de.htwg.se.monopoly.controller.{Controller, ExitProgram, RolledDice, StartGame}
+import de.htwg.se.monopoly.controller.Controller
 
 trait MenuItems {
   val name: String

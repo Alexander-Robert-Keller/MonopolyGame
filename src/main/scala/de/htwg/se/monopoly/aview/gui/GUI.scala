@@ -4,7 +4,8 @@ import java.awt.Image
 import java.io.File
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.controller.{Controller, ExitCurrentGame, StartGame}
+import de.htwg.se.monopoly.controller.Controller
+import de.htwg.se.monopoly.util.{ExitCurrentGame, StartGame}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
