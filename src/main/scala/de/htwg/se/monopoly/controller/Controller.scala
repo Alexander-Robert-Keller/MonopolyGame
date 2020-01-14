@@ -17,14 +17,13 @@ object Controller extends Publisher {
   def rollDice(): Unit = {
     Game.dice = Dice()
     playerState = playerState.determinePlayerState(Game.board.players(gameState.getCurrentPlayer))
-    playerState = playerState.rollDice(getCurrentDice, gameState.getCurrentPlayer)
+    playerState.rollDice(getCurrentDice, gameState.getCurrentPlayer)
     publish(new RolledDice)
     gameState.nextState()
   }
 
   def stringRolledDice: String = {
-    val message = playerState.stringRollDice(getCurrentDice, gameState.getCurrentPlayer)
-    message
+    playerState.stringRollDice(getCurrentDice, gameState.getCurrentPlayer)
   }
 
   def stringGameBoard(): String = {
