@@ -19,7 +19,9 @@ object Controller extends Publisher {
     playerState = playerState.determinePlayerState(Game.board.players(gameState.getCurrentPlayer))
     playerState.rollDice(getCurrentDice, gameState.getCurrentPlayer)
     publish(new RolledDice)
-    gameState.nextState()
+    if (!getCurrentDice.hasDoublets) {
+      gameState.nextState()
+    }
   }
 
   def stringRolledDice: String = {

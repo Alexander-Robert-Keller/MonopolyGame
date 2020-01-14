@@ -44,10 +44,9 @@ class GameState extends Enumeration {
   def nextState(): Unit = {
     state match {
       case MAIN_MENU => state = ROLL_DICE
-      case ROLL_DICE => state = ROLL_DICE
-        if (!Controller.getCurrentDice.hasDoublets) { //Change back to BUY_OR_UPGRADE_PROPERTY, implement next player
-          nextPlayer()
-        }
+      case ROLL_DICE =>
+        state = ROLL_DICE //TODO: change when other options are implemented
+        nextPlayer()
       case BUY_OR_UPGRADE_PROPERTY => state = ROLL_DICE
     }
   }
