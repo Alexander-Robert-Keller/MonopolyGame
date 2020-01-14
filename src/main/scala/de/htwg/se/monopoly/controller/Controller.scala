@@ -1,7 +1,8 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.Game
-import de.htwg.se.monopoly.model.Dice
+import de.htwg.se.monopoly.model.{Dice, FreePlayerState, PlayerState}
+import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, RolledDice, StartGame}
 
 import scala.swing.Publisher
 
@@ -16,13 +17,13 @@ object Controller extends Publisher {
   def rollDice(): Unit = {
     Game.dice = Dice()
     playerState = playerState.determinePlayerState(Game.board.players(gameState.getCurrentPlayer))
-    playerState = playerState.rollDice(getCurrentDice)
+    playerState = playerState.rollDice(getCurrentDice, gameState.getCurrentPlayer)
     publish(new RolledDice)
     gameState.nextState()
   }
 
   def stringRolledDice: String = {
-    val message = playerState.stringRollDice(getCurrentDice)
+    val message = playerState.stringRollDice(getCurrentDice, gameState.getCurrentPlayer)
     message
   }
 

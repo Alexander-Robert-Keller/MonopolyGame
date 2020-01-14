@@ -1,8 +1,6 @@
-package de.htwg.se.monopoly.controller
+package de.htwg.se.monopoly.util
 
 import scala.swing.event.Event
-
-class Events {}
 
 class ExitCurrentGame extends Event
 class StartGame extends Event
