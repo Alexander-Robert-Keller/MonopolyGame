@@ -28,18 +28,18 @@ object FreePlayerState extends PlayerState {
 
   override def stringRollDice(dice: Dice, currentPlayerIndex: Int): String = {
     if (Controller.getCurrentDice.hasDoublets) {
-      if (dice.getFaceValue + Game.board.players(currentPlayerIndex).getLocation == 0) {
-        return dice.toString + "You landed on Go: here are 400$\n"
+      if (Game.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && Game.board.players(currentPlayerIndex).getLocation == 0) {
+        return dice.toString + "You got doublets roll again!\n" + "You landed on Go: here are 400$\n"
       }
-      if (dice.getFaceValue + Game.board.players(currentPlayerIndex).getLocation > 0) {
-        return dice.toString + "You went over Go: here are 200$\n"
+      if (Game.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
+        return dice.toString + "You got doublets roll again!\n" + "You went over Go: here are 200$\n"
       }
-      dice.toString
+      dice.toString + "You got doublets roll again!\n"
     } else {
-      if (dice.getFaceValue + Game.board.players(Controller.gameState.currentPlayer).getLocation == Game.board.getTotalNumberOfSpaces) {
+      if (Game.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && Game.board.players(currentPlayerIndex).getLocation == 0) {
         return dice.toString + "You went over Go: here are 400$\n"
       }
-      if (dice.getFaceValue + Game.board.players(Controller.gameState.currentPlayer).getLocation > Game.board.getTotalNumberOfSpaces) {
+      if (Game.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
         return dice.toString + "You went over Go: here are 200$\n"
       }
       dice.toString
