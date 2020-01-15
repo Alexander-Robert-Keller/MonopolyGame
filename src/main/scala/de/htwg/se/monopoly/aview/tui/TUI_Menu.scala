@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.aview.tui
 
-import de.htwg.se.monopoly.controller.GameState
+import de.htwg.se.monopoly.model.GameState
 
 import scala.collection.mutable
 
@@ -71,6 +71,8 @@ object RollDiceMenu extends TUI_Menu {
 
   add(RollDiceMenuItem)
   add(ExitGameMenuItem)
+  add(UndoMenuItem)
+  add(RedoMenuItem)
 
   override def determineMenu(gameState: GameState): TUI_Menu = {
     if (gameState.state == gameState.MAIN_MENU) {

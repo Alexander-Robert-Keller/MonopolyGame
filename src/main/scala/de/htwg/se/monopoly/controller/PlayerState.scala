@@ -1,6 +1,6 @@
-package de.htwg.se.monopoly.model
+package de.htwg.se.monopoly.controller
 
-import de.htwg.se.monopoly.controller.Controller
+import de.htwg.se.monopoly.model.{Dice, Player}
 
 trait PlayerState {
 
@@ -21,23 +21,23 @@ object FreePlayerState extends PlayerState {
   }
 
   override def rollDice(dice: Dice, currentPlayerIndex: Int): Unit = {
-      Controller.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
+      Controller.board = Controller.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
   }
 
   override def stringRollDice(dice: Dice, currentPlayerIndex: Int): String = {
     if (Controller.getCurrentDice.hasDoublets) {
-      if (Controller.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && Controller.board.players(currentPlayerIndex).getLocation == 0) {
+      if (Controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && Controller.board.playerList(currentPlayerIndex).getLocation == 0) {
         return dice.toString + "You got doublets roll again!\n" + "You landed on Go: here are 400$\n"
       }
-      if (Controller.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
+      if (Controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
         return dice.toString + "You got doublets roll again!\n" + "You went over Go: here are 200$\n"
       }
       dice.toString + "You got doublets roll again!\n"
     } else {
-      if (Controller.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && Controller.board.players(currentPlayerIndex).getLocation == 0) {
+      if (Controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && Controller.board.playerList(currentPlayerIndex).getLocation == 0) {
         return dice.toString + "You went over Go: here are 400$\n"
       }
-      if (Controller.board.players(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
+      if (Controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
         return dice.toString + "You went over Go: here are 200$\n"
       }
       dice.toString
@@ -57,8 +57,8 @@ object JailedPlayerState extends PlayerState {
 
   override def rollDice(dice: Dice, currentPlayerIndex: Int): Unit = {
     if (dice.hasDoublets) {
-      Controller.board.setPlayerJailedOrUnJailed(currentPlayerIndex, jailed = false)
-      Controller.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
+      Controller.board = Controller.board.setPlayerJailedOrUnJailed(currentPlayerIndex, jailed = false)
+      Controller.board = Controller.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
     }
   }
 

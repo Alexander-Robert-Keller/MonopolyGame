@@ -6,3 +6,7 @@ class ExitCurrentGame extends Event
 class StartGame extends Event
 class RolledDice extends Event
 class ExitProgram extends Event
+class Undo extends Event
+class Redo extends Event
+class FailedUndo extends Event
+class FailedRedo extends Event
