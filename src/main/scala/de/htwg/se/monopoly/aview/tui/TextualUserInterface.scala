@@ -6,25 +6,25 @@ import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, FailedRedo, Faile
 import scala.swing.Reactor
 
 
-class TextualUserInterface extends Reactor {
+class TextualUserInterface(controller: Controller) extends Reactor {
 
-  listenTo(Controller)
+  listenTo(controller)
 
-  var tuiMenu: TUI_Menu = MainMenu.determineMenu(Controller.stateMachine.state)
+  var tuiMenu: TUI_Menu = MainMenu.determineMenu(controller.stateMachine.state)
 
   def displayMenuOptions(): Unit = {
-    tuiMenu = tuiMenu.determineMenu(Controller.stateMachine.state)
+    tuiMenu = tuiMenu.determineMenu(controller.stateMachine.state)
     println(tuiMenu.toString)
   }
 
 
   def processInputLine(input: String): Unit = {
-    tuiMenu = tuiMenu.determineMenu(Controller.stateMachine.state)
+    tuiMenu = tuiMenu.determineMenu(controller.stateMachine.state)
     try {
       val option = input.toInt
-      tuiMenu.action(option - 1)
+      tuiMenu.action(option - 1, controller)
     } catch {
-      case _: Exception => tuiMenu.action(Integer.MAX_VALUE)
+      case _: Exception => tuiMenu.action(Integer.MAX_VALUE, controller)
     }
   }
 
@@ -36,27 +36,27 @@ class TextualUserInterface extends Reactor {
   reactions += {
     case event: StartGame =>
       println("Start Game:")
-      println(Controller.stringGameBoard())
-      println(Controller.nextPlayersRoundMessage())
+      println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())
       displayMenuOptions()
     case event: RolledDice =>
-      println(Controller.stringRolledDice)
-      println(Controller.stringGameBoard())
-      println(Controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
+      println(controller.stringRolledDice)
+      println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
       displayMenuOptions()
     case event: ExitCurrentGame =>
-      println(Controller.exitCurrentGameMessage)
+      println(controller.exitCurrentGameMessage)
       displayMenuOptions()
-    case event: ExitProgram => println(Controller.exitProgramMessage)
+    case event: ExitProgram => println(controller.exitProgramMessage)
     case event: Undo =>
       println("Undo Command successful!")
-      println(Controller.stringGameBoard())
-      println(Controller.nextPlayersRoundMessage())
+      println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())
       displayMenuOptions()
     case event: Redo =>
       println("Redo Command successful!")
-      println(Controller.stringGameBoard())
-      println(Controller.nextPlayersRoundMessage())
+      println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())
       displayMenuOptions()
     case event: FailedRedo =>
       println("There is nothing to Redo!")
