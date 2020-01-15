@@ -1,28 +1,25 @@
 package de.htwg.se.monopoly.aview.tui
 
 import de.htwg.se.monopoly.controller._
-import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, RolledDice, StartGame}
+import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, FailedRedo, FailedUndo, Redo, RolledDice, StartGame, Undo}
 
 import scala.swing.Reactor
 
 
-/**
- * TODO Come up with a suitable observer pattern for the textual user interface
- */
 class TextualUserInterface extends Reactor {
 
   listenTo(Controller)
 
-  var tuiMenu: TUI_Menu = MainMenu.determineMenu(Controller.gameState)
+  var tuiMenu: TUI_Menu = MainMenu.determineMenu(Controller.stateMachine.state)
 
   def displayMenuOptions(): Unit = {
-    tuiMenu = tuiMenu.determineMenu(Controller.gameState)
+    tuiMenu = tuiMenu.determineMenu(Controller.stateMachine.state)
     println(tuiMenu.toString)
   }
 
 
   def processInputLine(input: String): Unit = {
-    tuiMenu = tuiMenu.determineMenu(Controller.gameState)
+    tuiMenu = tuiMenu.determineMenu(Controller.stateMachine.state)
     try {
       val option = input.toInt
       tuiMenu.action(option - 1)
@@ -51,6 +48,22 @@ class TextualUserInterface extends Reactor {
       println(Controller.exitCurrentGameMessage)
       displayMenuOptions()
     case event: ExitProgram => println(Controller.exitProgramMessage)
+    case event: Undo =>
+      println("Undo Command successful!")
+      println(Controller.stringGameBoard())
+      println(Controller.nextPlayersRoundMessage())
+      displayMenuOptions()
+    case event: Redo =>
+      println("Redo Command successful!")
+      println(Controller.stringGameBoard())
+      println(Controller.nextPlayersRoundMessage())
+      displayMenuOptions()
+    case event: FailedRedo =>
+      println("There is nothing to Redo!")
+      displayMenuOptions()
+    case event: FailedUndo =>
+      println("There is nothing to Undo!")
+      displayMenuOptions()
     case _ =>
   }
 }

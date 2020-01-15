@@ -58,6 +58,7 @@ class GUI extends MainFrame {
     case ButtonClicked(`exitMainMenuButton`) =>
       Controller.exitMainMenu()
     case ButtonClicked(`infoButton`) => //TODO: Popup Field with some info
+    case _ =>
   }
 
   val inGameGui = new GameGui

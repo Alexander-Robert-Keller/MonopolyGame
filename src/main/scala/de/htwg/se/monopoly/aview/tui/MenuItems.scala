@@ -38,3 +38,15 @@ object ExitGameMenuItem extends MenuItems {
 
   override def action(): Unit = Controller.exitGameMenu()
 }
+
+object UndoMenuItem extends MenuItems {
+  override val name: String = "Undo last Command!"
+
+  override def action(): Unit = Controller.undoCommand()
+}
+
+object RedoMenuItem extends MenuItems {
+  override val name: String = "Redo last Undo Command!"
+
+  override def action(): Unit = Controller.redoCommand()
+}

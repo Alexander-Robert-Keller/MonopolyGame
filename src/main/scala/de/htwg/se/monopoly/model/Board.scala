@@ -5,57 +5,120 @@ import de.htwg.se.monopoly.model.spacetypes._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
-class Board(totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
+case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
 
-  val getTotalNumberOfSpaces: Int = totalNumberOfPlayers
+  val getTotalNumberOfSpaces: Int = totalNumberOfSpaces
 
   val jailLocation: Int = 10
 
-  val spaces: Array[Space] = Array.fill[Space](totalNumberOfSpaces)(Property()) // hint: most spaces are property spaces
+  val playerList: Vector[Player] = newPlayerList
 
-  val players: ArrayBuffer[Player] = {
-    val buffer: ArrayBuffer[Player] = new ArrayBuffer[Player]
+  val spaces: Vector[Space] = newSpaceList
+
+  def init(): Board = {
+    //TODO: rework when spaces properly named
+    var initSpaces = Vector[Space]()
+    initSpaces = initSpaces:+ Go() //0
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ CommunityChest()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Tax()
+    initSpaces = initSpaces:+ Railroad() //5
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Chance()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Jail() //10
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ ElectricCompany()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Railroad() //15
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ CommunityChest()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ FreeParking() //20
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Chance()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Railroad() //25
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ WaterWorks()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ GoToJail() //30
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ CommunityChest()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Railroad() //35
+    initSpaces = initSpaces:+ Chance()
+    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces:+ Tax()
+    initSpaces = initSpaces:+ Property()
+    Board(initSpaces, initializePlayerList(), totalNumberOfPlayers, totalNumberOfSpaces)
+  }
+
+  private def initializePlayerList(): Vector[Player] = {
+    var tmpPlayerList = Vector[Player]()
     for (i <- 1 to totalNumberOfPlayers) {
-      buffer.append(Player(i, 0, jailed = false, 1500))
+      tmpPlayerList = tmpPlayerList :+ Player(i, 0, jailed = false, 1500)
     }
-    buffer
+    tmpPlayerList
   }
 
-  def movePlayer(moveByXSpaces: Int, currentPlayerID: Int): Unit = {
-    players(currentPlayerID) = players(currentPlayerID).move(moveByXSpaces, totalNumberOfSpaces)
+  def movePlayer(moveByXSpaces: Int, currentPlayerIndex: Int):  Board = {
+    var tmpPlayerList = Vector[Player]()
+    val chosenPlayer = currentPlayerIndex + 1
+    for (player <- playerList) {
+      if (player.getId == chosenPlayer) {
+        tmpPlayerList = tmpPlayerList:+ player.move(moveByXSpaces, totalNumberOfSpaces)
+      } else {
+        tmpPlayerList = tmpPlayerList :+ player
+      }
+    }
+    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def increasePlayerMoney(playerGetsXMoney: Int , currentPlayerID: Int): Unit = {
-    players(currentPlayerID) = players(currentPlayerID).increaseMoney(playerGetsXMoney)
+  def increasePlayerMoney(playerGetsXMoney: Int , currentPlayerIndex: Int): Board = {
+    var tmpPlayerList = Vector[Player]()
+    val chosenPlayer = currentPlayerIndex + 1
+    for (player <- playerList) {
+      if (player.getId == chosenPlayer) {
+        tmpPlayerList = tmpPlayerList:+ player.increaseMoney(playerGetsXMoney)
+      } else {
+        tmpPlayerList = tmpPlayerList :+ player
+      }
+    }
+    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def decreasePlayerMoney(playerPaysXMoney: Int , currentPlayerID: Int): Unit = {
-    players(currentPlayerID) = players(currentPlayerID).decreaseMoney(playerPaysXMoney)
+  def decreasePlayerMoney(playerPaysXMoney: Int , currentPlayerIndex: Int):  Board = {
+    var tmpPlayerList = Vector[Player]()
+    val chosenPlayer = currentPlayerIndex + 1
+    for (player <- playerList) {
+      if (player.getId == chosenPlayer) {
+        tmpPlayerList = tmpPlayerList:+ player.decreaseMoney(playerPaysXMoney)
+      } else {
+        tmpPlayerList = tmpPlayerList :+ player
+      }
+    }
+    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def setPlayerJailedOrUnJailed(currentPlayerID: Int, jailed: Boolean): Unit = {
-    players(currentPlayerID) = players(currentPlayerID).setJailed(jailed, jailLocation)
-  }
-
-  def init(): Unit = {
-    spaces(0) = Go()
-    spaces(2) = CommunityChest()
-    spaces(5) = Railroad()
-    spaces(4) = Tax()
-    spaces(7) = Chance()
-    spaces(10) = Jail()
-    spaces(12) = ElectricCompany()
-    spaces(15) = Railroad()
-    spaces(17) = CommunityChest()
-    spaces(20) = FreeParking()
-    spaces(25) = Railroad()
-    spaces(22) = Chance()
-    spaces(28) = WaterWorks()
-    spaces(30) = GoToJail()
-    spaces(33) = CommunityChest()
-    spaces(35) = Railroad()
-    spaces(36) = Chance()
-    spaces(38) = Tax()
+  def setPlayerJailedOrUnJailed(currentPlayerIndex: Int, jailed: Boolean):  Board = {
+    var tmpPlayerList = Vector[Player]()
+    val chosenPlayer = currentPlayerIndex + 1
+    for (player <- playerList) {
+      if (player.getId == chosenPlayer) {
+        tmpPlayerList = tmpPlayerList:+ player.setJailed(jailed, jailLocation)
+      } else {
+        tmpPlayerList = tmpPlayerList :+ player
+      }
+    }
+    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
   override def toString: String = {
@@ -64,7 +127,7 @@ class Board(totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
     var i = 0
     while (i < 40) {
       boardString ++= "%d\t\t\t %-20s".format(i, spaces(i).getClass.toString.substring(43))
-      for (player <- players) {
+      for (player <- playerList) {
         if (player.getLocation == i) {
           boardString ++= "Player %d  ".format(player.getId)
         }

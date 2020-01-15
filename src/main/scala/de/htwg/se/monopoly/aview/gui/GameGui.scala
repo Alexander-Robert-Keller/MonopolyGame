@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.gui
 import java.awt.Dimension
 
 import de.htwg.se.monopoly.controller.Controller
-import de.htwg.se.monopoly.util.RolledDice
+import de.htwg.se.monopoly.util.{Redo, RolledDice, StartGame, Undo}
 
 import scala.swing.MainFrame
 import scala.swing._
@@ -19,24 +19,19 @@ class GameGui extends MainFrame {
 
   menuBar = new MenuBar {
     contents += new Menu("Game") {
-      contents += new MenuItem(Action("Undo") {/*TODO: Implement action */})
-      contents += new MenuItem(Action("Redo") {/*TODO: Implement action */})
+      contents += new MenuItem(Action("Undo") { Controller.undoCommand() })
+      contents += new MenuItem(Action("Redo") { Controller.redoCommand() })
       contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
       contents += new MenuItem(Action("Quit") { Controller.exitGameMenu()})
     }
   }
 
-  // TODO: delete unnecessary Fields
   val currentPlayerName = new TextField(15)
-  val playerMoney = new TextField(15)
-  val jailedLabel = new TextField(15)
 
   def currentPlayerPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Player:"))
     preferredSize = new Dimension(200, 200)
     currentPlayerName.editable = false
-    playerMoney.editable = false
-    jailedLabel.editable = false
     contents += Swing.VStrut(10)
     contents += Swing.Glue
     contents += currentPlayerName
@@ -45,7 +40,6 @@ class GameGui extends MainFrame {
     contents += gameCommandsPanel
     contents += Swing.VStrut(10)
     contents += Swing.Glue
-    updatePlayerInfo()
   }
 
   def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
@@ -133,12 +127,13 @@ class GameGui extends MainFrame {
   visible = false
 
   def updatePlayerInfo(): Unit = { //Into Controller
-    currentPlayerName.text = Controller.board.players(Controller.gameState.currentPlayer).toString
-    playerMoney.text = "Capital: %d".format(Controller.board.players(Controller.gameState.currentPlayer).getMoney)
-    if (Controller.board.players(Controller.gameState.currentPlayer).isJailed) {
-     jailedLabel.text = "This Player is currently Jailed!"
+    if (Controller.board.playerList(Controller.getCurrentPlayerIndex).isJailed) {
+      currentPlayerName.text = Controller.board.playerList(Controller.getCurrentPlayerIndex).toString + " (jailed!)"
+    } else {
+      currentPlayerName.text = Controller.board.playerList(Controller.getCurrentPlayerIndex).toString
     }
   }
+
 
   def openGui(): Unit = {
     visible = true
@@ -149,8 +144,15 @@ class GameGui extends MainFrame {
   }
 
   reactions += {
-      case event: RolledDice => this.repaint()
-      case _ =>
+    case event : StartGame =>
+      updatePlayerInfo()
+      this.repaint()
+    case event: RolledDice =>
+      updatePlayerInfo()
+      this.repaint()
+    case event: Undo => this.repaint()
+    case event: Redo => this.repaint()
+    case _ =>
   }
 }
 
