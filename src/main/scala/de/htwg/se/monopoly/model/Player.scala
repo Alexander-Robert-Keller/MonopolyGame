@@ -1,7 +1,5 @@
 package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.controller.Game
-
 case class Player(t_id: Int, location: Int, jailed: Boolean, money: Int) {
 
   def getId: Int = t_id
