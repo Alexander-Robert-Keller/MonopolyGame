@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.gui
 import java.awt.{Dimension, Image}
 import java.io.File
 
-import de.htwg.se.monopoly.controller.{Controller, Game, GameState}
+import de.htwg.se.monopoly.controller.{Controller, GameState}
 import javax.imageio.ImageIO
 
 import scala.swing.{Component, Graphics2D}
@@ -20,9 +20,9 @@ class BoardCanvas extends Component{
     val numberofPlayers = Controller.gameState.getNumberOfPlayers
     var currentPlayer = 0
     var yOffSet = 0
-    //TODO: adjust prefeerd size back to 900 x 900 and tweak x and y calculation
+
     do {
-      val location = Game.board.players(currentPlayer).getLocation  //TODO: implement in controller getplayers -> returns list
+      val location = Controller.board.players(currentPlayer).getLocation  //TODO: implement in controller getplayers -> returns list
       val playerImage = getPlayerImage(currentPlayer, numberofPlayers)
       if (location < 10) {
         val x = 794 - (location * 74)
