@@ -2,11 +2,11 @@ package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.model.GameState
 
-class StateMachine extends Enumeration {
+class StateMachine(controller: Controller) extends Enumeration {
 
   val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
 
-  var state: GameState = GameState(0, 0, Controller.numberOfPlayers)
+  var state: GameState = GameState(0, 0, controller.numberOfPlayers)
 
   def setCurrentPlayer(player: Int): Unit = {
     state = GameState(state.getStateIndex, state.getCurrentPlayer, state.getNumberOfPlayers)
@@ -40,7 +40,7 @@ class StateMachine extends Enumeration {
     state.getStateIndex match {
       case 0 => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
       case 1 => //TODO: change when other options are implemented
-        if (Controller.dice.hasDoublets) {
+        if (controller.dice.hasDoublets) {
           state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
         } else {
           state = GameState(1, nextPlayer(), state.getNumberOfPlayers)

@@ -11,18 +11,18 @@ import scala.swing.event.ButtonClicked
 
 
 
-class GameGui extends MainFrame {
+class GameGui(controller: Controller) extends MainFrame {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
-  listenTo(Controller)
+  listenTo(controller)
   title = "HTWG Monopoly"
   resizable = true
 
   menuBar = new MenuBar {
     contents += new Menu("Game") {
-      contents += new MenuItem(Action("Undo") { Controller.undoCommand() })
-      contents += new MenuItem(Action("Redo") { Controller.redoCommand() })
+      contents += new MenuItem(Action("Undo") { controller.undoCommand() })
+      contents += new MenuItem(Action("Redo") { controller.redoCommand() })
       contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
-      contents += new MenuItem(Action("Quit") { Controller.exitGameMenu()})
+      contents += new MenuItem(Action("Quit") { controller.exitGameMenu()})
     }
   }
 
@@ -57,7 +57,7 @@ class GameGui extends MainFrame {
     listenTo(buyPropertyButton)
     reactions += {
       case ButtonClicked(`rollDiceButton`) =>
-        Controller.rollDice()
+        controller.rollDice()
       case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
     }
   }
@@ -115,7 +115,7 @@ class GameGui extends MainFrame {
 
 
   def gameBoardPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
-    contents += new BoardCanvas
+    contents += new BoardCanvas(controller)
   }
 
   contents = new BoxPanel(Orientation.Horizontal) {
@@ -127,10 +127,10 @@ class GameGui extends MainFrame {
   visible = false
 
   def updatePlayerInfo(): Unit = { //Into Controller
-    if (Controller.board.playerList(Controller.getCurrentPlayerIndex).isJailed) {
-      currentPlayerName.text = Controller.board.playerList(Controller.getCurrentPlayerIndex).toString + " (jailed!)"
+    if (controller.board.playerList(controller.getCurrentPlayerIndex).isJailed) {
+      currentPlayerName.text = controller.board.playerList(controller.getCurrentPlayerIndex).toString + " (jailed!)"
     } else {
-      currentPlayerName.text = Controller.board.playerList(Controller.getCurrentPlayerIndex).toString
+      currentPlayerName.text = controller.board.playerList(controller.getCurrentPlayerIndex).toString
     }
   }
 

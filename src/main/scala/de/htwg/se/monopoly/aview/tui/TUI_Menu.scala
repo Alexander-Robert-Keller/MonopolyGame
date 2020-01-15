@@ -1,6 +1,7 @@
 package de.htwg.se.monopoly.aview.tui
 
 import de.htwg.se.monopoly.model.GameState
+import de.htwg.se.monopoly.controller.Controller
 
 import scala.collection.mutable
 
@@ -11,11 +12,11 @@ trait TUI_Menu extends {
 
   def determineMenu(gameState: GameState): TUI_Menu
 
-  def action(index: Int): Unit = {
+  def action(index: Int, controller: Controller): Unit = {
     if (menuOptions.size > index) {
-      menuOptions(index).action()
+      menuOptions(index).action(controller)
     } else {
-      WrongCommandMenuItem.action()
+      WrongCommandMenuItem.action(controller)
     }
   }
 

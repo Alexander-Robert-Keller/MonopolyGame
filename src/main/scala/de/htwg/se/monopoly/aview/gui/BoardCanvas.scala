@@ -8,7 +8,7 @@ import javax.imageio.ImageIO
 
 import scala.swing.{Component, Graphics2D}
 
-class BoardCanvas extends Component{
+class BoardCanvas(controller: Controller) extends Component{
 
   preferredSize = new Dimension(900, 900)
 
@@ -17,10 +17,10 @@ class BoardCanvas extends Component{
     val gameBoardImage = getMonopolyBoardImage
     g.drawImage(gameBoardImage, 0, 0, null)
 
-    val numberofPlayers = Controller.numberOfPlayers
+    val numberofPlayers = controller.numberOfPlayers
     var yOffSet = 0
 
-    for (player <- Controller.board.playerList) {
+    for (player <- controller.board.playerList) {
       val location: Int = player.getLocation  //TODO: implement in controller getplayers -> returns list
       val playerImage = getPlayerImage(player.getId, numberofPlayers)
       if (location < 10) {

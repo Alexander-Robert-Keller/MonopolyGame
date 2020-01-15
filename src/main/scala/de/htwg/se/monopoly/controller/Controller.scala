@@ -6,30 +6,30 @@ import de.htwg.se.monopoly.util.{Command, ExitCurrentGame, ExitProgram, FailedRe
 
 import scala.swing.Publisher
 
-object Controller extends Publisher {
+class Controller extends Publisher {
 
   val numberOfPlayers = 2
   val numberOfSpaces = 40
   var board: Board = Board(Vector[Space](), Vector[Player](), numberOfPlayers, numberOfSpaces)
   var dice: Dice = Dice()
 
-  var stateMachine = new StateMachine
+  var stateMachine = new StateMachine(this)
 
   def getCurrentDice: Dice = dice
 
   var playerState: PlayerState = FreePlayerState
 
   def rollDice(): Unit = {
-    doStep(new RollDiceCommand)
+    doStep(new RollDiceCommand(this))
     dice = Dice()
     playerState = playerState.determinePlayerState(board.playerList(stateMachine.getCurrentPlayer))
-    playerState.rollDice(getCurrentDice, stateMachine.getCurrentPlayer)
+    playerState.rollDice(getCurrentDice, stateMachine.getCurrentPlayer, this)
     stateMachine.nextState()
     publish(new RolledDice)
   }
 
   def stringRolledDice: String = {
-    playerState.stringRollDice(getCurrentDice, stateMachine.getCurrentPlayer)
+    playerState.stringRollDice(getCurrentDice, stateMachine.getCurrentPlayer, this)
   }
 
   def stringGameBoard(): String = {
