@@ -54,6 +54,8 @@ class Controller extends Publisher {
     System.exit(0)
   }
 
+  def getPlayerList: Vector[Player] = board.playerList
+
   def exitGameMenu(): Unit = {
     stateMachine.setState("MAIN_MENU")
     publish(new ExitCurrentGame)

@@ -20,8 +20,8 @@ class BoardCanvas(controller: Controller) extends Component{
     val numberofPlayers = controller.numberOfPlayers
     var yOffSet = 0
 
-    for (player <- controller.board.playerList) {
-      val location: Int = player.getLocation  //TODO: implement in controller getplayers -> returns list
+    for (player <- controller.getPlayerList) {
+      val location: Int = player.getLocation
       val playerImage = getPlayerImage(player.getId, numberofPlayers)
       if (location < 10) {
         val x = 794 - (location * 74)
