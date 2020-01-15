@@ -2,7 +2,7 @@ package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.model.spacetypes.Space
 import de.htwg.se.monopoly.model.{Board, Dice, Player}
-import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, FailedRedo, FailedUndo, Redo, RollDiceCommand, RolledDice, StartGame, Undo, UndoManager}
+import de.htwg.se.monopoly.util.{Command, ExitCurrentGame, ExitProgram, FailedRedo, FailedUndo, Redo, RolledDice, StartGame, Undo, UndoManager}
 
 import scala.swing.Publisher
 
@@ -20,7 +20,7 @@ object Controller extends Publisher {
   var playerState: PlayerState = FreePlayerState
 
   def rollDice(): Unit = {
-    doStep()
+    doStep(new RollDiceCommand)
     dice = Dice()
     playerState = playerState.determinePlayerState(board.playerList(stateMachine.getCurrentPlayer))
     playerState.rollDice(getCurrentDice, stateMachine.getCurrentPlayer)
@@ -68,8 +68,8 @@ object Controller extends Publisher {
 
   private val undoManager = new UndoManager
 
-  def doStep(): Unit = {
-    undoManager.doStep(new RollDiceCommand)
+  def doStep(command: Command): Unit = {
+    undoManager.doStep(command)
   }
 
   def undoCommand(): Unit = {
