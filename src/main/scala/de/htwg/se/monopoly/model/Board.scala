@@ -61,7 +61,7 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(initSpaces, initializePlayerList(), totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  private def initializePlayerList(): Vector[Player] = {
+  def initializePlayerList(): Vector[Player] = {
     var tmpPlayerList = Vector[Player]()
     for (i <- 1 to totalNumberOfPlayers) {
       tmpPlayerList = tmpPlayerList :+ Player(i, 0, jailed = false, 1500)
