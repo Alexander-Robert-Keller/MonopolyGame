@@ -66,7 +66,7 @@ object JailedPlayerState extends PlayerState {
     if (dice.hasDoublets) {
       "You got doublets, you are now a free man!\n" + FreePlayerState.stringRollDice(dice, currentPlayerIndex, controller)
     } else {
-      "You rolled %d and %d. ".format(dice.die1, dice.die2)  + "You are still jailed!\n"
+      "You rolled %d and %d. ".format(dice.die1, dice.die2) + "You are still jailed!\n"
     }
   }
 }

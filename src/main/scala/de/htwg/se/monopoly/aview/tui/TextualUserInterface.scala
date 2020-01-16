@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.aview.tui
 
 import de.htwg.se.monopoly.controller._
-import de.htwg.se.monopoly.util.{ExitCurrentGame, ExitProgram, FailedRedo, FailedUndo, Redo, RolledDice, StartGame, Undo}
+import de.htwg.se.monopoly.util._
 
 import scala.swing.Reactor
 
@@ -17,6 +17,10 @@ class TextualUserInterface(controller: Controller) extends Reactor {
     println(tuiMenu.toString)
   }
 
+  def processInputLine(args0: String, args1: String): Unit = {
+    processInputLine(args0)
+    processInputLine(args1)
+  }
 
   def processInputLine(input: String): Unit = {
     tuiMenu = tuiMenu.determineMenu(controller.stateMachine.state)
@@ -28,11 +32,6 @@ class TextualUserInterface(controller: Controller) extends Reactor {
     }
   }
 
-  def processInputLine(args0: String, args1: String): Unit = {
-    processInputLine(args0)
-    processInputLine(args1)
-  }
-
   reactions += {
     case event: StartGame =>
       println("Start Game:")
@@ -42,7 +41,7 @@ class TextualUserInterface(controller: Controller) extends Reactor {
     case event: RolledDice =>
       println(controller.stringRolledDice)
       println(controller.stringGameBoard())
-      println(controller.nextPlayersRoundMessage())  //place at later Stage, when buying/selling spaces is implemented
+      println(controller.nextPlayersRoundMessage()) //place at later Stage, when buying/selling spaces is implemented
       displayMenuOptions()
     case event: ExitCurrentGame =>
       println(controller.exitCurrentGameMessage)

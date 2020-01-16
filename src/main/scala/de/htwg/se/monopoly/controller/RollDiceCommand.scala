@@ -13,7 +13,7 @@ class RollDiceCommand(controller: Controller) extends Command {
 
   override def undoStep(): Unit = {
     val newBoard: Board = controller.board
-    val newDice: Dice  = controller.dice
+    val newDice: Dice = controller.dice
     val newGameState: GameState = controller.stateMachine.state
     controller.board = board
     controller.dice = dice
@@ -25,7 +25,7 @@ class RollDiceCommand(controller: Controller) extends Command {
 
   override def redoStep(): Unit = {
     val newBoard: Board = controller.board
-    val newDice: Dice  = controller.dice
+    val newDice: Dice = controller.dice
     val newGameState: GameState = controller.stateMachine.state
     controller.board = board
     controller.dice = dice

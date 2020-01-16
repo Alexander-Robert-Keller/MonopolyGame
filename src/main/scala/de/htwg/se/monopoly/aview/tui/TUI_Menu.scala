@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.aview.tui
 
-import de.htwg.se.monopoly.model.GameState
 import de.htwg.se.monopoly.controller.Controller
+import de.htwg.se.monopoly.model.GameState
 
 import scala.collection.mutable
 
@@ -21,9 +21,9 @@ trait TUI_Menu extends {
   }
 
   override def toString: String = {
-    val menuString = new mutable.StringBuilder(this.getClass.toString.substring(36).replace('$',' ')+ "Options:\n")
+    val menuString = new mutable.StringBuilder(this.getClass.toString.substring(36).replace('$', ' ') + "Options:\n")
     var index = 0
-    while(index < menuOptions.size) {
+    while (index < menuOptions.size) {
       val tmp = menuOptions(index).name
       index += 1
       menuString ++= index.toString + ": " + tmp + "\n"
