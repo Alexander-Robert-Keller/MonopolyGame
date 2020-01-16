@@ -8,9 +8,8 @@ import de.htwg.se.monopoly.util.{ExitCurrentGame, StartGame}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
-import scala.swing._
 import scala.swing.event.ButtonClicked
-import scala.swing.{BoxPanel, MainFrame}
+import scala.swing.{BoxPanel, MainFrame, _}
 
 class GUI(controller: Controller) extends MainFrame {
   listenTo(controller)
@@ -25,7 +24,7 @@ class GUI(controller: Controller) extends MainFrame {
   listenTo(exitMainMenuButton)
   listenTo(startGameButton)
 
-  contents = new BoxPanel(Orientation.Vertical){
+  contents = new BoxPanel(Orientation.Vertical) {
     val image = new Label()
     image.icon = new ImageIcon(getMonopolyBoardImage)
     contents += Swing.VStrut(10)
@@ -44,13 +43,7 @@ class GUI(controller: Controller) extends MainFrame {
 
   visible = true
   centerOnScreen()
-
-  def getMonopolyBoardImage: Image = {
-    val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolyMascot.jpg"
-    val gameBoardImage = ImageIO.read(new File(path))
-    val resizedImage = gameBoardImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT)
-    resizedImage
-  }
+  val inGameGui = new GameGui(controller)
 
   reactions += {
     case ButtonClicked(`startGameButton`) =>
@@ -61,7 +54,12 @@ class GUI(controller: Controller) extends MainFrame {
     case _ =>
   }
 
-  val inGameGui = new GameGui(controller)
+  def getMonopolyBoardImage: Image = {
+    val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolyMascot.jpg"
+    val gameBoardImage = ImageIO.read(new File(path))
+    val resizedImage = gameBoardImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT)
+    resizedImage
+  }
 
   def startGame(): Unit = {
     visible = false
