@@ -8,8 +8,8 @@ import de.htwg.se.monopoly.model.Board
 
 object XmlTest {
   def main(args: Array[String]): Unit = {
-    //testSave()
-    //testLoadBoard()
+    testSave()
+    testLoadBoard()
     testLoadGameState()
   }
 
