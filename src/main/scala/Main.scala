@@ -4,10 +4,6 @@ import de.htwg.se.monopoly.controller.Controller
 
 import scala.io.StdIn
 
-/*
- * The starting point of this program.
- */
-
 object Main {
   def main(args: Array[String]): Unit = {
     val controller: Controller = new Controller
@@ -16,12 +12,10 @@ object Main {
 
     tui.displayMenuOptions()
 
-    // Main Menu loop
-    var input: String = ""
     if (!args.isEmpty) {
       tui.processInputLine(args(0), args(1))
     } else do {
-      input = StdIn.readLine()
+      var input: String = StdIn.readLine()
       tui.processInputLine(input)
     } while (true)
   }
