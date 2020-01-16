@@ -18,8 +18,7 @@ class FileIO extends FileIOInterface {
     var cellNodePlayerList = file \\ "Monopoly" \ "board" \ "playerList" \ "player"
     var playerList = Vector[Player]()
     for (player <- cellNodePlayerList) {
-      val t_id = (player \ "@t_id").text.toInt
-      playerList = playerList :+ Player(t_id, (player \ "@location").text.toInt, (player \ "@jailed").text.toBoolean, (player \ "@money").text.toInt)
+      playerList = playerList :+ Player((player \ "@id").text.toInt, (player \ "@location").text.toInt, (player \ "@jailed").text.toBoolean, (player \ "@money").text.toInt)
     }
     val cellNodeSpaces = file \\ "Monopoly" \ "board" \ "spaces" \ "space"
     var spaces = Vector[Space]()
@@ -81,7 +80,7 @@ class FileIO extends FileIOInterface {
   }
 
   def playerToXml(player: Player): Elem = {
-    <player t_id={player.getId.toString} location={player.getLocation.toString} jailed={player.isJailed.toString} money={player.getMoney.toString}>
+    <player id={player.getId.toString} location={player.getLocation.toString} jailed={player.isJailed.toString} money={player.getMoney.toString}>
     </player>
   }
 
