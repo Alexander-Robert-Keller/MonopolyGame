@@ -32,7 +32,9 @@ object XmlTest {
   def testLoadGameState(): Unit = {
     val fileIo = new FileIO
     val gameState = fileIo.loadGameState("test")
-    print("")
+    println("stateIndex = " + gameState.getStateIndex.toString)
+    println("currentPlayer = " + gameState.currentPlayer.toString)
+    println("numberOfPlayers = " + gameState.numberOfPlayers.toString)
   }
 
 }

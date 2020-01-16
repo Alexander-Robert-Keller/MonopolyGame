@@ -1,8 +1,8 @@
 <Monopoly>
     <board numberOfSpaces="40" numberOfPlayers="2">
         <playerList>
-            <player t_id="1" location="0" jailed="false" money="1500"> </player>
-            <player t_id="2" location="0" jailed="false" money="1500"> </player>
+            <player id="1" location="0" jailed="false" money="1500"> </player>
+            <player id="2" location="0" jailed="false" money="1500"> </player>
         </playerList>
         <spaces>
             <space class="Go"> </space>
