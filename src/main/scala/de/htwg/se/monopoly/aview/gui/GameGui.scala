@@ -5,8 +5,8 @@ import java.awt.Dimension
 import de.htwg.se.monopoly.controller.Controller
 import de.htwg.se.monopoly.util.{Redo, RolledDice, StartGame, Undo}
 
-import scala.swing.{MainFrame, _}
 import scala.swing.event.ButtonClicked
+import scala.swing.{MainFrame, _}
 
 
 class GameGui(controller: Controller) extends MainFrame {
@@ -56,6 +56,7 @@ class GameGui(controller: Controller) extends MainFrame {
     contents += Swing.VStrut(10)
     contents += Swing.Glue
   }
+
   infoPlayerName.editable = false
 
   def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
