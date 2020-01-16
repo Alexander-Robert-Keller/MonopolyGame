@@ -1,0 +1,51 @@
+<Monopoly>
+    <board numberOfSpaces="40" numberOfPlayers="2">
+        <playerList>
+            <player t_id="1" location="0" jailed="false" money="1500"> </player>
+            <player t_id="2" location="0" jailed="false" money="1500"> </player>
+        </playerList>
+        <spaces>
+            <space class="Go"> </space>
+            <space class="Property"> </space>
+            <space class="CommunityChest"> </space>
+            <space class="Property"> </space>
+            <space class="Tax"> </space>
+            <space class="Railroad"> </space>
+            <space class="Property"> </space>
+            <space class="Chance"> </space>
+            <space class="Property"> </space>
+            <space class="Property"> </space>
+            <space class="Jail"> </space>
+            <space class="Property"> </space>
+            <space class="ElectricCompany"> </space>
+            <space class="Property"> </space>
+            <space class="Property"> </space>
+            <space class="Railroad"> </space>
+            <space class="Property"> </space>
+            <space class="CommunityChest"> </space>
+            <space class="Property"> </space>
+            <space class="Property"> </space>
+            <space class="FreeParking"> </space>
+            <space class="Property"> </space>
+            <space class="Chance"> </space>
+            <space class="Property"> </space>
+            <space class="Property"> </space>
+            <space class="Railroad"> </space>
+            <space class="Property"> </space>
+            <space class="Property"> </space>
+            <space class="WaterWorks"> </space>
+            <space class="Property"> </space>
+            <space class="GoToJail"> </space>
+            <space class="Property"> </space>
+            <space class="Property"> </space>
+            <space class="CommunityChest"> </space>
+            <space class="Property"> </space>
+            <space class="Railroad"> </space>
+            <space class="Chance"> </space>
+            <space class="Property"> </space>
+            <space class="Tax"> </space>
+            <space class="Property"> </space>
+        </spaces>
+    </board>
+    <gameState stateindex="1" currentPlayer="0" numberOfPlayers="2"> </gameState>
+</Monopoly>
