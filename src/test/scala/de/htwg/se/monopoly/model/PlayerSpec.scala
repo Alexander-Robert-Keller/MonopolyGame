@@ -9,7 +9,7 @@ class PlayerSpec extends WordSpec with Matchers {
       val player = Player(1, 0, jailed = false, 0)
 
       "have a playerId, location, money value and jailed status" in {
-        player.id should be(1)
+        player.t_id should be(1)
         player.money should be(0)
         player.location should be(0)
         player.jailed should be(false)

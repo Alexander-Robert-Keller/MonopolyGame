@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.model.spacetypes
 import de.htwg.se.monopoly.model.Player
 
 case class GoToJail() extends Space {
-  override def action(player: Player): Player = {
-    player.setJailed(jail = true, 10)
+  override def action(t_player: Player): Player = {
+    t_player.setJailed(jail = true, 10)
   }
 }
