@@ -25,6 +25,7 @@ object JasonTest {
     board = fileIo.loadBoard("test")
     print(board.toString)
   }
+
   def testLoadGameState(): Unit = {
     val fileIo = new FileIO
     val gameState = fileIo.loadGameState("test")

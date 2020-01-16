@@ -1,8 +1,8 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoXmlImpl
 
-import de.htwg.se.monopoly.model.{Board, GameState, Player}
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
-import de.htwg.se.monopoly.model.spacetypes.{Chance, CommunityChest, ElectricCompany, FreeParking, Go, GoToJail, Jail, Property, Railroad, Space, Tax, WaterWorks}
+import de.htwg.se.monopoly.model.spacetypes._
+import de.htwg.se.monopoly.model.{Board, GameState, Player}
 
 import scala.xml.{Elem, PrettyPrinter}
 
@@ -56,12 +56,7 @@ class FileIO extends FileIOInterface {
 
   def gameSaveState(board: Board, gameState: GameState): Elem = {
     <Monopoly>
-      {
-      boardToXml(board)
-      }
-      {
-      gameStateToXml(gameState)
-      }
+      {boardToXml(board)}{gameStateToXml(gameState)}
     </Monopoly>
   }
 
@@ -69,12 +64,10 @@ class FileIO extends FileIOInterface {
   def boardToXml(board: Board): Elem = {
     <board numberOfSpaces={board.getTotalNumberOfSpaces.toString} numberOfPlayers={board.totalNumberOfPlayers.toString}>
       <playerList>
-        {for (player <- board.playerList) yield playerToXml(player)
-        }
+        {for (player <- board.playerList) yield playerToXml(player)}
       </playerList>
       <spaces>
-        {for (space <- board.spaces) yield spaceToXml(space)
-        }
+        {for (space <- board.spaces) yield spaceToXml(space)}
       </spaces>
     </board>
   }
@@ -90,7 +83,7 @@ class FileIO extends FileIOInterface {
   }
 
   def gameStateToXml(gameState: GameState): Elem = {
-    <gameState stateindex={gameState.getStateIndex.toString} currentPlayer={gameState.getCurrentPlayer.toString} numberOfPlayers={ gameState.getNumberOfPlayers.toString} >
+    <gameState stateindex={gameState.getStateIndex.toString} currentPlayer={gameState.getCurrentPlayer.toString} numberOfPlayers={gameState.getNumberOfPlayers.toString}>
     </gameState>
   }
 }

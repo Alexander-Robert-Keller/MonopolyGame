@@ -1,13 +1,13 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoJasonImpl
 
-import de.htwg.se.monopoly.model.{Board, GameState, Player}
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
-import de.htwg.se.monopoly.model.spacetypes.{Chance, CommunityChest, ElectricCompany, FreeParking, Go, GoToJail, Jail, Property, Railroad, Space, Tax, WaterWorks}
+import de.htwg.se.monopoly.model.spacetypes._
+import de.htwg.se.monopoly.model.{Board, GameState, Player}
 import play.api.libs.json._
 
 import scala.io.Source
 
-class FileIO extends FileIOInterface{
+class FileIO extends FileIOInterface {
 
   override def loadBoard(fileName: String): Board = {
     val sourceBuffered = Source.fromFile("fileIoFiles/" + fileName + ".json")
@@ -21,15 +21,15 @@ class FileIO extends FileIOInterface{
     }
     var playerList = Vector[Player]()
     for (index <- 0 until numberOfPlayers) {
-      val id = (json \\ "id")(index).as[Int]
-      val location = (json \\ "location")(index).as[Int]
-      val jailed = (json \\ "jailed")(index).as[Boolean]
-      val money = (json \\ "money")(index).as[Int]
+      val id = (json \\ "id") (index).as[Int]
+      val location = (json \\ "location") (index).as[Int]
+      val jailed = (json \\ "jailed") (index).as[Boolean]
+      val money = (json \\ "money") (index).as[Int]
       playerList = playerList :+ Player(id, location, jailed, money)
     }
     var spaces = Vector[Space]()
     for (index <- 0 until numberOfSpaces) {
-      val space: String = (json \\ "class")(index).as[String]
+      val space: String = (json \\ "class") (index).as[String]
       space match {
         case "Go" => spaces = spaces :+ Go()
         case "Property" => spaces = spaces :+ Property()
@@ -67,7 +67,7 @@ class FileIO extends FileIOInterface{
 
   def gameSaveState(board: Board, gameState: GameState): JsObject = {
     Json.obj(
-      "Monopoly"-> Json.obj(
+      "Monopoly" -> Json.obj(
         "board" -> Json.obj(
           "numberOfSpaces" -> JsNumber(board.getTotalNumberOfSpaces),
           "numberOfPlayers" -> JsNumber(board.totalNumberOfPlayers),
