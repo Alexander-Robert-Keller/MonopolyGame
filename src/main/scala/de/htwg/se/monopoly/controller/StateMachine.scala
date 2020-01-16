@@ -8,44 +8,15 @@ class StateMachine(controller: Controller) extends Enumeration {
 
   var state: GameState = GameState(0, 0, controller.numberOfPlayers)
 
-  def setCurrentPlayer(player: Int): Unit = {
-    state = GameState(state.getStateIndex, state.getCurrentPlayer, state.getNumberOfPlayers)
-  }
-
   def getCurrentPlayer: Int = state.getCurrentPlayer
 
-  def setNumberOfPlayers(maxPlayers: Int): Unit = {
-    state = GameState(state.getStateIndex, state.getCurrentPlayer, maxPlayers)
-  }
-
   def getNumberOfPlayers: Int = state.getNumberOfPlayers
-
-  def nextPlayer(): Int = {
-    var currentPlayer = state.getCurrentPlayer + 1
-    if (currentPlayer >= state.getNumberOfPlayers) {
-      currentPlayer = currentPlayer % state.getNumberOfPlayers
-    }
-    currentPlayer
-  }
 
   def setState(e: String): Unit = {
     e match {
       case "ROLL_DICE" => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "BUY_OR_UPGRADE_PROPERTY" => state = GameState(2, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "MAIN_MENU" => state = GameState(0, state.getCurrentPlayer, state.getNumberOfPlayers)
-    }
-  }
-
-  def nextState(): Unit = {
-    state.getStateIndex match {
-      case 0 => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
-      case 1 => //TODO: change when other options are implemented
-        if (controller.dice.hasDoublets) {
-          state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
-        } else {
-          state = GameState(1, nextPlayer(), state.getNumberOfPlayers)
-        }
-      case 2 => state = GameState(1, nextPlayer(), state.getNumberOfPlayers) //TODO: maybe change when above state is changed
     }
   }
 
@@ -61,5 +32,34 @@ class StateMachine(controller: Controller) extends Enumeration {
     nextState()
     setCurrentPlayer(0)
     setNumberOfPlayers(numberOfPlayers)
+  }
+
+  def setCurrentPlayer(player: Int): Unit = {
+    state = GameState(state.getStateIndex, state.getCurrentPlayer, state.getNumberOfPlayers)
+  }
+
+  def setNumberOfPlayers(maxPlayers: Int): Unit = {
+    state = GameState(state.getStateIndex, state.getCurrentPlayer, maxPlayers)
+  }
+
+  def nextState(): Unit = {
+    state.getStateIndex match {
+      case 0 => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
+      case 1 => //TODO: change when other options are implemented
+        if (controller.dice.hasDoublets) {
+          state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
+        } else {
+          state = GameState(1, nextPlayer(), state.getNumberOfPlayers)
+        }
+      case 2 => state = GameState(1, nextPlayer(), state.getNumberOfPlayers) //TODO: maybe change when above state is changed
+    }
+  }
+
+  def nextPlayer(): Int = {
+    var currentPlayer = state.getCurrentPlayer + 1
+    if (currentPlayer >= state.getNumberOfPlayers) {
+      currentPlayer = currentPlayer % state.getNumberOfPlayers
+    }
+    currentPlayer
   }
 }

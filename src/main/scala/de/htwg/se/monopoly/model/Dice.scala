@@ -10,9 +10,13 @@ case class Dice() {
 
   val die2: Int = random.nextInt(6) + 1
 
-  def getFaceValue: Int = {die1 + die2}
+  def getFaceValue: Int = {
+    die1 + die2
+  }
 
-  def hasDoublets: Boolean = {die1 == die2}
+  def hasDoublets: Boolean = {
+    die1 == die2
+  }
 
   def rollDice(): Dice = Dice()
 

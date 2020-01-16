@@ -3,7 +3,6 @@ package de.htwg.se.monopoly.model
 import de.htwg.se.monopoly.model.spacetypes._
 
 import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
 
 case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
 
@@ -18,46 +17,46 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
   def init(): Board = {
     //TODO: rework when spaces properly named
     var initSpaces = Vector[Space]()
-    initSpaces = initSpaces:+ Go() //0
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ CommunityChest()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Tax()
-    initSpaces = initSpaces:+ Railroad() //5
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Chance()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Jail() //10
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ ElectricCompany()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Railroad() //15
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ CommunityChest()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ FreeParking() //20
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Chance()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Railroad() //25
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ WaterWorks()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ GoToJail() //30
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ CommunityChest()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Railroad() //35
-    initSpaces = initSpaces:+ Chance()
-    initSpaces = initSpaces:+ Property()
-    initSpaces = initSpaces:+ Tax()
-    initSpaces = initSpaces:+ Property()
+    initSpaces = initSpaces :+ Go() //0
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ CommunityChest()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Tax()
+    initSpaces = initSpaces :+ Railroad() //5
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Chance()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Jail() //10
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ ElectricCompany()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Railroad() //15
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ CommunityChest()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ FreeParking() //20
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Chance()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Railroad() //25
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ WaterWorks()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ GoToJail() //30
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ CommunityChest()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Railroad() //35
+    initSpaces = initSpaces :+ Chance()
+    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Tax()
+    initSpaces = initSpaces :+ Property()
     Board(initSpaces, initializePlayerList(), totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
@@ -69,12 +68,12 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     tmpPlayerList
   }
 
-  def movePlayer(moveByXSpaces: Int, currentPlayerIndex: Int):  Board = {
+  def movePlayer(moveByXSpaces: Int, currentPlayerIndex: Int): Board = {
     var tmpPlayerList = Vector[Player]()
     val chosenPlayer = currentPlayerIndex + 1
     for (player <- playerList) {
       if (player.getId == chosenPlayer) {
-        tmpPlayerList = tmpPlayerList:+ player.move(moveByXSpaces, totalNumberOfSpaces)
+        tmpPlayerList = tmpPlayerList :+ player.move(moveByXSpaces, totalNumberOfSpaces)
       } else {
         tmpPlayerList = tmpPlayerList :+ player
       }
@@ -82,12 +81,12 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def increasePlayerMoney(playerGetsXMoney: Int , currentPlayerIndex: Int): Board = {
+  def increasePlayerMoney(playerGetsXMoney: Int, currentPlayerIndex: Int): Board = {
     var tmpPlayerList = Vector[Player]()
     val chosenPlayer = currentPlayerIndex + 1
     for (player <- playerList) {
       if (player.getId == chosenPlayer) {
-        tmpPlayerList = tmpPlayerList:+ player.increaseMoney(playerGetsXMoney)
+        tmpPlayerList = tmpPlayerList :+ player.increaseMoney(playerGetsXMoney)
       } else {
         tmpPlayerList = tmpPlayerList :+ player
       }
@@ -95,12 +94,12 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def decreasePlayerMoney(playerPaysXMoney: Int , currentPlayerIndex: Int):  Board = {
+  def decreasePlayerMoney(playerPaysXMoney: Int, currentPlayerIndex: Int): Board = {
     var tmpPlayerList = Vector[Player]()
     val chosenPlayer = currentPlayerIndex + 1
     for (player <- playerList) {
       if (player.getId == chosenPlayer) {
-        tmpPlayerList = tmpPlayerList:+ player.decreaseMoney(playerPaysXMoney)
+        tmpPlayerList = tmpPlayerList :+ player.decreaseMoney(playerPaysXMoney)
       } else {
         tmpPlayerList = tmpPlayerList :+ player
       }
@@ -108,12 +107,12 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def setPlayerJailedOrUnJailed(currentPlayerIndex: Int, jailed: Boolean):  Board = {
+  def setPlayerJailedOrUnJailed(currentPlayerIndex: Int, jailed: Boolean): Board = {
     var tmpPlayerList = Vector[Player]()
     val chosenPlayer = currentPlayerIndex + 1
     for (player <- playerList) {
       if (player.getId == chosenPlayer) {
-        tmpPlayerList = tmpPlayerList:+ player.setJailed(jailed, jailLocation)
+        tmpPlayerList = tmpPlayerList :+ player.setJailed(jailed, jailLocation)
       } else {
         tmpPlayerList = tmpPlayerList :+ player
       }

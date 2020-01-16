@@ -5,10 +5,8 @@ import java.awt.Dimension
 import de.htwg.se.monopoly.controller.Controller
 import de.htwg.se.monopoly.util.{Redo, RolledDice, StartGame, Undo}
 
-import scala.swing.MainFrame
-import scala.swing._
+import scala.swing.{MainFrame, _}
 import scala.swing.event.ButtonClicked
-
 
 
 class GameGui(controller: Controller) extends MainFrame {
@@ -19,14 +17,31 @@ class GameGui(controller: Controller) extends MainFrame {
 
   menuBar = new MenuBar {
     contents += new Menu("Game") {
-      contents += new MenuItem(Action("Undo") { controller.undoCommand() })
-      contents += new MenuItem(Action("Redo") { controller.redoCommand() })
-      contents += new MenuItem(Action("Info") {/*TODO: Implement action */})
-      contents += new MenuItem(Action("Quit") { controller.exitGameMenu()})
+      contents += new MenuItem(Action("Undo") {
+        controller.undoCommand()
+      })
+      contents += new MenuItem(Action("Redo") {
+        controller.redoCommand()
+      })
+      contents += new MenuItem(Action("Info") {
+        /*TODO: Implement action */
+      })
+      contents += new MenuItem(Action("Quit") {
+        controller.exitGameMenu()
+      })
     }
   }
 
   val currentPlayerName = new TextField(15)
+  val infoPlayerName = new TextField("")
+
+  def combinedCurrentGamePanelAndGameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    border = Swing.EmptyBorder(10, 10, 10, 10)
+    contents += currentPlayerPanel
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += playerInfoAndPlayerTextAreaPanel
+  }
 
   def currentPlayerPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Player:"))
@@ -41,6 +56,7 @@ class GameGui(controller: Controller) extends MainFrame {
     contents += Swing.VStrut(10)
     contents += Swing.Glue
   }
+  infoPlayerName.editable = false
 
   def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     preferredSize = new Dimension(200, 100)
@@ -62,8 +78,19 @@ class GameGui(controller: Controller) extends MainFrame {
     }
   }
 
-  val infoPlayerName = new TextField("")
-  infoPlayerName.editable = false
+  def playerInfoAndPlayerTextAreaPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
+    border = Swing.EmptyBorder(10, 10, 10, 10)
+    preferredSize = new Dimension(200, 660)
+    border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Player Info:"))
+    contents += nextPrevPlayerPanel
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += playerInfoPanel
+    playerInfoTextArea.editable = false
+
+  }
+
+  playerInfoTextArea.editable = false
 
   def nextPrevPlayerPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
     preferredSize = new Dimension(200, 42)
@@ -85,34 +112,12 @@ class GameGui(controller: Controller) extends MainFrame {
     }
   }
 
-  def playerInfoTextArea: TextArea = new TextArea(" \n")
-  playerInfoTextArea.editable = false
-
   def playerInfoPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     preferredSize = new Dimension(600, 700)
     contents += playerInfoTextArea
   }
 
-  def playerInfoAndPlayerTextAreaPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
-    border = Swing.EmptyBorder(10, 10, 10, 10)
-    preferredSize = new Dimension(200, 660)
-    border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Player Info:"))
-    contents += nextPrevPlayerPanel
-    contents += Swing.VStrut(10)
-    contents += Swing.Glue
-    contents += playerInfoPanel
-    playerInfoTextArea.editable = false
-
-  }
-
-  def combinedCurrentGamePanelAndGameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
-    border = Swing.EmptyBorder(10, 10, 10, 10)
-    contents += currentPlayerPanel
-    contents += Swing.VStrut(10)
-    contents += Swing.Glue
-    contents += playerInfoAndPlayerTextAreaPanel
-  }
-
+  def playerInfoTextArea: TextArea = new TextArea(" \n")
 
   def gameBoardPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     contents += new BoardCanvas(controller)
@@ -144,7 +149,7 @@ class GameGui(controller: Controller) extends MainFrame {
   }
 
   reactions += {
-    case event : StartGame =>
+    case event: StartGame =>
       updatePlayerInfo()
       this.repaint()
     case event: RolledDice =>

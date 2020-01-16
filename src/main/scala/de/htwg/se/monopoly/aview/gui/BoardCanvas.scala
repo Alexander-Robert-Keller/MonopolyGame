@@ -8,7 +8,7 @@ import javax.imageio.ImageIO
 
 import scala.swing.{Component, Graphics2D}
 
-class BoardCanvas(controller: Controller) extends Component{
+class BoardCanvas(controller: Controller) extends Component {
 
   preferredSize = new Dimension(900, 900)
 
@@ -40,7 +40,7 @@ class BoardCanvas(controller: Controller) extends Component{
         yOffSet += 10
       } else if (location < 40) {
         val x = 834
-        val y = 50  + ((location - 30) * 74) + yOffSet
+        val y = 50 + ((location - 30) * 74) + yOffSet
         g.drawImage(playerImage, x, y, null)
         yOffSet += 10
       }
@@ -48,11 +48,11 @@ class BoardCanvas(controller: Controller) extends Component{
   }
 
   def getPlayerImage(currentPlayer: Int, totalNumberOfPlayers: Int): Image = {
-   /* if (currentPlayer > totalNumberOfPlayers) {
-      val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/PlayerImage" + currentPlayer.toString + ".jpg"
-    } else {
-      //Default pic
-    }*/
+    /* if (currentPlayer > totalNumberOfPlayers) {
+       val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/PlayerImage" + currentPlayer.toString + ".jpg"
+     } else {
+       //Default pic
+     }*/
     val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/MonopolyMascot.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
     val resized = gameBoardImage.getScaledInstance(50, 50, Image.SCALE_DEFAULT)
