@@ -25,20 +25,24 @@ object FreePlayerState extends PlayerState {
   }
 
   override def stringRollDice(dice: Dice, currentPlayerIndex: Int, controller: Controller): String = {
+    val msgDoublets: String = "You got doublets roll again!\n"
+    val msgWentOverGo200: String = "You went over Go: here are 200$\n"
+    val msgWentOverGo400: String = "You went over Go: here are 400$\n"
+
     if (controller.getCurrentDice.hasDoublets) {
       if (controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && controller.board.playerList(currentPlayerIndex).getLocation == 0) {
-        return dice.toString + "You got doublets roll again!\n" + "You landed on Go: here are 400$\n"
+        return dice.toString + msgDoublets + msgWentOverGo400
       }
       if (controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
-        return dice.toString + "You got doublets roll again!\n" + "You went over Go: here are 200$\n"
+        return dice.toString + msgDoublets + msgWentOverGo200
       }
-      dice.toString + "You got doublets roll again!\n"
+      dice.toString + msgDoublets
     } else {
       if (controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0 && controller.board.playerList(currentPlayerIndex).getLocation == 0) {
-        return dice.toString + "You went over Go: here are 400$\n"
+        return dice.toString + msgWentOverGo400
       }
       if (controller.board.playerList(currentPlayerIndex).getLocation - dice.getFaceValue < 0) {
-        return dice.toString + "You went over Go: here are 200$\n"
+        return dice.toString + msgWentOverGo200
       }
       dice.toString
     }
