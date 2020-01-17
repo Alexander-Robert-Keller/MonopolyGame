@@ -2,7 +2,7 @@ package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.model.spacetypes.Space
 import de.htwg.se.monopoly.model.{Board, Dice, Player}
-import de.htwg.se.monopoly.util._
+import de.htwg.se.monopoly.util.utilityComponent._
 
 import scala.swing.Publisher
 
@@ -13,7 +13,7 @@ class Controller extends Publisher {
   val exitCurrentGameMessage: String = "Returns to main menu!"
   val exitProgramMessage: String = "Exit game!"
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
-  private val undoManager = new UndoManager
+  private val undoManager = (new Utility).createUndoManagerInstance()
   var board: Board = Board(Vector[Space](), Vector[Player](), numberOfPlayers, numberOfSpaces)
   var dice: Dice = Dice()
   var stateMachine = new StateMachine(this)

@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.controller
 
 import de.htwg.se.monopoly.model.{Board, Dice, GameState}
-import de.htwg.se.monopoly.util.Command
+import de.htwg.se.monopoly.util.utilityComponent.Command
 
 class RollDiceCommand(controller: Controller) extends Command {
 

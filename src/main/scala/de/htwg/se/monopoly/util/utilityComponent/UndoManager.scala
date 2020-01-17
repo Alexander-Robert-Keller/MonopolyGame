@@ -1,6 +1,6 @@
-package de.htwg.se.monopoly.util
+package de.htwg.se.monopoly.util.utilityComponent
 
-class UndoManager {
+class UndoManager extends Utility {
   private var undoStack: List[Command] = Nil
   private var redoStack: List[Command] = Nil
 
