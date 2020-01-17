@@ -1,12 +1,13 @@
 package de.htwg.se.monopoly.aview.tuiComponent.tuiBaseImpl
 
+import de.htwg.se.monopoly.aview.tuiComponent.TuiInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.monopoly.util._
 
 import scala.swing.Reactor
 
 
-class TextualUserInterface(controller: Controller) extends Reactor {
+class TextualUserInterface(controller: Controller) extends Reactor with TuiInterface {
 
   listenTo(controller)
 

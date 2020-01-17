@@ -1,6 +1,8 @@
 package de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl
 
-case class GameState(stateIndex: Int, currentPlayer: Int, numberOfPlayers: Int) extends Enumeration {
+import de.htwg.se.monopoly.model.gameStateComponent.GameStateInterface
+
+case class GameState(stateIndex: Int, currentPlayer: Int, numberOfPlayers: Int) extends Enumeration with GameStateInterface {
   val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
 
   val state: Value = stateIndex match {

@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.guiComponent.guiBaseImpl
 import java.awt.Image
 import java.io.File
 
-import de.htwg.se.monopoly.controller.controllerComponent._
+import de.htwg.se.monopoly.aview.guiComponent.GuiInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.monopoly.util.{ExitCurrentGame, StartGame}
 import javax.imageio.ImageIO
@@ -12,7 +12,7 @@ import javax.swing.ImageIcon
 import scala.swing.event.ButtonClicked
 import scala.swing.{BoxPanel, MainFrame, _}
 
-class GUI(controller: Controller) extends MainFrame {
+class GUI(controller: Controller) extends MainFrame with GuiInterface {
   listenTo(controller)
 
   resizable = false
