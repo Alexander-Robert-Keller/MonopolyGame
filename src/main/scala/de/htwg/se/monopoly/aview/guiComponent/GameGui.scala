@@ -1,16 +1,15 @@
-package de.htwg.se.monopoly.aview.guiComponent.guiBaseImpl
+package de.htwg.se.monopoly.aview.guiComponent
 
 import java.awt.Dimension
 
-import de.htwg.se.monopoly.controller.controllerComponent._
-import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
+import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.util.{Redo, RolledDice, StartGame, Undo}
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{MainFrame, _}
 
 
-class GameGui(controller: Controller) extends MainFrame {
+class GameGui(controller: ControllerInterface) extends MainFrame {
   //TODO: get a player onto the Field, resize left Menu properly, add Menu bar with start Game, exit Game, add redo feature later on
   listenTo(controller)
   title = "HTWG Monopoly"

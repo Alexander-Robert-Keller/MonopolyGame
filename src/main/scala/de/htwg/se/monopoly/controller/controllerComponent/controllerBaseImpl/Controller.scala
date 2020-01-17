@@ -15,7 +15,7 @@ class Controller extends Publisher with ControllerInterface {
   val exitCurrentGameMessage: String = "Returns to main menu!"
   val exitProgramMessage: String = "Exit game!"
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
-  private val undoManager = new UndoManager
+  val undoManager = new UndoManager
   var board: Board = Board(Vector[Space](), Vector[Player](), numberOfPlayers, numberOfSpaces)
   var dice: Dice = Dice()
   var stateMachine = new StateMachine(this)

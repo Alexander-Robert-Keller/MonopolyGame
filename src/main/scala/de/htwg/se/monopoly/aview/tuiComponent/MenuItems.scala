@@ -1,11 +1,12 @@
-package de.htwg.se.monopoly.aview.tuiComponent.tuiBaseImpl
+package de.htwg.se.monopoly.aview.tuiComponent
 
+import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 
 trait MenuItems {
   val name: String
 
-  def action(controller: Controller): Unit
+  def action(controller: ControllerInterface): Unit
 
   override def toString: String = name
 }
@@ -13,13 +14,13 @@ trait MenuItems {
 object ExitMainMenuItem extends MenuItems {
   override val name: String = "Exit Game!"
 
-  override def action(controller: Controller): Unit = controller.exitMainMenu()
+  override def action(controller: ControllerInterface): Unit = controller.exitMainMenu()
 }
 
 object StartGameMenuItem extends MenuItems {
   override val name: String = "Start Game!"
 
-  override def action(controller: Controller): Unit = controller.initializeGame()
+  override def action(controller: ControllerInterface): Unit = controller.initializeGame()
 }
 
 object WrongCommandMenuItem extends MenuItems {
@@ -27,29 +28,29 @@ object WrongCommandMenuItem extends MenuItems {
 
   val wrongCommand: String = "Command Option does not exist"
 
-  override def action(controller: Controller): Unit = println(wrongCommand)
+  override def action(controller: ControllerInterface): Unit = println(wrongCommand)
 }
 
 object RollDiceMenuItem extends MenuItems {
   override val name: String = "Roll Dice!"
 
-  override def action(controller: Controller): Unit = controller.rollDice()
+  override def action(controller: ControllerInterface): Unit = controller.rollDice()
 }
 
 object ExitGameMenuItem extends MenuItems {
   override val name: String = "Exit Game!"
 
-  override def action(controller: Controller): Unit = controller.exitGameMenu()
+  override def action(controller: ControllerInterface): Unit = controller.exitGameMenu()
 }
 
 object UndoMenuItem extends MenuItems {
   override val name: String = "Undo last Command!"
 
-  override def action(controller: Controller): Unit = controller.undoCommand()
+  override def action(controller: ControllerInterface): Unit = controller.undoCommand()
 }
 
 object RedoMenuItem extends MenuItems {
   override val name: String = "Redo last Undo Command!"
 
-  override def action(controller: Controller): Unit = controller.redoCommand()
+  override def action(controller: ControllerInterface): Unit = controller.redoCommand()
 }

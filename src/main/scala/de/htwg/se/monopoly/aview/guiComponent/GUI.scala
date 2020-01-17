@@ -1,9 +1,9 @@
-package de.htwg.se.monopoly.aview.guiComponent.guiBaseImpl
+package de.htwg.se.monopoly.aview.guiComponent
 
 import java.awt.Image
 import java.io.File
 
-import de.htwg.se.monopoly.aview.guiComponent.GuiInterface
+import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.monopoly.util.{ExitCurrentGame, StartGame}
 import javax.imageio.ImageIO
@@ -12,7 +12,7 @@ import javax.swing.ImageIcon
 import scala.swing.event.ButtonClicked
 import scala.swing.{BoxPanel, MainFrame, _}
 
-class GUI(controller: Controller) extends MainFrame with GuiInterface {
+class GUI(controller: ControllerInterface) extends MainFrame {
   listenTo(controller)
 
   resizable = false
@@ -56,7 +56,7 @@ class GUI(controller: Controller) extends MainFrame with GuiInterface {
   }
 
   def getMonopolyBoardImage: Image = {
-    val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/guiBaseImpl/images/MonopolyMascot.jpg"
+    val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/images/MonopolyMascot.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
     val resizedImage = gameBoardImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT)
     resizedImage
