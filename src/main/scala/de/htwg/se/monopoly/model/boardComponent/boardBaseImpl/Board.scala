@@ -1,10 +1,11 @@
 package de.htwg.se.monopoly.model.boardComponent.boardBaseImpl
 
+import de.htwg.se.monopoly.model.boardComponent.BoardInterface
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 
 import scala.collection.mutable
 
-case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
+case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) extends BoardInterface{
 
   val getTotalNumberOfSpaces: Int = totalNumberOfSpaces
 
