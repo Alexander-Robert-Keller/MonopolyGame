@@ -1,6 +1,6 @@
-import de.htwg.se.monopoly.aview.guiComponent.gui.GUI
-import de.htwg.se.monopoly.aview.tuiComponent.tui.TextualUserInterface
-import de.htwg.se.monopoly.controller.controllerComponent.Controller
+import de.htwg.se.monopoly.aview.guiComponent.guiBaseImpl.GUI
+import de.htwg.se.monopoly.aview.tuiComponent.tuiBaseImpl.TextualUserInterface
+import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 
 import scala.io.StdIn
 
