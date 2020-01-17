@@ -1,8 +1,8 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoJasonImpl
 
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
-import de.htwg.se.monopoly.model.spacetypes._
-import de.htwg.se.monopoly.model.{Board, GameState, Player}
+import de.htwg.se.monopoly.model.gameComponent.spacetypes._
+import de.htwg.se.monopoly.model.gameComponent.{Board, GameState, Player}
 import play.api.libs.json._
 
 import scala.io.Source

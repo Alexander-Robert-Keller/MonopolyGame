@@ -1,8 +1,8 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoXmlImpl
 
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
-import de.htwg.se.monopoly.model.spacetypes._
-import de.htwg.se.monopoly.model.{Board, GameState, Player}
+import de.htwg.se.monopoly.model.gameComponent.spacetypes._
+import de.htwg.se.monopoly.model.gameComponent.{Board, GameState, Player}
 
 import scala.xml.{Elem, PrettyPrinter}
 
