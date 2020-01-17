@@ -6,7 +6,7 @@ import de.htwg.se.monopoly.util.utilityComponent._
 
 import scala.swing.Publisher
 
-class Controller extends Publisher {
+class Controller extends Publisher with ControllerInterface {
 
   val numberOfPlayers = 2
   val numberOfSpaces = 40
