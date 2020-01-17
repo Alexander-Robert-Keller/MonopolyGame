@@ -1,5 +1,6 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoJasonImpl
 
+import de.htwg.se.monopoly.controller.controllerComponent.Controller
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
 import de.htwg.se.monopoly.model.gameComponent.spacetypes._
 import de.htwg.se.monopoly.model.gameComponent.{Board, GameState, Player}
@@ -7,7 +8,7 @@ import play.api.libs.json._
 
 import scala.io.Source
 
-class FileIO extends FileIOInterface {
+case class FileIO(controller: Controller) extends FileIOInterface {
 
   override def loadBoard(fileName: String): Board = {
     val sourceBuffered = Source.fromFile("fileIoFiles/" + fileName + ".json")
@@ -44,7 +45,7 @@ class FileIO extends FileIOInterface {
         case "WaterWorks" => spaces = spaces :+ WaterWorks()
       }
     }
-    Board(spaces, playerList, numberOfPlayers, numberOfSpaces)
+    Board(controller)
   }
 
   override def loadGameState(fileName: String): GameState = {
@@ -70,7 +71,7 @@ class FileIO extends FileIOInterface {
       "Monopoly" -> Json.obj(
         "board" -> Json.obj(
           "numberOfSpaces" -> JsNumber(board.getTotalNumberOfSpaces),
-          "numberOfPlayers" -> JsNumber(board.totalNumberOfPlayers),
+          "numberOfPlayers" -> JsNumber(controller.board.totalNumberOfPlayers),
           "playerList" -> Json.obj(
             "player" -> Json.toJson(
               for {

@@ -1,4 +1,4 @@
-package de.htwg.se.monopoly.util.utilityComponent
+package de.htwg.se.monopoly.controller.controllerComponent
 
 import scala.swing.event.Event
 

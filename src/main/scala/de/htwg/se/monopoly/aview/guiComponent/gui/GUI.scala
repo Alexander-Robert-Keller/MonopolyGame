@@ -3,8 +3,8 @@ package de.htwg.se.monopoly.aview.guiComponent.gui
 import java.awt.Image
 import java.io.File
 
-import de.htwg.se.monopoly.controller.controllerComponent.Controller
-import de.htwg.se.monopoly.util.utilityComponent.{ExitCurrentGame, StartGame}
+import de.htwg.se.monopoly.controller.controllerComponent.{Controller, ExitCurrentGame, StartGame}
+import de.htwg.se.monopoly.util.utilityComponent.StartGame
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 

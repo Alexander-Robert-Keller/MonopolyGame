@@ -24,7 +24,7 @@ object XmlTest {
 
   def testLoadBoard(): Unit = {
     val fileIo = new FileIO
-    var board = Board(null, null, 10, 10)
+    var board = Board(new Controller(10, 10))
     board = fileIo.loadBoard("test")
     print(board.toString)
   }

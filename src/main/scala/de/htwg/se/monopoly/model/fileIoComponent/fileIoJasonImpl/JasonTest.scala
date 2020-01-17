@@ -21,7 +21,8 @@ object JasonTest {
 
   def testLoadBoard(): Unit = {
     val fileIo = new FileIO
-    var board = Board(null, null, 10, 10)
+    var controller = new Controller(10, 10)
+    var board = Board(controller)
     board = fileIo.loadBoard("test")
     print(board.toString)
   }

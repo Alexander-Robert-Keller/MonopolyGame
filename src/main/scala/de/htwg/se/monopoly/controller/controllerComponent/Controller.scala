@@ -6,15 +6,15 @@ import de.htwg.se.monopoly.util.utilityComponent._
 
 import scala.swing.Publisher
 
-class Controller extends Publisher with ControllerInterface {
+case class Controller(numPlayers: Int = 2, numSpaces: Int = 40) extends Publisher with ControllerInterface {
 
-  val numberOfPlayers = 2
-  val numberOfSpaces = 40
+  val numberOfPlayers: Int = numPlayers
+  val numberOfSpaces: Int = numberOfSpaces
   val exitCurrentGameMessage: String = "Returns to main menu!"
   val exitProgramMessage: String = "Exit game!"
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
   private val undoManager = (new Utility).createUndoManagerInstance()
-  var board: Board = Board(Vector[Space](), Vector[Player](), numberOfPlayers, numberOfSpaces)
+  var board: Board = Board(this)
   var dice: Dice = Dice()
   var stateMachine = new StateMachine(this)
   var playerState: PlayerState = FreePlayerState

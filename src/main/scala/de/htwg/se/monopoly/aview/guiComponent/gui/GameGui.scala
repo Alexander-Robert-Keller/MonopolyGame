@@ -2,8 +2,8 @@ package de.htwg.se.monopoly.aview.guiComponent.gui
 
 import java.awt.Dimension
 
-import de.htwg.se.monopoly.controller.controllerComponent.Controller
-import de.htwg.se.monopoly.util.utilityComponent.{Redo, RolledDice, StartGame, Undo}
+import de.htwg.se.monopoly.controller.controllerComponent.{Controller, Redo, RolledDice, StartGame, Undo}
+import de.htwg.se.monopoly.util.utilityComponent.{Redo, RolledDice, Undo}
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{MainFrame, _}

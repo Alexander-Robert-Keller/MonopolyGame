@@ -6,15 +6,19 @@ import de.htwg.se.monopoly.controller.controllerComponent.Controller
 
 import scala.collection.mutable
 
-case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
 
-  val getTotalNumberOfSpaces: Int = totalNumberOfSpaces
+case class Board(controller: Controller) {
+
+  val totalNumberOfPlayers = controller.numberOfPlayers
+  val totalNumberOfSpaces = controller.numberOfSpaces
+
+  val getTotalNumberOfSpaces: Int = controller.numberOfSpaces
 
   val jailLocation: Int = 10
 
-  val playerList: Vector[Player] = newPlayerList
+  var playerList: Vector[Player] = null
 
-  val spaces: Vector[Space] = newSpaceList
+  var spaces: Vector[Space] = null
 
   def init(): Board = {
     //TODO: rework when spaces properly named
@@ -59,15 +63,18 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     initSpaces = initSpaces :+ Property()
     initSpaces = initSpaces :+ Tax()
     initSpaces = initSpaces :+ Property()
-    Board(initSpaces, initializePlayerList(), totalNumberOfPlayers, totalNumberOfSpaces)
+    initializePlayerList()
+    spaces = initSpaces
+    this
   }
 
-  def initializePlayerList(): Vector[Player] = {
+  def initializePlayerList(): Board = {
     var tmpPlayerList = Vector[Player]()
     for (i <- 1 to totalNumberOfPlayers) {
       tmpPlayerList = tmpPlayerList :+ Player(i, 0, jailed = false, 1500)
     }
-    tmpPlayerList
+    playerList = tmpPlayerList
+    this
   }
 
   def movePlayer(moveByXSpaces: Int, currentPlayerIndex: Int): Board = {
@@ -80,7 +87,8 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
         tmpPlayerList = tmpPlayerList :+ player
       }
     }
-    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+    playerList = tmpPlayerList
+    this
   }
 
   def increasePlayerMoney(playerGetsXMoney: Int, currentPlayerIndex: Int): Board = {
@@ -93,7 +101,8 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
         tmpPlayerList = tmpPlayerList :+ player
       }
     }
-    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+    playerList = tmpPlayerList
+    this
   }
 
   def decreasePlayerMoney(playerPaysXMoney: Int, currentPlayerIndex: Int): Board = {
@@ -106,7 +115,8 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
         tmpPlayerList = tmpPlayerList :+ player
       }
     }
-    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+    playerList = tmpPlayerList
+    this
   }
 
   def setPlayerJailedOrUnJailed(currentPlayerIndex: Int, jailed: Boolean): Board = {
@@ -119,7 +129,8 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
         tmpPlayerList = tmpPlayerList :+ player
       }
     }
-    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+    playerList = tmpPlayerList
+    this
   }
 
   override def toString: String = {

@@ -1,5 +1,6 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoXmlImpl
 
+import de.htwg.se.monopoly.controller.controllerComponent.Controller
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
 import de.htwg.se.monopoly.model.gameComponent.spacetypes._
 import de.htwg.se.monopoly.model.gameComponent.{Board, GameState, Player}
@@ -37,7 +38,7 @@ class FileIO extends FileIOInterface {
         case "WaterWorks" => spaces = spaces :+ WaterWorks()
       }
     }
-    Board(spaces, playerList, numberOfPlayers, numberOfSpaces)
+    Board(new Controller(numberOfPlayers, numberOfSpaces))
   }
 
   override def loadGameState(fileName: String): GameState = {

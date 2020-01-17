@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.aview.tuiComponent.tui
 
 import de.htwg.se.monopoly.controller._
-import de.htwg.se.monopoly.controller.controllerComponent.Controller
+import de.htwg.se.monopoly.controller.controllerComponent.{Controller, ExitCurrentGame, ExitProgram, FailedRedo, FailedUndo, Redo, RolledDice, StartGame, Undo}
 import de.htwg.se.monopoly.util.utilityComponent._
 
 import scala.swing.Reactor
