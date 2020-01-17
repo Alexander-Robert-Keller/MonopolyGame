@@ -1,10 +1,10 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoXmlImpl
 
 
-import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.{Board, Player}
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
-import de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl.GameState
+import de.htwg.se.monopoly.model.gameStateComponent.GameState
 
 import scala.xml.{Elem, PrettyPrinter}
 
@@ -80,7 +80,7 @@ class FileIO extends FileIOInterface {
   }
 
   def spaceToXml(space: Space): Elem = {
-    <space class={space.getClass.toString.substring(43)}>
+    <space class={space.getClass.toString.substring(72)}>
     </space>
   }
 

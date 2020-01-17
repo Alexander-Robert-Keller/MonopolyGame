@@ -1,10 +1,8 @@
-package de.htwg.se.monopoly.model.diceComponent.diceBaseImpl
-
-import de.htwg.se.monopoly.model.diceComponent.DiceInterface
+package de.htwg.se.monopoly.model.diceComponent
 
 import scala.util.Random
 
-case class Dice() extends DiceInterface {
+case class Dice() {
 
   val random: Random = scala.util.Random
 

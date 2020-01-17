@@ -5,7 +5,7 @@ import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 
 import scala.collection.mutable
 
-case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) extends BoardInterface{
+case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) extends BoardInterface {
 
   val getTotalNumberOfSpaces: Int = totalNumberOfSpaces
 
@@ -126,7 +126,7 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     boardString ++= "field ID:\t type: \t\t\t\t player:\n"
     var i = 0
     while (i < 40) {
-      boardString ++= "%d\t\t\t %-20s".format(i, spaces(i).getClass.toString.substring(43))
+      boardString ++= "%d\t\t\t %-20s".format(i, spaces(i).getClass.toString.substring(72))
       for (player <- playerList) {
         if (player.getLocation == i) {
           boardString ++= "Player %d  ".format(player.getId)

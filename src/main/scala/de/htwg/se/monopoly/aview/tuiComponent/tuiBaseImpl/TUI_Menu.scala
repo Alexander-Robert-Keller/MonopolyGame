@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.aview.tuiComponent.tuiBaseImpl
 
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl.GameState
+import de.htwg.se.monopoly.model.gameStateComponent.GameState
 
 import scala.collection.mutable
 

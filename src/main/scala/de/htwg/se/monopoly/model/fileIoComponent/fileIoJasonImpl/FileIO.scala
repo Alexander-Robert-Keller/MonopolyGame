@@ -1,9 +1,11 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoJasonImpl
 
-import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
+import de.htwg.se.monopoly.model.boardComponent
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.{Board, Player}
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
-import de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl.GameState
+import de.htwg.se.monopoly.model.gameStateComponent.GameState
 import play.api.libs.json._
 
 import scala.io.Source
@@ -45,7 +47,7 @@ class FileIO extends FileIOInterface {
         case "WaterWorks" => spaces = spaces :+ WaterWorks()
       }
     }
-    Board(spaces, playerList, numberOfPlayers, numberOfSpaces)
+    boardBaseImpl.Board(spaces, playerList, numberOfPlayers, numberOfSpaces)
   }
 
   override def loadGameState(fileName: String): GameState = {
@@ -111,7 +113,7 @@ class FileIO extends FileIOInterface {
 
   def spaceToJason(space: Space): JsObject = {
     Json.obj(
-      "class" -> JsString(space.getClass.toString.substring(43))
+      "class" -> JsString(space.getClass.toString.substring(72))
     )
   }
 }

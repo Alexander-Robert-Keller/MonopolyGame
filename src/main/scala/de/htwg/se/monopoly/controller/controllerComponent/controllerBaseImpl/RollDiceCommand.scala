@@ -1,8 +1,8 @@
 package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.Board
-import de.htwg.se.monopoly.model.diceComponent.diceBaseImpl.Dice
-import de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl.GameState
+import de.htwg.se.monopoly.model.diceComponent.Dice
+import de.htwg.se.monopoly.model.gameStateComponent.GameState
 import de.htwg.se.monopoly.util.Command
 
 class RollDiceCommand(controller: Controller) extends Command {

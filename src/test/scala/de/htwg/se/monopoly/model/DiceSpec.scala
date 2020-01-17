@@ -1,6 +1,6 @@
-package de.htwg.se.monopoly.model.gameComponent
+package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.model.diceComponent.diceBaseImpl.Dice
+import de.htwg.se.monopoly.model.diceComponent.Dice
 import org.scalatest.{Matchers, WordSpec}
 
 class DiceSpec extends WordSpec with Matchers {
