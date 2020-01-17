@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.guiComponent
 import java.awt.Dimension
 
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
-import de.htwg.se.monopoly.util.{Redo, RolledDice, StartGame, Undo}
+import de.htwg.se.monopoly.util.{LoadGame, Redo, RolledDice, SaveGame, StartGame, Undo}
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{MainFrame, _}
@@ -158,6 +158,7 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
       this.repaint()
     case event: Undo => this.repaint()
     case event: Redo => this.repaint()
+    case event: LoadGame => this.repaint()
     case _ =>
   }
 }

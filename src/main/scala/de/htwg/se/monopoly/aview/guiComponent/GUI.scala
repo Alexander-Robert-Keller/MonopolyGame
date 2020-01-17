@@ -5,7 +5,7 @@ import java.io.File
 
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.monopoly.util.{ExitCurrentGame, StartGame}
+import de.htwg.se.monopoly.util.{ExitCurrentGame, LoadGame, StartGame}
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
@@ -75,6 +75,7 @@ class GUI(controller: ControllerInterface) extends MainFrame {
   reactions += {
     case event: ExitCurrentGame => endGame()
     case event: StartGame => startGame()
+    case event: LoadGame => startGame()
     case _ =>
   }
 }
