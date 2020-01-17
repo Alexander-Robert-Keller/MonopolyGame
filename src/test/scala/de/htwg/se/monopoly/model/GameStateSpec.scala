@@ -1,4 +1,4 @@
-package de.htwg.se.monopoly.model
+package de.htwg.se.monopoly.model.gameComponent
 
 import org.scalatest.{Matchers, WordSpec}
 

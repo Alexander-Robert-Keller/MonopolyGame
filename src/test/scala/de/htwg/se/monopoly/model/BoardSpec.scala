@@ -1,7 +1,8 @@
 package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.controller.Controller
-import de.htwg.se.monopoly.model.spacetypes.Space
+import de.htwg.se.monopoly.controller.controllerComponent.Controller
+import de.htwg.se.monopoly.model.gameComponent._
+import de.htwg.se.monopoly.model.gameComponent.spacetypes._
 import org.scalatest.{Matchers, WordSpec}
 
 class BoardSpec {

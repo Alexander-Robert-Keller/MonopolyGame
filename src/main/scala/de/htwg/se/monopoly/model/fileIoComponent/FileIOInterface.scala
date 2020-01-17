@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.model.fileIoComponent
 
-import de.htwg.se.monopoly.model.{Board, GameState}
+import de.htwg.se.monopoly.model.gameComponent.{Board, GameState}
 
 trait FileIOInterface {
 

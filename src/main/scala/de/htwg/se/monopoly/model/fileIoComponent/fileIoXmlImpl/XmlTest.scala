@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoXmlImpl
 
-import de.htwg.se.monopoly.controller.Controller
-import de.htwg.se.monopoly.model.Board
+import de.htwg.se.monopoly.controller.controllerComponent.Controller
+import de.htwg.se.monopoly.model.gameComponent.Board
 
 
 // Temporery file for Testing porposes
