@@ -1,14 +1,15 @@
-package de.htwg.se.monopoly.aview.guiComponent.guiBaseImpl
+package de.htwg.se.monopoly.aview.guiComponent
 
 import java.awt.{Dimension, Image}
 import java.io.File
 
+import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 import javax.imageio.ImageIO
 
 import scala.swing.{Component, Graphics2D}
 
-class BoardCanvas(controller: Controller) extends Component {
+class BoardCanvas(controller: ControllerInterface) extends Component {
 
   preferredSize = new Dimension(900, 900)
 
@@ -53,14 +54,14 @@ class BoardCanvas(controller: Controller) extends Component {
      } else {
        //Default pic
      }*/
-    val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/guiBaseImpl/images/MonopolyMascot.jpg"
+    val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/images/MonopolyMascot.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
     val resized = gameBoardImage.getScaledInstance(50, 50, Image.SCALE_DEFAULT)
     resized
   }
 
   def getMonopolyBoardImage: Image = {
-    val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/guiBaseImpl/images/MonopolygameBoard.jpg"
+    val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/images/MonopolygameBoard.jpg"
     val gameBoardImage = ImageIO.read(new File(path))
     val resized = gameBoardImage.getScaledInstance(900, 900, Image.SCALE_DEFAULT)
     resized

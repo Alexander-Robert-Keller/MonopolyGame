@@ -1,5 +1,6 @@
-package de.htwg.se.monopoly.aview.tuiComponent.tuiBaseImpl
+package de.htwg.se.monopoly.aview.tuiComponent
 
+import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.monopoly.model.gameStateComponent.GameState
 
@@ -12,7 +13,7 @@ trait TUI_Menu extends {
 
   def determineMenu(gameState: GameState): TUI_Menu
 
-  def action(index: Int, controller: Controller): Unit = {
+  def action(index: Int, controller: ControllerInterface): Unit = {
     if (menuOptions.size > index) {
       menuOptions(index).action(controller)
     } else {
@@ -21,7 +22,7 @@ trait TUI_Menu extends {
   }
 
   override def toString: String = {
-    val menuString = new mutable.StringBuilder(this.getClass.toString.substring(36).replace('$', ' ') + "Options:\n")
+    val menuString = new mutable.StringBuilder(this.getClass.toString.substring(45).replace('$', ' ') + "Options:\n")
     var index = 0
     while (index < menuOptions.size) {
       val tmp = menuOptions(index).name
