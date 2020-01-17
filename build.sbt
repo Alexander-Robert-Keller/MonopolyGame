@@ -11,13 +11,13 @@ resolvers += "Artima Maven Repository" at "http://repo.artima.com/release"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.1.1"
 
-// guice dependecys
+// guice dependecies
 
-libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
+libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
 
-libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.0"
+libraryDependencies += "net.codingwell" %% "scala-guice" % "4.2.6"
 
-// json, xml dependencys
+// json, xml dependencies
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
 
