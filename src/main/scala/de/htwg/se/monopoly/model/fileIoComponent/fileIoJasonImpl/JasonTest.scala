@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.model.fileIoComponent.fileIoJasonImpl
 
-import de.htwg.se.monopoly.controller.controllerComponent.Controller
-import de.htwg.se.monopoly.model.gameComponent.Board
+import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.Board
 
 object JasonTest {
   def main(args: Array[String]): Unit = {
