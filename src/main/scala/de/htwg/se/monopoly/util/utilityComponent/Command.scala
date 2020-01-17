@@ -1,4 +1,4 @@
-package de.htwg.se.monopoly.util
+package de.htwg.se.monopoly.util.utilityComponent
 
 trait Command {
   // def doStep(): Unit

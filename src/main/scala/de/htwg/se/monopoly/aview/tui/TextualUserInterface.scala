@@ -1,7 +1,7 @@
 package de.htwg.se.monopoly.aview.tui
 
 import de.htwg.se.monopoly.controller._
-import de.htwg.se.monopoly.util._
+import de.htwg.se.monopoly.util.utilityComponent._
 
 import scala.swing.Reactor
 
