@@ -1,6 +1,6 @@
 package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 
-import de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl.GameState
+import de.htwg.se.monopoly.model.gameStateComponent.GameState
 
 class StateMachine(controller: Controller) extends Enumeration {
 

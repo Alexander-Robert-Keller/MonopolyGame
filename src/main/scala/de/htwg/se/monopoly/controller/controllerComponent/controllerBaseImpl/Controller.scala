@@ -1,9 +1,9 @@
 package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
-import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.{Board, Player}
-import de.htwg.se.monopoly.model.diceComponent.diceBaseImpl.Dice
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
+import de.htwg.se.monopoly.model.diceComponent.Dice
 import de.htwg.se.monopoly.util._
 
 import scala.swing.Publisher

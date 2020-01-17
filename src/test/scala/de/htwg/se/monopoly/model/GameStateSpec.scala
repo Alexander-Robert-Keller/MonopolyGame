@@ -1,6 +1,6 @@
-package de.htwg.se.monopoly.model.gameComponent
+package de.htwg.se.monopoly.model
 
-import de.htwg.se.monopoly.model.gameStateComponent.gameStateBaseImpl.GameState
+import de.htwg.se.monopoly.model.gameStateComponent.GameState
 import org.scalatest.{Matchers, WordSpec}
 
 class GameStateSpec extends WordSpec with Matchers {
