@@ -17,3 +17,7 @@ class Redo extends Event
 class FailedUndo extends Event
 
 class FailedRedo extends Event
+
+class LoadGame extends Event
+
+class SaveGame extends Event

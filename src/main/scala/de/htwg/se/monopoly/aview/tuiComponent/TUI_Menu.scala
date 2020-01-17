@@ -37,6 +37,7 @@ object MainMenu extends TUI_Menu {
 
   add(StartGameMenuItem)
   add(ExitMainMenuItem)
+  add(LoadGameMenuItem)
 
   override def determineMenu(gameState: GameState): TUI_Menu = {
     if (gameState.state == gameState.MAIN_MENU) {
@@ -75,6 +76,7 @@ object RollDiceMenu extends TUI_Menu {
   add(ExitGameMenuItem)
   add(UndoMenuItem)
   add(RedoMenuItem)
+  add(SaveGameMenuItem)
 
   override def determineMenu(gameState: GameState): TUI_Menu = {
     if (gameState.state == gameState.MAIN_MENU) {

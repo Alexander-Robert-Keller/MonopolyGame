@@ -34,5 +34,7 @@ trait ControllerInterface extends Publisher{
   def initializeGame(): Unit
   def undoCommand(): Unit
   def redoCommand(): Unit
+  def saveGame(): Unit
+  def loadGame(): Unit
 
 }

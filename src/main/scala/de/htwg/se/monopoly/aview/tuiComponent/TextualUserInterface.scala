@@ -63,6 +63,13 @@ class TextualUserInterface(controller: ControllerInterface) extends Reactor {
     case event: FailedUndo =>
       println("There is nothing to Undo!")
       displayMenuOptions()
+    case event: SaveGame =>
+      println("Saving Game!")
+      displayMenuOptions()
+    case event: LoadGame =>
+      println("Load Game!")
+
+      displayMenuOptions()
     case _ =>
   }
 }

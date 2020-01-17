@@ -1,9 +1,12 @@
 package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 
+import com.google.inject.{Guice, Injector}
+import de.htwg.se.monopoly.MonopolyModule
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.{Board, Player}
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 import de.htwg.se.monopoly.model.diceComponent.Dice
+import de.htwg.se.monopoly.model.fileIoComponent.FileIOInterface
 import de.htwg.se.monopoly.util._
 
 import scala.swing.Publisher
@@ -20,6 +23,8 @@ class Controller extends Publisher with ControllerInterface {
   var dice: Dice = Dice()
   var stateMachine = new StateMachine(this)
   var playerState: PlayerState = FreePlayerState
+  val injector: Injector = Guice.createInjector(new MonopolyModule)
+  val fileIO: FileIOInterface = injector.getInstance(classOf[FileIOInterface])
 
   def rollDice(): Unit = {
     doStep(new RollDiceCommand(this))
@@ -86,5 +91,16 @@ class Controller extends Publisher with ControllerInterface {
       undoManager.redoStep()
       publish(new Redo)
     }
+  }
+
+  override def saveGame(): Unit = {
+    fileIO.save(board, stateMachine.state, "SaveFile1")
+    publish(new SaveGame)
+  }
+
+  override def loadGame(): Unit = {
+    board = fileIO.loadBoard("SaveFile1")
+    stateMachine.state = fileIO.loadGameState("SaveFile1")
+    publish(new LoadGame)
   }
 }
