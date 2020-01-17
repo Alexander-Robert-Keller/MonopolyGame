@@ -1,5 +1,5 @@
 package de.htwg.se.monopoly.model.gameComponent
 
-trait GameInterface {
-  
+class Game extends GameInterface {
+
 }

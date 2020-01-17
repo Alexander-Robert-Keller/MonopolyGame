@@ -2,6 +2,8 @@ package de.htwg.se.monopoly.model.gameComponent
 
 import de.htwg.se.monopoly.model.gameComponent.spacetypes._
 
+import de.htwg.se.monopoly.controller.controllerComponent.Controller
+
 import scala.collection.mutable
 
 case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], totalNumberOfPlayers: Int, totalNumberOfSpaces: Int) {
