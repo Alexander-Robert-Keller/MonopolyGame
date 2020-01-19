@@ -1,14 +1,13 @@
 package de.htwg.se.monopoly.controller.controllerComponent
 
-import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.{FreePlayerState, PlayerState, StateMachine}
+import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.{PlayerState, StateMachine}
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.{Board, Player}
-import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes.Space
 import de.htwg.se.monopoly.model.diceComponent.Dice
 import de.htwg.se.monopoly.util.{Command, UndoManager}
 
 import scala.swing.Publisher
 
-trait ControllerInterface extends Publisher{
+trait ControllerInterface extends Publisher {
 
   val numberOfPlayers: Int
   val numberOfSpaces: Int

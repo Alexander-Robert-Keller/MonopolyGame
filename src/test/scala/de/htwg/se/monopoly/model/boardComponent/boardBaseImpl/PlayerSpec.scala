@@ -1,6 +1,5 @@
-package de.htwg.se.monopoly.model.gameComponent
+package de.htwg.se.monopoly.model.boardComponent.boardBaseImpl
 
-import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.Player
 import org.scalatest.{Matchers, WordSpec}
 
 class PlayerSpec extends WordSpec with Matchers {
