@@ -5,7 +5,6 @@ import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes._
 import org.scalatest.{Matchers, WordSpec}
 
 class BoardSpec extends WordSpec with Matchers {
-
   "A Board" when {
     "new" should {
 
@@ -27,11 +26,11 @@ class BoardSpec extends WordSpec with Matchers {
         gameBoard.spaces.length should be(0)
       }
 
-      "have a Vector array newSpaceList, which contains the spaces on the Board" in {
+      "have a Vector array newPlayerList, which contains the spaces on the Board" in {
         gameBoard.newPlayerList.length should be(0)
       }
 
-      "have a Vector array newSpaceList, which contains the spaces on the Board" in {
+      "have a Vector array PlayerList, which contains the spaces on the Board" in {
         gameBoard.playerList.length should be(0)
       }
 
@@ -48,33 +47,38 @@ class BoardSpec extends WordSpec with Matchers {
         playerList.length should be(2)
       }
 
-      "have a method to initialize the Board Vector[]" in {
+      "have a method to initialie the Board Vector[]" in {
         gameBoard = gameBoard.init()
         gameBoard.playerList.length should be(2)
         gameBoard.spaces.length should be(40)
       }
 
       "have a method to move a Player" in {
-        gameBoard.movePlayer(2, 0).playerList(0).getLocation should be(2)
+        gameBoard = gameBoard.movePlayer(2, 0)
+        gameBoard.playerList(0).getLocation should be(2)
       }
 
       "have a method to increase a Players Money" in {
-        gameBoard.increasePlayerMoney(100, 0).playerList(0).getMoney should be(1600)
+        gameBoard = gameBoard.increasePlayerMoney(100, 0)
+        gameBoard.playerList(0).getMoney should be(1600)
       }
 
       "have a method to decrease a Players Money" in {
-        gameBoard.decreasePlayerMoney(100, 0).playerList(0).getMoney should be(1500)
+        gameBoard = gameBoard.decreasePlayerMoney(100, 0)
+        gameBoard.playerList(0).getMoney should be(1500)
       }
 
       "have a method to jail or unjail a player" in {
-        gameBoard.setPlayerJailedOrUnJailed(0, jailed = true).playerList(0).isJailed should be(true)
+        gameBoard = gameBoard.setPlayerJailedOrUnJailed(0, jailed = true)
+        gameBoard.playerList(0).isJailed should be(true)
+        gameBoard = gameBoard.setPlayerJailedOrUnJailed(0, jailed = false)
+        gameBoard.playerList(0).isJailed should be(false)
       }
 
-      "have a toString Method wihich returns the Board as a String" in {
-        val controller = new Controller
-        gameBoard.toString should be(controller.stringGameBoard())
+      "have a toString Method which returns the Board as a String" in {
+        val test1 = gameBoard.init()
+        test1.toString shouldBe a[String]
       }
     }
   }
 }
-

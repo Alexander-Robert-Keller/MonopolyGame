@@ -125,7 +125,7 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     val boardString = new mutable.StringBuilder("")
     boardString ++= "field ID:\t type: \t\t\t\t player:\n"
     var i = 0
-    while (i < 40) {
+    while (i < totalNumberOfSpaces) {
       boardString ++= "%d\t\t\t %-20s".format(i, spaces(i).getClass.toString.substring(72))
       for (player <- playerList) {
         if (player.getLocation == i) {
