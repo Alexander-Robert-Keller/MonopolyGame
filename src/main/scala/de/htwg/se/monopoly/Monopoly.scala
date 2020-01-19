@@ -4,7 +4,6 @@ import com.google.inject.Guice
 import de.htwg.se.monopoly.aview.guiComponent.GUI
 import de.htwg.se.monopoly.aview.tuiComponent.TextualUserInterface
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
-import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.Controller
 
 import scala.io.StdIn
 

@@ -1,4 +1,5 @@
-import de.htwg.se.monopoly.Monopoly
+package de.htwg.se.monopoly
+
 import org.scalatest.{Matchers, WordSpec}
 
 class MonopolySpec extends WordSpec with Matchers {
