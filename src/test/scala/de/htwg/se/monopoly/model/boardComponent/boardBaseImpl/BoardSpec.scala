@@ -56,7 +56,7 @@ class BoardSpec {
         }
 
         "have a method to move a Player" in {
-          gameBoard.movePlayer(2, 0) shouldBe a[Board]
+          gameBoard.movePlayer(2, 0).playerList(0).getLocation should be(2)
         }
 
         "have a method to increase a Players Money" in {
