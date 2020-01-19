@@ -2,9 +2,7 @@ package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.monopoly.model.gameStateComponent.GameState
 
-class StateMachine(controller: Controller) extends Enumeration {
-
-  val ROLL_DICE, MAIN_MENU, BUY_OR_UPGRADE_PROPERTY = Value
+class StateMachine(controller: Controller) extends {
 
   var state: GameState = GameState(0, 0, controller.numberOfPlayers)
 
