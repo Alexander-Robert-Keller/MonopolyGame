@@ -79,7 +79,8 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
         tmpPlayerList = tmpPlayerList :+ player
       }
     }
-    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+    val board = Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+    board
   }
 
   def increasePlayerMoney(playerGetsXMoney: Int, currentPlayerIndex: Int): Board = {

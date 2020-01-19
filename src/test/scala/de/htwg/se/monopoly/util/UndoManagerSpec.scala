@@ -28,12 +28,14 @@ class UndoManagerSpec extends WordSpec with Matchers {
         undoManger.undoStep()
         undoManger.undoStackEmpty() should be (true)
         undoManger.redoStackEmpty() should be (false)
+        undoManger.undoStep()
       }
 
       "have a method to redo a step" in {
         undoManger.redoStep()
         undoManger.undoStackEmpty() should be (false)
         undoManger.redoStackEmpty() should be (true)
+        undoManger.redoStep()
       }
     }
   }
