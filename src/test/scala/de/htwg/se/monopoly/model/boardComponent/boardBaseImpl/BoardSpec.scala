@@ -56,19 +56,19 @@ class BoardSpec {
         }
 
         "have a method to move a Player" in {
-         gameBoard.movePlayer(2, 0) shouldBe a[Board]
+          gameBoard.movePlayer(2, 0).playerList(0).getLocation should be(2)
         }
 
         "have a method to increase a Players Money" in {
-         gameBoard.increasePlayerMoney(100, 0) shouldBe a[Board]
+          gameBoard.increasePlayerMoney(100, 0).playerList(0).getMoney should be(1600)
         }
 
         "have a method to decrease a Players Money" in {
-          gameBoard.decreasePlayerMoney(100, 0) shouldBe a[Board]
+          gameBoard.decreasePlayerMoney(100, 0).playerList(0).getMoney should be(1500)
         }
 
         "have a method to jail or unjail a player" in {
-          gameBoard.setPlayerJailedOrUnJailed(0, jailed = true) shouldBe a[Board]
+          gameBoard.setPlayerJailedOrUnJailed(0, jailed = true).playerList(0).isJailed should be(true)
         }
 
         "have a toString Method wihich returns the Board as a String" in {
