@@ -12,7 +12,9 @@ object Monopoly {
     val injector = Guice.createInjector(new MonopolyModule)
     val controller = injector.getInstance(classOf[ControllerInterface])
     val tui: TextualUserInterface = new TextualUserInterface(controller)
-    val gui: GUI = new GUI(controller)
+    if (args.isEmpty) {
+      val gui: GUI = new GUI(controller)
+    }
 
     tui.displayMenuOptions()
 
