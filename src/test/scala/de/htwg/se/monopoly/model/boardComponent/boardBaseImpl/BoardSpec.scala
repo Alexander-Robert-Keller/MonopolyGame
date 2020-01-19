@@ -56,23 +56,19 @@ class BoardSpec {
         }
 
         "have a method to move a Player" in {
-          val test = gameBoard.movePlayer(2, 0)
-          test.playerList(0).getLocation should be(2)
+         gameBoard.movePlayer(2, 0) shouldBe a[Board]
         }
 
         "have a method to increase a Players Money" in {
-          val test = gameBoard.increasePlayerMoney(100, 0)
-          test.playerList(0).getMoney should be(1600)
+         gameBoard.increasePlayerMoney(100, 0) shouldBe a[Board]
         }
 
         "have a method to decrease a Players Money" in {
-          val test = gameBoard.decreasePlayerMoney(100, 0)
-          test.playerList(0).getMoney should be(1500)
+          gameBoard.decreasePlayerMoney(100, 0) shouldBe a[Board]
         }
 
         "have a method to jail or unjail a player" in {
-          val test = gameBoard.setPlayerJailedOrUnJailed(0, jailed = true)
-          test.playerList(0).isJailed should be(true)
+          gameBoard.setPlayerJailedOrUnJailed(0, jailed = true) shouldBe a[Board]
         }
 
         "have a toString Method wihich returns the Board as a String" in {
