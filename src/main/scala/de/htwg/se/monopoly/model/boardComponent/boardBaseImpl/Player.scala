@@ -8,7 +8,7 @@ case class Player(id: Int, location: Int, jailed: Boolean, money: Int) {
 
   def isJailed: Boolean = jailed
 
-  def setJailed(jail: Boolean, position: Int): Player = Player(id, position, jailed, money)
+  def setJailed(jail: Boolean, position: Int): Player = Player(id, position, jail, money)
 
   def getMoney: Int = money
 
