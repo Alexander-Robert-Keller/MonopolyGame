@@ -56,25 +56,23 @@ class BoardSpec {
         }
 
         "have a method to move a Player" in {
-          gameBoard = gameBoard.movePlayer(2, 0)
-          gameBoard.playerList(0).getLocation should be(2)
+          val test = gameBoard.movePlayer(2, 0)
+          test.playerList(0).getLocation should be(2)
         }
 
         "have a method to increase a Players Money" in {
-          gameBoard = gameBoard.increasePlayerMoney(100, 0)
-          gameBoard.playerList(0).getMoney should be(1600)
+          val test = gameBoard.increasePlayerMoney(100, 0)
+          test.playerList(0).getMoney should be(1600)
         }
 
         "have a method to decrease a Players Money" in {
-          gameBoard = gameBoard.decreasePlayerMoney(100, 0)
-          gameBoard.playerList(0).getMoney should be(1500)
+          val test = gameBoard.decreasePlayerMoney(100, 0)
+          test.playerList(0).getMoney should be(1500)
         }
 
         "have a method to jail or unjail a player" in {
-          gameBoard = gameBoard.setPlayerJailedOrUnJailed(0, jailed = true)
-          gameBoard.playerList(0).isJailed should be(true)
-          gameBoard = gameBoard.setPlayerJailedOrUnJailed(0, jailed = false)
-          gameBoard.playerList(0).isJailed should be(false)
+          val test = gameBoard.setPlayerJailedOrUnJailed(0, jailed = true)
+          test.playerList(0).isJailed should be(true)
         }
 
         "have a toString Method wihich returns the Board as a String" in {
