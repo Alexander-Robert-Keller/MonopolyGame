@@ -43,9 +43,9 @@ class FreePlayerStateSpec extends WordSpec with Matchers {
       }
       controller.dice = dice
       controller.playerState.stringRollDice(dice, 1, controller) shouldBe a[String]
-      controller.board = controller.board.movePlayer(1, 0)
+      controller.board = controller.board.movePlayer(1, 1)
       controller.playerState.stringRollDice(dice, 1, controller) shouldBe a[String]
-      controller.board = controller.board.movePlayer(20, 0)
+      controller.board = controller.board.movePlayer(20, 1)
       controller.playerState.stringRollDice(dice, 1, controller) shouldBe a[String]
     }
   }
