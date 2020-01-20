@@ -9,6 +9,7 @@ class JailedPlayerStateSpec extends WordSpec with Matchers {
     val controller = new Controller
     controller.board = controller.board.init()
     controller.board = controller.board.setPlayerJailedOrUnJailed(0, jailed = true)
+    controller.playerState = controller.playerState.determinePlayerState(controller.board.playerList(0))
 
     "have a method to determine the current palyerState" in {
       controller.playerState.determinePlayerState(controller.board.playerList(0)) == JailedPlayerState
@@ -16,11 +17,12 @@ class JailedPlayerStateSpec extends WordSpec with Matchers {
     }
 
     "have a method to roll the dice" in {
+      controller.board = controller.board.setPlayerJailedOrUnJailed(1, jailed = true)
       var dice = Dice()
       while (!dice.hasDoublets) {
         dice = Dice()
       }
-      controller.playerState.rollDice(dice, currentPlayerIndex = 1, controller)
+      controller.playerState.rollDice(dice, 1, controller)
       controller.board.playerList(1).isJailed should be (false)
     }
 
@@ -31,12 +33,12 @@ class JailedPlayerStateSpec extends WordSpec with Matchers {
       while (dice.hasDoublets) {
         dice = Dice()
       }
-      controller.playerState.stringRollDice(dice, 1, controller) shouldBe a[String]
+      controller.playerState.stringRollDice(dice, 0, controller) shouldBe a[String]
       while (!dice.hasDoublets) {
         dice = Dice()
       }
-      controller.playerState.rollDice(dice, 1, controller)
-      controller.playerState.stringRollDice(dice, 1, controller) shouldBe a[String]
+      controller.playerState.rollDice(dice, 0, controller)
+      controller.playerState.stringRollDice(dice, 0, controller) shouldBe a[String]
     }
   }
 }
