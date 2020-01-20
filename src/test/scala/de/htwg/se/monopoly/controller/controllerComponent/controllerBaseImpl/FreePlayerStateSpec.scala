@@ -27,7 +27,6 @@ class FreePlayerStateSpec extends WordSpec with Matchers {
 
     "have a method to get a message" in {
       controller.board = controller.board.init()
-      controller.board = controller.board.setPlayerJailedOrUnJailed(0, jailed = true)
       var dice = Dice()
       while (!dice.hasDoublets) {
         dice = Dice()
