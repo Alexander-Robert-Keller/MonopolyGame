@@ -19,6 +19,11 @@ class JailedPlayerStateSpec extends WordSpec with Matchers {
     "have a method to roll the dice" in {
       controller.board = controller.board.setPlayerJailedOrUnJailed(1, jailed = true)
       var dice = Dice()
+
+      while (dice.hasDoublets) {
+        dice = Dice()
+      }
+      controller.playerState.rollDice(dice,1, controller)
       while (!dice.hasDoublets) {
         dice = Dice()
       }
