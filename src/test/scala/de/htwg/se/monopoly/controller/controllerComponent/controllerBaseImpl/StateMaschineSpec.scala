@@ -3,6 +3,7 @@ package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 import com.google.inject.Guice
 import de.htwg.se.monopoly.MonopolyModule
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
+import de.htwg.se.monopoly.model.diceComponent.Dice
 import de.htwg.se.monopoly.model.gameStateComponent.GameState
 import org.scalatest.{Matchers, WordSpec}
 
@@ -57,6 +58,17 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.nextState()
         controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
         controller.stateMachine.setState("MAIN_MENU")
+        var dice = Dice()
+        while (!dice.hasDoublets) {
+          dice = Dice()
+        }
+        controller.dice = dice
+        controller.stateMachine.nextState()
+        dice = Dice()
+        while (dice.hasDoublets) {
+          dice = Dice()
+        }
+        controller.dice = dice
         controller.stateMachine.nextState()
         controller.stateMachine.state.state  should be (controller.stateMachine.state.ROLL_DICE)
         controller.stateMachine.setState("BUY_OR_UPGRADE_PROPERTY")
