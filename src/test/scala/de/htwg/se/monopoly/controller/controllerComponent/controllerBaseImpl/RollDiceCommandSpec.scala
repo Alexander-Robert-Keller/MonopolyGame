@@ -28,7 +28,7 @@ class RollDiceCommandSpec extends WordSpec with Matchers {
         controller.board = controller.board.init()
         rollDiceCommand.undoStep()
         rollDiceCommand.redoStep()
-        controller.board.playerList.length should not be rollDiceCommand.board.playerList.length
+        controller.board.playerList.length should be rollDiceCommand.board.playerList.length
       }
     }
   }
