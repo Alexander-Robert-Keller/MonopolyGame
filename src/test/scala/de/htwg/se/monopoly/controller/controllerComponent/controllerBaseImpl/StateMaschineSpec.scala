@@ -54,17 +54,17 @@ class StateMaschineSpec extends WordSpec with Matchers {
       }
 
       "have a method to get to the next state" in {
-        controller.stateMachine.setState("ROLL_DICE")
+        controller.stateMachine.setState("MAIN_MENU")
         controller.stateMachine.nextState()
         controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
-        controller.stateMachine.setState("MAIN_MENU")
+        controller.stateMachine.setState("ROLL_DICE")
         var dice = Dice()
         while (!dice.hasDoublets) {
           dice = Dice()
         }
         controller.dice = dice
         controller.stateMachine.nextState()
-        dice = Dice()
+        controller.stateMachine.state.state  should be (controller.stateMachine.state.ROLL_DICE)
         while (dice.hasDoublets) {
           dice = Dice()
         }
