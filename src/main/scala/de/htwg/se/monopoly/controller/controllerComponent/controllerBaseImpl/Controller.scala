@@ -33,6 +33,7 @@ class Controller extends Publisher with ControllerInterface {
     playerState.rollDice(getCurrentDice, stateMachine.getCurrentPlayer, this)
     stateMachine.nextState()
     publish(new RolledDice)
+    endFinishedGame()
   }
 
   def getCurrentDice: Dice = dice
@@ -108,5 +109,60 @@ class Controller extends Publisher with ControllerInterface {
     val player: Player = board.playerList(stateMachine.getCurrentPlayer)
     val space: Space = board.spaces(player.getLocation)
     board = board.replacePlayerInList(space.action(player))
+  }
+
+  def playerInfo(): Unit = {
+    publish(new PlayerInfo)
+  }
+
+  def getPlayerInfo(playerIndex: Int): Vector[String] = {
+    val player = board.playerList(playerIndex)
+    val playerMessage = player.toString
+    var infoMessage = "Money: " + player.getMoney.toString + "\n"
+    infoMessage = infoMessage + "Location: " + player.getLocation.toString + "\n" + "Jailed: " + player.isJailed.toString + "\n"
+    infoMessage = infoMessage + "Propertys: \n"
+    for (space <- board.spaces) {
+      space match {
+        case property: Property =>
+          if (property.ownerId == playerIndex) {
+            "\t" + property.name + "\n"
+          }
+        case _ =>
+      }
+    }
+    Vector[String](playerMessage, infoMessage)
+  }
+
+  def buyProperty(): Unit = {
+    doStep(new BuyCommand(this))
+    board = board.buySpace(stateMachine.getCurrentPlayer + 1, getPlayerList(stateMachine.getCurrentPlayer).getLocation)
+    stateMachine.nextState()
+    publish(new BuyProperty)
+  }
+
+  def dontBuyProperty(): Unit = {
+    doStep(new BuyCommand(this))
+    stateMachine.nextState()
+    publish(new DontBuyProperty)
+  }
+
+  def endFinishedGame(): Unit = {
+    if (isGameFinished) {
+      publish(new GameFinished)
+    }
+  }
+
+  def isGameFinished: Boolean = {
+    var index = 0
+    for (player <- getPlayerList) {
+      if (player.getMoney < 0) {
+        index += 1
+      }
+    }
+    if (index <= 1) {
+      true
+    } else {
+      false
+    }
   }
 }

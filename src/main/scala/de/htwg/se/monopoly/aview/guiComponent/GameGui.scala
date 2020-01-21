@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.guiComponent
 import java.awt.Dimension
 
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
-import de.htwg.se.monopoly.util.{LoadGame, Redo, RolledDice, SaveGame, StartGame, Undo}
+import de.htwg.se.monopoly.util.{LoadGame, PlayerInfo, Redo, RolledDice, SaveGame, StartGame, Undo}
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{MainFrame, _}
@@ -17,14 +17,14 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
 
   menuBar = new MenuBar {
     contents += new Menu("Game") {
+      contents += new MenuItem(Action("SaveGame") {
+        controller.saveGame()
+      })
       contents += new MenuItem(Action("Undo") {
         controller.undoCommand()
       })
       contents += new MenuItem(Action("Redo") {
         controller.redoCommand()
-      })
-      contents += new MenuItem(Action("Info") {
-        /*TODO: Implement action */
       })
       contents += new MenuItem(Action("Quit") {
         controller.exitGameMenu()
@@ -63,19 +63,15 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
     preferredSize = new Dimension(200, 100)
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Commands:"))
     val rollDiceButton = new Button("roll Dice!")
-    val buyPropertyButton = new Button("Buy Property")
     contents += Swing.VStrut(10)
     contents += Swing.Glue
     contents += rollDiceButton
     contents += Swing.VStrut(10)
     contents += Swing.Glue
-    contents += buyPropertyButton
     listenTo(rollDiceButton)
-    listenTo(buyPropertyButton)
     reactions += {
       case ButtonClicked(`rollDiceButton`) =>
         controller.rollDice()
-      case ButtonClicked(`buyPropertyButton`) => //TODO: add controller Commands
     }
   }
 
@@ -91,7 +87,7 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
 
   }
 
-  playerInfoTextArea.editable = false
+  var currentPlayerInfoIndex: Int = 0
 
   def nextPrevPlayerPanel: BoxPanel = new BoxPanel(Orientation.Horizontal) {
     preferredSize = new Dimension(200, 42)
@@ -108,8 +104,15 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
     listenTo(prevButton)
     listenTo(nextButton)
     reactions += {
-      case ButtonClicked(`prevButton`) => //TODO: Implement Show Player Info
-      case ButtonClicked(`nextButton`) => //TODO: Implement Show Player Info
+      case ButtonClicked(`prevButton`) =>
+        currentPlayerInfoIndex = (currentPlayerInfoIndex + 1) % controller.numberOfPlayers
+        controller.playerInfo()
+      case ButtonClicked(`nextButton`) =>
+        currentPlayerInfoIndex = currentPlayerInfoIndex - 1
+        if (currentPlayerInfoIndex < 0) {
+          currentPlayerInfoIndex = currentPlayerInfoIndex + controller.numberOfPlayers
+        }
+        controller.playerInfo()
     }
   }
 
@@ -118,7 +121,12 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
     contents += playerInfoTextArea
   }
 
-  def playerInfoTextArea: TextArea = new TextArea(" \n")
+  val playerInfoTextArea: TextArea = new TextArea(" \n")
+
+  def setPlayerInfo(info: Vector[String]): Unit = {
+    playerInfoTextArea.text = info(1)
+    infoPlayerName.text = info(0)
+  }
 
   def gameBoardPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
     contents += new BoardCanvas(controller)
@@ -140,9 +148,9 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
     }
   }
 
-
   def openGui(): Unit = {
     visible = true
+    setPlayerInfo(controller.getPlayerInfo(currentPlayerInfoIndex))
   }
 
   def closeGui(): Unit = {
@@ -159,6 +167,10 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
     case event: Undo => this.repaint()
     case event: Redo => this.repaint()
     case event: LoadGame => this.repaint()
+    case event: SaveGame =>
+    case event: PlayerInfo =>
+      setPlayerInfo(controller.getPlayerInfo(currentPlayerInfoIndex))
+      this.repaint()
     case _ =>
   }
 }

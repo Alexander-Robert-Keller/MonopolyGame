@@ -133,6 +133,22 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
+  def buySpace(playerId: Int, location: Int): Board = {
+    var newSpaces = Vector[Space]()
+    for (spaceId <- 0 until totalNumberOfSpaces) {
+      if (spaceId == location) {
+        spaces(spaceId) match {
+          case property: Property => newSpaces = newSpaces:+ Property(property.name, property.price, playerId, property.rent)
+          //TODO: add Railroads
+          case _ => newSpaces = newSpaces:+ spaces(spaceId)
+        }
+      } else {
+        newSpaces = newSpaces:+ spaces(spaceId)
+      }
+    }
+    Board(newSpaces, playerList, totalNumberOfPlayers, totalNumberOfSpaces)
+  }
+
   override def toString: String = {
     val boardString = new mutable.StringBuilder("")
     boardString ++= "field ID:\t type: \t\t\t\t player:\n"

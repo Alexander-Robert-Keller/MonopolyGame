@@ -19,9 +19,9 @@ class GUI(controller: ControllerInterface) extends MainFrame {
   title = "HTWG Monopoly"
 
   val startGameButton = new Button("Start Game")
-  val infoButton = new Button("Info")
+  val loadGameButton = new Button("Load Game")
   val exitMainMenuButton = new Button("Exit")
-  listenTo(infoButton)
+  listenTo(loadGameButton)
   listenTo(exitMainMenuButton)
   listenTo(startGameButton)
 
@@ -36,7 +36,7 @@ class GUI(controller: ControllerInterface) extends MainFrame {
     contents += startGameButton
     contents += Swing.VStrut(10)
     contents += Swing.Glue
-    contents += infoButton
+    contents += loadGameButton
     contents += Swing.VStrut(10)
     contents += Swing.Glue
     contents += exitMainMenuButton
@@ -51,7 +51,8 @@ class GUI(controller: ControllerInterface) extends MainFrame {
       controller.initializeGame()
     case ButtonClicked(`exitMainMenuButton`) =>
       controller.exitMainMenu()
-    case ButtonClicked(`infoButton`) => //TODO: Popup Field with some info
+    case ButtonClicked(`loadGameButton`) =>
+      controller.loadGame()
     case _ =>
   }
 

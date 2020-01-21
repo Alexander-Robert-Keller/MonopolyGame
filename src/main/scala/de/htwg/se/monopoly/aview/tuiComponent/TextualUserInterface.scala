@@ -70,6 +70,24 @@ class TextualUserInterface(controller: ControllerInterface) extends Reactor {
       println("Load Game!")
 
       displayMenuOptions()
+    case event: PlayerInfo =>
+      println("PlayerInfoList:")
+      for (index <- 0 until controller.numberOfPlayers) {
+        val info = controller.getPlayerInfo(index)
+        println(info(0))
+        println(info(1))
+      }
+      displayMenuOptions()
+    case event: DontBuyProperty =>
+      println("Did not bought property!")
+      println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())
+      displayMenuOptions()
+    case event: BuyProperty =>
+      println("Bought property!")
+      println(controller.stringGameBoard())
+      println(controller.nextPlayersRoundMessage())
+      displayMenuOptions()
     case _ =>
   }
 }

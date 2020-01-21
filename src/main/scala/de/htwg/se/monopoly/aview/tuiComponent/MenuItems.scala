@@ -66,3 +66,21 @@ object LoadGameMenuItem extends MenuItems {
 
   override def action(controller: ControllerInterface): Unit = controller.loadGame()
 }
+
+object PlayerInfoMenuItem extends MenuItems {
+  override val name: String = "Player Info!"
+
+  override def action(controller: ControllerInterface): Unit = controller.playerInfo()
+}
+
+object BuyPropertyMenuItem extends MenuItems {
+  override val name: String = "Buy Property"
+
+  override def action(controller: ControllerInterface): Unit = controller.buyProperty()
+}
+
+object DontBuyPropertyMenuItem extends MenuItems {
+  override val name: String = "Dont buy Property"
+
+  override def action(controller: ControllerInterface): Unit = controller.dontBuyProperty()
+}
