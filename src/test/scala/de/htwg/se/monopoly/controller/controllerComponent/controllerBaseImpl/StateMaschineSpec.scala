@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 import com.google.inject.Guice
 import de.htwg.se.monopoly.MonopolyModule
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
-import de.htwg.se.monopoly.model.diceComponent.Dice
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.Player
 import de.htwg.se.monopoly.model.gameStateComponent.GameState
 import org.scalatest.{Matchers, WordSpec}
 
@@ -28,8 +28,8 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
         controller.stateMachine.setState("MAIN_MENU")
         controller.stateMachine.state.state should be (controller.stateMachine.state.MAIN_MENU)
-        controller.stateMachine.setState("BUY_OR_UPGRADE_PROPERTY")
-        controller.stateMachine.state.state should be (controller.stateMachine.state.BUY_OR_UPGRADE_PROPERTY)
+        controller.stateMachine.setState("BUY_PROPERTY")
+        controller.stateMachine.state.state should be (controller.stateMachine.state.BUY_PROPERTY)
       }
 
       "have a message for the current gameState" in {
@@ -37,7 +37,7 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.currentGameStateMessage should be ("Roll Dice!")
         controller.stateMachine.setState("MAIN_MENU")
         controller.stateMachine.currentGameStateMessage should be ("Main Menu:")
-        controller.stateMachine.setState("BUY_OR_UPGRADE_PROPERTY")
+        controller.stateMachine.setState("BUY_PROPERTY")
         controller.stateMachine.currentGameStateMessage should be ("Buy or Upgrade your property now!")
       }
 
@@ -54,30 +54,23 @@ class StateMaschineSpec extends WordSpec with Matchers {
       }
 
       "have a method to get to the next state" in {
+        controller.board = controller.board.init()
         controller.stateMachine.setState("MAIN_MENU")
         controller.stateMachine.nextState()
         controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
         controller.stateMachine.setState("ROLL_DICE")
-        var dice = Dice()
-        while (!dice.hasDoublets) {
-          dice = Dice()
-        }
-        controller.dice = dice
         controller.stateMachine.nextState()
-        controller.stateMachine.state.state  should be (controller.stateMachine.state.ROLL_DICE)
-        while (dice.hasDoublets) {
-          dice = Dice()
-        }
-        controller.dice = dice
+        controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
+        controller.stateMachine.setState("BUY_PROPERTY")
         controller.stateMachine.nextState()
-        controller.stateMachine.state.state  should be (controller.stateMachine.state.ROLL_DICE)
-        controller.stateMachine.setState("BUY_OR_UPGRADE_PROPERTY")
-        controller.stateMachine.nextState()
-        controller.stateMachine.state.state  should be (controller.stateMachine.state.ROLL_DICE)
+        controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
       }
 
       "have a method to get the next player" in {
+        controller.board = controller.board.init()
         controller.stateMachine.startGame(2)
+        controller.stateMachine.nextPlayer() should be (1)
+        controller.board.replacePlayerInList(Player(0, 0, false, -100))
         controller.stateMachine.nextPlayer() should be (1)
       }
     }

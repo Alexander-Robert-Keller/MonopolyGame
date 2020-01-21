@@ -20,7 +20,7 @@ class GameStateSpec extends WordSpec with Matchers {
         gameState = GameState(1, 0, 2)
         gameState.state should be(gameState.ROLL_DICE)
         gameState = GameState(2, 0, 2)
-        gameState.state should be(gameState.BUY_OR_UPGRADE_PROPERTY)
+        gameState.state should be(gameState.BUY_PROPERTY)
         gameState = GameState(0, 0, 2)
       }
 

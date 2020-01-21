@@ -44,7 +44,7 @@ object MainMenu extends TUI_Menu {
       MainMenu
     } else if (gameState.state == gameState.ROLL_DICE) {
       RollDiceMenu
-    } else if (gameState.state == gameState.BUY_OR_UPGRADE_PROPERTY) {
+    } else if (gameState.state == gameState.BUY_PROPERTY) {
       BuyMenu
     } else {
       throw new IllegalArgumentException("there is no such state")
@@ -67,7 +67,7 @@ object BuyMenu extends TUI_Menu {
       MainMenu
     } else if (gameState.state == gameState.ROLL_DICE) {
       RollDiceMenu
-    } else if (gameState.state == gameState.BUY_OR_UPGRADE_PROPERTY) {
+    } else if (gameState.state == gameState.BUY_PROPERTY) {
       BuyMenu
     } else {
       throw new IllegalArgumentException("there is no such state")
@@ -89,7 +89,7 @@ object RollDiceMenu extends TUI_Menu {
       MainMenu
     } else if (gameState.state == gameState.ROLL_DICE) {
       RollDiceMenu
-    } else if (gameState.state == gameState.BUY_OR_UPGRADE_PROPERTY) {
+    } else if (gameState.state == gameState.BUY_PROPERTY) {
       BuyMenu
     } else {
       throw new IllegalArgumentException("there is no such state")

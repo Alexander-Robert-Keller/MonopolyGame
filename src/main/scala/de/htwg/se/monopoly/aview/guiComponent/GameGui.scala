@@ -3,7 +3,7 @@ package de.htwg.se.monopoly.aview.guiComponent
 import java.awt.Dimension
 
 import de.htwg.se.monopoly.controller.controllerComponent.ControllerInterface
-import de.htwg.se.monopoly.util.{LoadGame, PlayerInfo, Redo, RolledDice, SaveGame, StartGame, Undo}
+import de.htwg.se.monopoly.util.{BuyProperty, DontBuyProperty, LoadGame, PlayerInfo, Redo, RolledDice, SaveGame, StartGame, Undo}
 
 import scala.swing.event.ButtonClicked
 import scala.swing.{MainFrame, _}
@@ -58,20 +58,52 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
   }
 
   infoPlayerName.editable = false
+  val buyPropertyButton = new Button("Buy property!")
+  val dontBuyPropertyButton = new Button("Dont´t buy property!")
+
+  def en_disableBuyProperty(): Unit = {
+    if (controller.stateMachine.state.stateIndex == 2) {
+      buyPropertyButton.enabled = true
+      dontBuyPropertyButton.enabled = true
+    } else {
+      buyPropertyButton.enabled = false
+      dontBuyPropertyButton.enabled = false
+    }
+  }
+
+  val rollDiceButton = new Button("Roll Dice!")
+
+  def en_disableRollDice(): Unit = {
+    if (controller.stateMachine.state.stateIndex == 1) {
+      rollDiceButton.enabled = true
+    } else {
+      rollDiceButton.enabled = false
+    }
+  }
 
   def gameCommandsPanel: BoxPanel = new BoxPanel(Orientation.Vertical) {
-    preferredSize = new Dimension(200, 100)
+    preferredSize = new Dimension(200, 150)
     border = Swing.CompoundBorder(Swing.LineBorder(java.awt.Color.BLACK, 1), Swing.TitledBorder(Swing.EmptyBorder(10, 10, 10, 10), "Current Commands:"))
-    val rollDiceButton = new Button("roll Dice!")
+
     contents += Swing.VStrut(10)
     contents += Swing.Glue
     contents += rollDiceButton
     contents += Swing.VStrut(10)
     contents += Swing.Glue
+    contents += buyPropertyButton
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += dontBuyPropertyButton
     listenTo(rollDiceButton)
+    listenTo(buyPropertyButton)
+    listenTo(dontBuyPropertyButton)
     reactions += {
       case ButtonClicked(`rollDiceButton`) =>
         controller.rollDice()
+      case ButtonClicked(`buyPropertyButton`) =>
+        controller.buyProperty()
+      case ButtonClicked(`dontBuyPropertyButton`) =>
+        controller.dontBuyProperty()
     }
   }
 
@@ -140,7 +172,7 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
   centerOnScreen()
   visible = false
 
-  def updatePlayerInfo(): Unit = { //Into Controller
+  def updatePlayerInfo(): Unit = {
     if (controller.board.playerList(controller.getCurrentPlayerIndex).isJailed) {
       currentPlayerName.text = controller.board.playerList(controller.getCurrentPlayerIndex).toString + " (jailed!)"
     } else {
@@ -151,26 +183,35 @@ class GameGui(controller: ControllerInterface) extends MainFrame {
   def openGui(): Unit = {
     visible = true
     setPlayerInfo(controller.getPlayerInfo(currentPlayerInfoIndex))
+    en_disableRollDice()
   }
 
   def closeGui(): Unit = {
     visible = false
   }
 
+  def updateGui(): Unit = {
+    en_disableBuyProperty()
+    en_disableRollDice()
+    updatePlayerInfo()
+    setPlayerInfo(controller.getPlayerInfo(currentPlayerInfoIndex))
+    this.repaint()
+  }
+
   reactions += {
     case event: StartGame =>
-      updatePlayerInfo()
-      this.repaint()
+      updateGui()
     case event: RolledDice =>
-      updatePlayerInfo()
-      this.repaint()
-    case event: Undo => this.repaint()
-    case event: Redo => this.repaint()
-    case event: LoadGame => this.repaint()
+      updateGui()
+    case event: Undo => updateGui()
+    case event: Redo => updateGui()
+    case event: LoadGame => updateGui()
     case event: SaveGame =>
     case event: PlayerInfo =>
       setPlayerInfo(controller.getPlayerInfo(currentPlayerInfoIndex))
-      this.repaint()
+      updateGui()
+    case event: BuyProperty => updateGui()
+    case event: DontBuyProperty => updateGui()
     case _ =>
   }
 }
