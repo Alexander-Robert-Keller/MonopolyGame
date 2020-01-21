@@ -8,7 +8,7 @@ class PropertySpec extends WordSpec with Matchers {
   "A property field" when {
     "new" should {
 
-      val field = Property()
+      val field = Property("test", 10, -1, 2)
 
       "have a performable Action" in {
         field.action(Player(0, 0, jailed = false, 0))

@@ -31,11 +31,18 @@ class FileIO extends FileIOInterface {
       playerList = playerList :+ Player(id, location, jailed, money)
     }
     var spaces = Vector[Space]()
+    var propertyindex: Int = 0
     for (index <- 0 until numberOfSpaces) {
       val space: String = (json \\ "class") (index).as[String]
       space match {
         case "Go" => spaces = spaces :+ Go()
-        case "Property" => spaces = spaces :+ Property()
+        case "Property" =>
+          val name: String = (json \\ "name")(propertyindex).as[String]
+          val price: Int = (json \\ "price")(propertyindex).as[Int]
+          val ownerId: Int = (json \\ "ownerId")(propertyindex).as[Int]
+          val rent: Int = (json \\ "rent")(propertyindex).as[Int]
+          propertyindex += 1
+          spaces = spaces :+ Property(name, price, ownerId, rent)
         case "CommunityChest" => spaces = spaces :+ CommunityChest()
         case "Tax" => spaces = spaces :+ Tax()
         case "Railroad" => spaces = spaces :+ Railroad()
@@ -112,8 +119,19 @@ class FileIO extends FileIOInterface {
   }
 
   def spaceToJason(space: Space): JsObject = {
-    Json.obj(
-      "class" -> JsString(space.getClass.toString.substring(72))
-    )
+    space match {
+      case tmpSpace: Property =>
+        Json.obj(
+          "class" -> JsString(space.getClass.toString.substring(72)),
+          "name" -> JsString(tmpSpace.name),
+          "price" -> JsNumber(tmpSpace.price),
+          "ownerId" -> JsNumber(tmpSpace.ownerId),
+          "rent" -> JsNumber(tmpSpace.rent)
+        )
+      case _ =>
+        Json.obj(
+          "class" -> JsString(space.getClass.toString.substring(72))
+        )
+    }
   }
 }

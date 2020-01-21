@@ -27,7 +27,7 @@ class FileIO extends FileIOInterface {
     for (space <- cellNodeSpaces) {
       (space \ "@class").text match {
         case "Go" => spaces = spaces :+ Go()
-        case "Property" => spaces = spaces :+ Property()
+        case "Property" => spaces = spaces :+ Property((space \ "@name").text, (space \ "@price").text.toInt, (space \ "@ownerId").text.toInt, (space \ "@rent").text.toInt)
         case "CommunityChest" => spaces = spaces :+ CommunityChest()
         case "Tax" => spaces = spaces :+ Tax()
         case "Railroad" => spaces = spaces :+ Railroad()
@@ -80,8 +80,14 @@ class FileIO extends FileIOInterface {
   }
 
   def spaceToXml(space: Space): Elem = {
-    <space class={space.getClass.toString.substring(72)}>
-    </space>
+    space match {
+      case tmpSpace: Property =>
+        <space class={tmpSpace.getClass.toString.substring(72)} price={tmpSpace.price.toString} ownerId={tmpSpace.ownerId.toString} rent={tmpSpace.rent.toString}>
+        </space>
+      case _ =>
+        <space class={space.getClass.toString.substring(72)}>
+        </space>
+    }
   }
 
   def gameStateToXml(gameState: GameState): Elem = {
