@@ -19,45 +19,45 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     //TODO: rework when spaces properly named
     var initSpaces = Vector[Space]()
     initSpaces = initSpaces :+ Go() //0
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Mediterranean Avenue", 60, -1, 2)
     initSpaces = initSpaces :+ CommunityChest()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Baltic Avenue", 60, -1, 4)
     initSpaces = initSpaces :+ Tax()
     initSpaces = initSpaces :+ Railroad() //5
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Oriental Avenue", 100, -1, 6)
     initSpaces = initSpaces :+ Chance()
-    initSpaces = initSpaces :+ Property()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Vermont Avenue", 100, -1, 6)
+    initSpaces = initSpaces :+ Property("Connecticut Avenue", 120, -1, 8)
     initSpaces = initSpaces :+ Jail() //10
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("St. Charles Place", 140, -1, 10)
     initSpaces = initSpaces :+ ElectricCompany()
-    initSpaces = initSpaces :+ Property()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("States Avenue", 140, -1, 10)
+    initSpaces = initSpaces :+ Property("Virginia Avenue", 160, -1, 12)
     initSpaces = initSpaces :+ Railroad() //15
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("St. James Place", 180, -1, 14)
     initSpaces = initSpaces :+ CommunityChest()
-    initSpaces = initSpaces :+ Property()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Tennessee Avenue", 180, -1, 14)
+    initSpaces = initSpaces :+ Property("New York Avenue", 200, -1, 16)
     initSpaces = initSpaces :+ FreeParking() //20
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Kentucky Avenue", 220, -1, 18)
     initSpaces = initSpaces :+ Chance()
-    initSpaces = initSpaces :+ Property()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Indiana Avenue", 220, -1, 18)
+    initSpaces = initSpaces :+ Property("Illinois Avenue", 240, -1, 20)
     initSpaces = initSpaces :+ Railroad() //25
-    initSpaces = initSpaces :+ Property()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Atlantic Avenue", 260, -1, 22)
+    initSpaces = initSpaces :+ Property("Ventor Avenue", 260, -1, 22)
     initSpaces = initSpaces :+ WaterWorks()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Marvis Gardens", 280, -1, 24)
     initSpaces = initSpaces :+ GoToJail() //30
-    initSpaces = initSpaces :+ Property()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Pacific Avenue", 300, -1, 26)
+    initSpaces = initSpaces :+ Property("North Carolina Avenue", 300, -1, 26)
     initSpaces = initSpaces :+ CommunityChest()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Pennsylvania Avenue", 320, -1, 28)
     initSpaces = initSpaces :+ Railroad() //35
     initSpaces = initSpaces :+ Chance()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Park Palace", 350, -1, 35)
     initSpaces = initSpaces :+ Tax()
-    initSpaces = initSpaces :+ Property()
+    initSpaces = initSpaces :+ Property("Boardwalk", 400, -1, 40)
     Board(initSpaces, initializePlayerList(), totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
@@ -114,6 +114,18 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     for (player <- playerList) {
       if (player.getId == chosenPlayer) {
         tmpPlayerList = tmpPlayerList :+ player.setJailed(jailed, jailLocation)
+      } else {
+        tmpPlayerList = tmpPlayerList :+ player
+      }
+    }
+    Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
+  }
+
+  def replacePlayerInList(newPlayer: Player): Board = {
+    var tmpPlayerList = Vector[Player]()
+    for (player <- playerList) {
+      if (player.getId == newPlayer.getId) {
+        tmpPlayerList = tmpPlayerList :+ newPlayer
       } else {
         tmpPlayerList = tmpPlayerList :+ player
       }

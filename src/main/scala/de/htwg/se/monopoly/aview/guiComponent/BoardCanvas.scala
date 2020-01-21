@@ -50,7 +50,7 @@ class BoardCanvas(controller: ControllerInterface) extends Component {
 
   def getPlayerImage(currentPlayer: Int, totalNumberOfPlayers: Int): Image = {
     /* if (currentPlayer > totalNumberOfPlayers) {
-       val path = "src/main/scala/de/htwg/se/monopoly/aview/gui/images/PlayerImage" + currentPlayer.toString + ".jpg"
+       val path = "src/main/scala/de/htwg/se/monopoly/aview/guiComponent/images/PlayerImage" + currentPlayer.toString + ".jpg"
      } else {
        //Default pic
      }*/

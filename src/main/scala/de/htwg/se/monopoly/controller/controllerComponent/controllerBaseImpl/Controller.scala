@@ -103,4 +103,10 @@ class Controller extends Publisher with ControllerInterface {
     stateMachine.state = fileIO.loadGameState("SaveFile1")
     publish(new LoadGame)
   }
+
+  def spaceAction(): Unit = {
+    val player: Player = board.playerList(stateMachine.getCurrentPlayer)
+    val space: Space = board.spaces(player.getLocation)
+    board = board.replacePlayerInList(space.action(player))
+  }
 }
