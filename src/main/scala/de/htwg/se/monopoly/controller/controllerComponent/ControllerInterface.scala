@@ -35,5 +35,10 @@ trait ControllerInterface extends Publisher {
   def redoCommand(): Unit
   def saveGame(): Unit
   def loadGame(): Unit
-
+  def spaceAction(): Unit
+  def playerInfo(): Unit
+  def getPlayerInfo(playerIndex: Int): Vector[String]
+  def endFinishedGame(): Unit
+  def dontBuyProperty(): Unit
+  def buyProperty(): Unit
 }

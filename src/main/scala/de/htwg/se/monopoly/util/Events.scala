@@ -21,3 +21,11 @@ class FailedRedo extends Event
 class LoadGame extends Event
 
 class SaveGame extends Event
+
+class PlayerInfo extends Event
+
+class GameFinished extends Event
+
+class BuyProperty extends Event
+
+class DontBuyProperty extends  Event

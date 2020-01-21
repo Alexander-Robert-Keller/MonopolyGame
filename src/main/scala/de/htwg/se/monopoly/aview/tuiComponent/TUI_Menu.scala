@@ -45,7 +45,7 @@ object MainMenu extends TUI_Menu {
     } else if (gameState.state == gameState.ROLL_DICE) {
       RollDiceMenu
     } else if (gameState.state == gameState.BUY_OR_UPGRADE_PROPERTY) {
-      BuyOrUpgradeMenu
+      BuyMenu
     } else {
       throw new IllegalArgumentException("there is no such state")
     }
@@ -53,9 +53,14 @@ object MainMenu extends TUI_Menu {
 
 }
 
-object BuyOrUpgradeMenu extends TUI_Menu {
+object BuyMenu extends TUI_Menu {
 
-  //TODO: Implement
+  add(BuyPropertyMenuItem)
+  add(DontBuyPropertyMenuItem)
+  add(UndoMenuItem)
+  add(RedoMenuItem)
+  add(PlayerInfoMenuItem)
+  add(ExitGameMenuItem)
 
   override def determineMenu(gameState: GameState): TUI_Menu = {
     if (gameState.state == gameState.MAIN_MENU) {
@@ -63,7 +68,7 @@ object BuyOrUpgradeMenu extends TUI_Menu {
     } else if (gameState.state == gameState.ROLL_DICE) {
       RollDiceMenu
     } else if (gameState.state == gameState.BUY_OR_UPGRADE_PROPERTY) {
-      BuyOrUpgradeMenu
+      BuyMenu
     } else {
       throw new IllegalArgumentException("there is no such state")
     }
@@ -77,6 +82,7 @@ object RollDiceMenu extends TUI_Menu {
   add(UndoMenuItem)
   add(RedoMenuItem)
   add(SaveGameMenuItem)
+  add(PlayerInfoMenuItem)
 
   override def determineMenu(gameState: GameState): TUI_Menu = {
     if (gameState.state == gameState.MAIN_MENU) {
@@ -84,7 +90,7 @@ object RollDiceMenu extends TUI_Menu {
     } else if (gameState.state == gameState.ROLL_DICE) {
       RollDiceMenu
     } else if (gameState.state == gameState.BUY_OR_UPGRADE_PROPERTY) {
-      BuyOrUpgradeMenu
+      BuyMenu
     } else {
       throw new IllegalArgumentException("there is no such state")
     }

@@ -1,6 +1,10 @@
 package de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl
 
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.Player
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes.Property
 import de.htwg.se.monopoly.model.gameStateComponent.GameState
+
+import scala.util.control.Breaks._
 
 class StateMachine(controller: Controller) extends {
 
@@ -15,6 +19,7 @@ class StateMachine(controller: Controller) extends {
       case "ROLL_DICE" => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "BUY_OR_UPGRADE_PROPERTY" => state = GameState(2, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "MAIN_MENU" => state = GameState(0, state.getCurrentPlayer, state.getNumberOfPlayers)
+      case "FINISHED_GAME" => GameState(3, state.getCurrentPlayer, state.getNumberOfPlayers)
     }
   }
 
@@ -23,6 +28,14 @@ class StateMachine(controller: Controller) extends {
       case 0 => "Main Menu:"
       case 1 => "Roll Dice!"
       case 2 => "Buy or Upgrade your property now!"
+      case 3 =>
+        var winner: Player = Player(-1, -1, jailed = true, -1)
+        for(player <- controller.getPlayerList) {
+          if (player.getMoney >= 0) {
+            winner = player
+          }
+        }
+        "Game finished! \n" + winner.toString + " won!"
     }
   }
 
@@ -43,20 +56,52 @@ class StateMachine(controller: Controller) extends {
   def nextState(): Unit = {
     state.getStateIndex match {
       case 0 => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
-      case 1 => //TODO: change when other options are implemented
-        if (controller.dice.hasDoublets) {
-          state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
+      case 1 =>
+        if (buyProperty()) {
+          state = GameState(2, state.getCurrentPlayer, state.getNumberOfPlayers)
         } else {
-          state = GameState(1, nextPlayer(), state.getNumberOfPlayers)
+          nextRollDiceState()
         }
-      case 2 => state = GameState(1, nextPlayer(), state.getNumberOfPlayers) //TODO: maybe change when above state is changed
+      case 2 =>
+        nextRollDiceState()
+      case 3 => state = GameState(3, nextPlayer(), state.getNumberOfPlayers)
     }
   }
 
+  def nextRollDiceState(): Unit = {
+    if (controller.dice.hasDoublets) {
+      state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
+    } else {
+      state = GameState(1, nextPlayer(), state.getNumberOfPlayers)
+    }
+  }
+
+  def buyProperty(): Boolean = {
+    val space = controller.board.spaces(controller.getPlayerList(getCurrentPlayer).getLocation)
+    space match {
+      case property: Property =>
+        if (property.ownerId < 0) {
+          return true
+        }
+        false
+        //TODO: add Railroads
+      case _ => false
+    }
+  }
+
+
   def nextPlayer(): Int = {
-    var currentPlayer = state.getCurrentPlayer + 1
-    if (currentPlayer >= state.getNumberOfPlayers) {
-      currentPlayer = currentPlayer % state.getNumberOfPlayers
+    var currentPlayer = state.getCurrentPlayer
+    breakable {
+      while (true) {
+        currentPlayer += 1
+        if (currentPlayer >= state.getNumberOfPlayers) {
+          currentPlayer = currentPlayer % state.getNumberOfPlayers
+        }
+        if (!(controller.getPlayerList(currentPlayer).getMoney < 0)) {
+          break()
+        }
+      }
     }
     currentPlayer
   }
