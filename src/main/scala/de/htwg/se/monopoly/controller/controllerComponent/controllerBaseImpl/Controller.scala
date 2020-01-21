@@ -124,8 +124,8 @@ class Controller extends Publisher with ControllerInterface {
     for (space <- board.spaces) {
       space match {
         case property: Property =>
-          if (property.ownerId == playerIndex) {
-            "\t" + property.name + "\n"
+          if (property.ownerId - 1 == playerIndex) {
+            infoMessage = infoMessage + "    -" + property.name + "\n"
           }
         case _ =>
       }
@@ -135,7 +135,7 @@ class Controller extends Publisher with ControllerInterface {
 
   def buyProperty(): Unit = {
     doStep(new BuyCommand(this))
-    board = board.buySpace(stateMachine.getCurrentPlayer + 1, getPlayerList(stateMachine.getCurrentPlayer).getLocation)
+    board = board.buySpace(stateMachine.getCurrentPlayer, getPlayerList(stateMachine.getCurrentPlayer).getLocation)
     stateMachine.nextState()
     publish(new BuyProperty)
   }

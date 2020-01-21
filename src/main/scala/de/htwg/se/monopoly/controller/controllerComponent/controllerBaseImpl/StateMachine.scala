@@ -17,7 +17,7 @@ class StateMachine(controller: Controller) extends {
   def setState(e: String): Unit = {
     e match {
       case "ROLL_DICE" => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
-      case "BUY_OR_UPGRADE_PROPERTY" => state = GameState(2, state.getCurrentPlayer, state.getNumberOfPlayers)
+      case "BUY_PROPERTY" => state = GameState(2, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "MAIN_MENU" => state = GameState(0, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "FINISHED_GAME" => GameState(3, state.getCurrentPlayer, state.getNumberOfPlayers)
     }
@@ -40,13 +40,13 @@ class StateMachine(controller: Controller) extends {
   }
 
   def startGame(numberOfPlayers: Int): Unit = {
-    nextState()
+    setState("ROLL_DICE")
     setCurrentPlayer(0)
     setNumberOfPlayers(numberOfPlayers)
   }
 
-  def setCurrentPlayer(player: Int): Unit = {
-    state = GameState(state.getStateIndex, state.getCurrentPlayer, state.getNumberOfPlayers)
+  def setCurrentPlayer(playerIndex: Int): Unit = {
+    state = GameState(state.getStateIndex, playerIndex, state.getNumberOfPlayers)
   }
 
   def setNumberOfPlayers(maxPlayers: Int): Unit = {
@@ -77,7 +77,8 @@ class StateMachine(controller: Controller) extends {
   }
 
   def buyProperty(): Boolean = {
-    val space = controller.board.spaces(controller.getPlayerList(getCurrentPlayer).getLocation)
+    val location = controller.board.playerList(getCurrentPlayer).getLocation
+    val space = controller.board.spaces(location)
     space match {
       case property: Property =>
         if (property.ownerId < 0) {
