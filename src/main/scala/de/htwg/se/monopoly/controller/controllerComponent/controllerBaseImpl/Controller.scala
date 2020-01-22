@@ -144,8 +144,6 @@ class Controller extends Publisher with ControllerInterface {
     }
   }
 
-
-
   def playerInfo(): Unit = {
     publish(new PlayerInfo)
   }
