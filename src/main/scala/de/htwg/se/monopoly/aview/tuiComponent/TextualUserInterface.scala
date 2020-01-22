@@ -88,6 +88,10 @@ class TextualUserInterface(controller: ControllerInterface) extends Reactor {
       println(controller.stringGameBoard())
       println(controller.nextPlayersRoundMessage())
       displayMenuOptions()
+    case event: GameFinished =>
+      println("Game Finished!")
+      println(controller.getWinner)
+      displayMenuOptions()
     case _ =>
   }
 }

@@ -108,11 +108,10 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def setPlayerJailedOrUnJailed(currentPlayerIndex: Int, jailed: Boolean): Board = {
+  def setPlayerJailedOrUnJailed(currentPlayerId: Int, jailed: Boolean): Board = {
     var tmpPlayerList = Vector[Player]()
-    val chosenPlayer = currentPlayerIndex + 1
     for (player <- playerList) {
-      if (player.getId == chosenPlayer) {
+      if (player.getId == currentPlayerId) {
         tmpPlayerList = tmpPlayerList :+ player.setJailed(jailed, jailLocation)
       } else {
         tmpPlayerList = tmpPlayerList :+ player
@@ -121,11 +120,14 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
     Board(spaces, tmpPlayerList, totalNumberOfPlayers, totalNumberOfSpaces)
   }
 
-  def replacePlayerInList(newPlayer: Player): Board = {
+  def setPayedRent(paysRentPlayer: Player, spaceIndex: Int): Board = {
     var tmpPlayerList = Vector[Player]()
+    val receivesRentPlayer = playerList(spaces(spaceIndex).asInstanceOf[Property].ownerId - 1)
     for (player <- playerList) {
-      if (player.getId == newPlayer.getId) {
-        tmpPlayerList = tmpPlayerList :+ newPlayer
+      if (player.getId == paysRentPlayer.getId) {
+        tmpPlayerList = tmpPlayerList :+ player.decreaseMoney(spaces(spaceIndex).asInstanceOf[Property].rent)
+      } else if (player.getId == receivesRentPlayer.getId) {
+        tmpPlayerList = tmpPlayerList :+ player.increaseMoney(spaces(spaceIndex).asInstanceOf[Property].rent)
       } else {
         tmpPlayerList = tmpPlayerList :+ player
       }
