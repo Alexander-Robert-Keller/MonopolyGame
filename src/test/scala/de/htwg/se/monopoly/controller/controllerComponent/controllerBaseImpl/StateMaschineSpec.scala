@@ -70,8 +70,6 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.board = controller.board.init()
         controller.stateMachine.startGame(2)
         controller.stateMachine.nextPlayer() should be (1)
-        controller.board.replacePlayerInList(Player(0, 0, false, -100))
-        controller.stateMachine.nextPlayer() should be (1)
       }
     }
   }

@@ -1,6 +1,7 @@
 package de.htwg.se.monopoly.controller.controllerComponent
 
 import de.htwg.se.monopoly.controller.controllerComponent.controllerBaseImpl.{PlayerState, StateMachine}
+import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.spacetypes.Space
 import de.htwg.se.monopoly.model.boardComponent.boardBaseImpl.{Board, Player}
 import de.htwg.se.monopoly.model.diceComponent.Dice
 import de.htwg.se.monopoly.util.{Command, UndoManager}
@@ -35,10 +36,11 @@ trait ControllerInterface extends Publisher {
   def redoCommand(): Unit
   def saveGame(): Unit
   def loadGame(): Unit
-  def spaceAction(): Unit
+  def spaceAction(): Space
   def playerInfo(): Unit
   def getPlayerInfo(playerIndex: Int): Vector[String]
   def endFinishedGame(): Unit
   def dontBuyProperty(): Unit
   def buyProperty(): Unit
+  def getWinner: String
 }

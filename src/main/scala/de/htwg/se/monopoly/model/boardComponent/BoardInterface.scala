@@ -15,6 +15,5 @@ trait BoardInterface {
   def increasePlayerMoney(playerGetsXMoney: Int, currentPlayerIndex: Int): Board
   def decreasePlayerMoney(playerPaysXMoney: Int, currentPlayerIndex: Int): Board
   def setPlayerJailedOrUnJailed(currentPlayerIndex: Int, jailed: Boolean): Board
-  def replacePlayerInList(newPlayer: Player): Board
   def buySpace(playerId: Int, location: Int): Board
 }

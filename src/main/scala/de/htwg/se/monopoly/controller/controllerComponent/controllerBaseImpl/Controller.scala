@@ -15,6 +15,7 @@ class Controller extends Publisher with ControllerInterface {
 
   val numberOfPlayers = 2
   val numberOfSpaces = 40
+  val wentOverGoValue: Int = 200
   val exitCurrentGameMessage: String = "Returns to main menu!"
   val exitProgramMessage: String = "Exit game!"
   val rolledDoubletsMessage: String = "You rolled doublets! Roll a second time"
@@ -31,8 +32,11 @@ class Controller extends Publisher with ControllerInterface {
     dice = Dice()
     playerState = playerState.determinePlayerState(board.playerList(stateMachine.getCurrentPlayer))
     playerState.rollDice(getCurrentDice, stateMachine.getCurrentPlayer, this)
+    val space = spaceAction()
+    wentOverGo()
     stateMachine.nextState()
     publish(new RolledDice)
+    publishSpaceAction(space)
     endFinishedGame()
   }
 
@@ -105,11 +109,42 @@ class Controller extends Publisher with ControllerInterface {
     publish(new LoadGame)
   }
 
-  def spaceAction(): Unit = {
+  def spaceAction(): Space = {
     val player: Player = board.playerList(stateMachine.getCurrentPlayer)
     val space: Space = board.spaces(player.getLocation)
-    board = board.replacePlayerInList(space.action(player))
+    space match {
+      case property: Property =>
+        if (property.ownerId != player.getId && property.ownerId >= 0) {
+          val newPlayer = property.action(player)
+          board = board.setPayedRent(newPlayer, newPlayer.getLocation)
+        }
+      case goToJail: GoToJail =>
+        val newPlayer = goToJail.action(player)
+        board = board.setPlayerJailedOrUnJailed(newPlayer.id, newPlayer.isJailed)
+      case _ =>
+    }
+    space
   }
+
+  def wentOverGo(): Unit = {
+    if (board.playerList(stateMachine.getCurrentPlayer).getLocation - dice.getFaceValue < 0 && board.playerList(stateMachine.getCurrentPlayer).getLocation == 0) {
+      board = board.increasePlayerMoney(wentOverGoValue * 2 ,stateMachine.getCurrentPlayer)
+    } else if (board.playerList(stateMachine.getCurrentPlayer).getLocation - dice.getFaceValue < 0) {
+      board = board.increasePlayerMoney(wentOverGoValue ,stateMachine.getCurrentPlayer)
+    }
+  }
+
+  def publishSpaceAction(space: Space): Unit = {
+    space match {
+      case property: Property =>
+        publish(new PayRent)
+      case goToJail: GoToJail =>
+        publish(new PlayerJailed)
+      case _ =>
+    }
+  }
+
+
 
   def playerInfo(): Unit = {
     publish(new PlayerInfo)
@@ -118,9 +153,9 @@ class Controller extends Publisher with ControllerInterface {
   def getPlayerInfo(playerIndex: Int): Vector[String] = {
     val player = board.playerList(playerIndex)
     val playerMessage = player.toString
-    var infoMessage = "Money: " + player.getMoney.toString + "\n"
-    infoMessage = infoMessage + "Location: " + player.getLocation.toString + "\n" + "Jailed: " + player.isJailed.toString + "\n"
-    infoMessage = infoMessage + "Propertys: \n"
+    var infoMessage = "  Money: " + player.getMoney.toString + "\n"
+    infoMessage = infoMessage + "  Location: " + player.getLocation.toString + "\n" + "  Jailed: " + player.isJailed.toString + "\n"
+    infoMessage = infoMessage + "  Propertys: \n"
     for (space <- board.spaces) {
       space match {
         case property: Property =>
@@ -138,6 +173,7 @@ class Controller extends Publisher with ControllerInterface {
     board = board.buySpace(stateMachine.getCurrentPlayer, getPlayerList(stateMachine.getCurrentPlayer).getLocation)
     stateMachine.nextState()
     publish(new BuyProperty)
+    endFinishedGame()
   }
 
   def dontBuyProperty(): Unit = {
@@ -147,15 +183,16 @@ class Controller extends Publisher with ControllerInterface {
   }
 
   def endFinishedGame(): Unit = {
-    if (isGameFinished) {
+    if (gameFinished) {
+      stateMachine.setState("FINISHED_GAME")
       publish(new GameFinished)
     }
   }
 
-  def isGameFinished: Boolean = {
+  def gameFinished: Boolean = {
     var index = 0
     for (player <- getPlayerList) {
-      if (player.getMoney < 0) {
+      if (player.getMoney >= 0) {
         index += 1
       }
     }
@@ -164,5 +201,15 @@ class Controller extends Publisher with ControllerInterface {
     } else {
       false
     }
+  }
+
+  def getWinner: String = {
+    var winner: String = ""
+    for (player <- board.playerList) {
+      if (player.getMoney < 0) {
+        winner = player.toString + " has won!"
+      }
+    }
+    winner
   }
 }

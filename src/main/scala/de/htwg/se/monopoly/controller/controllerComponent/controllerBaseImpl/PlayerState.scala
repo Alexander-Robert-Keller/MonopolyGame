@@ -62,7 +62,7 @@ object JailedPlayerState extends PlayerState {
 
   override def rollDice(dice: Dice, currentPlayerIndex: Int, controller: Controller): Unit = {
     if (dice.hasDoublets) {
-      controller.board = controller.board.setPlayerJailedOrUnJailed(currentPlayerIndex, jailed = false)
+      controller.board = controller.board.setPlayerJailedOrUnJailed(currentPlayerIndex + 1, jailed = false)
       controller.board = controller.board.movePlayer(dice.getFaceValue, currentPlayerIndex)
     }
   }

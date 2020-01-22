@@ -19,7 +19,7 @@ class StateMachine(controller: Controller) extends {
       case "ROLL_DICE" => state = GameState(1, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "BUY_PROPERTY" => state = GameState(2, state.getCurrentPlayer, state.getNumberOfPlayers)
       case "MAIN_MENU" => state = GameState(0, state.getCurrentPlayer, state.getNumberOfPlayers)
-      case "FINISHED_GAME" => GameState(3, state.getCurrentPlayer, state.getNumberOfPlayers)
+      case "FINISHED_GAME" => state = GameState(3, state.getCurrentPlayer, state.getNumberOfPlayers)
     }
   }
 

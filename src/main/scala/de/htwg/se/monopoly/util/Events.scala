@@ -28,4 +28,8 @@ class GameFinished extends Event
 
 class BuyProperty extends Event
 
-class DontBuyProperty extends  Event
+class DontBuyProperty extends Event
+
+class PayRent extends Event
+
+class PlayerJailed extends Event
