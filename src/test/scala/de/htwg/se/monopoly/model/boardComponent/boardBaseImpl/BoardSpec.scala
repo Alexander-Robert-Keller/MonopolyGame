@@ -68,9 +68,9 @@ class BoardSpec extends WordSpec with Matchers {
       }
 
       "have a method to jail or unjail a player" in {
-        gameBoard = gameBoard.setPlayerJailedOrUnJailed(0, jailed = true)
+        gameBoard = gameBoard.setPlayerJailedOrUnJailed(1, jailed = true)
         gameBoard.playerList(0).isJailed should be(true)
-        gameBoard = gameBoard.setPlayerJailedOrUnJailed(0, jailed = false)
+        gameBoard = gameBoard.setPlayerJailedOrUnJailed(1, jailed = false)
         gameBoard.playerList(0).isJailed should be(false)
       }
 
