@@ -1,0 +1,51 @@
+<Monopoly>
+    <board numberOfSpaces="40" numberOfPlayers="2">
+        <playerList>
+            <player id="1" location="0" jailed="false" money="1500"> </player>
+            <player id="2" location="0" jailed="false" money="1500"> </player>
+        </playerList>
+        <spaces>
+            <space class="Go"> </space>
+            <space class="Property" price="60" ownerId="-1" rent="2"> </space>
+            <space class="CommunityChest"> </space>
+            <space class="Property" price="60" ownerId="-1" rent="4"> </space>
+            <space class="Tax"> </space>
+            <space class="Railroad"> </space>
+            <space class="Property" price="100" ownerId="-1" rent="6"> </space>
+            <space class="Chance"> </space>
+            <space class="Property" price="100" ownerId="-1" rent="6"> </space>
+            <space class="Property" price="120" ownerId="-1" rent="8"> </space>
+            <space class="Jail"> </space>
+            <space class="Property" price="140" ownerId="-1" rent="10"> </space>
+            <space class="ElectricCompany"> </space>
+            <space class="Property" price="140" ownerId="-1" rent="10"> </space>
+            <space class="Property" price="160" ownerId="-1" rent="12"> </space>
+            <space class="Railroad"> </space>
+            <space class="Property" price="180" ownerId="-1" rent="14"> </space>
+            <space class="CommunityChest"> </space>
+            <space class="Property" price="180" ownerId="-1" rent="14"> </space>
+            <space class="Property" price="200" ownerId="-1" rent="16"> </space>
+            <space class="FreeParking"> </space>
+            <space class="Property" price="220" ownerId="-1" rent="18"> </space>
+            <space class="Chance"> </space>
+            <space class="Property" price="220" ownerId="-1" rent="18"> </space>
+            <space class="Property" price="240" ownerId="-1" rent="20"> </space>
+            <space class="Railroad"> </space>
+            <space class="Property" price="260" ownerId="-1" rent="22"> </space>
+            <space class="Property" price="260" ownerId="-1" rent="22"> </space>
+            <space class="WaterWorks"> </space>
+            <space class="Property" price="280" ownerId="-1" rent="24"> </space>
+            <space class="GoToJail"> </space>
+            <space class="Property" price="300" ownerId="-1" rent="26"> </space>
+            <space class="Property" price="300" ownerId="-1" rent="26"> </space>
+            <space class="CommunityChest"> </space>
+            <space class="Property" price="320" ownerId="-1" rent="28"> </space>
+            <space class="Railroad"> </space>
+            <space class="Chance"> </space>
+            <space class="Property" price="350" ownerId="-1" rent="35"> </space>
+            <space class="Tax"> </space>
+            <space class="Property" price="400" ownerId="-1" rent="40"> </space>
+        </spaces>
+    </board>
+    <gameState stateindex="1" currentPlayer="0" numberOfPlayers="2"> </gameState>
+</Monopoly>
