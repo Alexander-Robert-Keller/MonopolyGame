@@ -114,12 +114,13 @@ class ControllerSpec extends WordSpec with Matchers {
       }
       "have a method playerInfo and getPlayerInfo" in {
         controller.initializeGame()
-        controller.board.buySpace(1, 0)
+        controller.board.buySpace(1, 9)
         controller.getPlayerInfo(0)(0) shouldBe a[String]
         controller.getPlayerInfo(1)(0) shouldBe a[String]
         controller.playerInfo()
       }
       "have a method buyProperty and dontBuyProperty" in {
+        controller = new Controller
         controller.initializeGame()
         val state = controller.stateMachine.state
         controller.board = controller.board.movePlayer(9, 0)
