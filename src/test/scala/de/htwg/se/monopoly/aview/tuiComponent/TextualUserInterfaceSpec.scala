@@ -26,7 +26,6 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.stateMachine.state.getStateIndex should be (1)
       }
       "have reactions for Specific events" in {
-        controller = injector.getInstance(classOf[ControllerInterface])
         controller.initializeGame()
         controller.board = controller.board.movePlayer(9, 0)
         controller.buyProperty()
