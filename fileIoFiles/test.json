@@ -1,0 +1,197 @@
+{
+  "Monopoly" : {
+    "board" : {
+      "numberOfSpaces" : 40,
+      "numberOfPlayers" : 2,
+      "playerList" : {
+        "player" : [ {
+          "id" : 1,
+          "location" : 0,
+          "jailed" : false,
+          "money" : 1500
+        }, {
+          "id" : 2,
+          "location" : 0,
+          "jailed" : false,
+          "money" : 1500
+        } ]
+      },
+      "spaces" : {
+        "space" : [ {
+          "class" : "Go"
+        }, {
+          "class" : "Property",
+          "name" : "Mediterranean Avenue",
+          "price" : 60,
+          "ownerId" : -1,
+          "rent" : 2
+        }, {
+          "class" : "CommunityChest"
+        }, {
+          "class" : "Property",
+          "name" : "Baltic Avenue",
+          "price" : 60,
+          "ownerId" : -1,
+          "rent" : 4
+        }, {
+          "class" : "Tax"
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Property",
+          "name" : "Oriental Avenue",
+          "price" : 100,
+          "ownerId" : -1,
+          "rent" : 6
+        }, {
+          "class" : "Chance"
+        }, {
+          "class" : "Property",
+          "name" : "Vermont Avenue",
+          "price" : 100,
+          "ownerId" : -1,
+          "rent" : 6
+        }, {
+          "class" : "Property",
+          "name" : "Connecticut Avenue",
+          "price" : 120,
+          "ownerId" : -1,
+          "rent" : 8
+        }, {
+          "class" : "Jail"
+        }, {
+          "class" : "Property",
+          "name" : "St. Charles Place",
+          "price" : 140,
+          "ownerId" : -1,
+          "rent" : 10
+        }, {
+          "class" : "ElectricCompany"
+        }, {
+          "class" : "Property",
+          "name" : "States Avenue",
+          "price" : 140,
+          "ownerId" : -1,
+          "rent" : 10
+        }, {
+          "class" : "Property",
+          "name" : "Virginia Avenue",
+          "price" : 160,
+          "ownerId" : -1,
+          "rent" : 12
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Property",
+          "name" : "St. James Place",
+          "price" : 180,
+          "ownerId" : -1,
+          "rent" : 14
+        }, {
+          "class" : "CommunityChest"
+        }, {
+          "class" : "Property",
+          "name" : "Tennessee Avenue",
+          "price" : 180,
+          "ownerId" : -1,
+          "rent" : 14
+        }, {
+          "class" : "Property",
+          "name" : "New York Avenue",
+          "price" : 200,
+          "ownerId" : -1,
+          "rent" : 16
+        }, {
+          "class" : "FreeParking"
+        }, {
+          "class" : "Property",
+          "name" : "Kentucky Avenue",
+          "price" : 220,
+          "ownerId" : -1,
+          "rent" : 18
+        }, {
+          "class" : "Chance"
+        }, {
+          "class" : "Property",
+          "name" : "Indiana Avenue",
+          "price" : 220,
+          "ownerId" : -1,
+          "rent" : 18
+        }, {
+          "class" : "Property",
+          "name" : "Illinois Avenue",
+          "price" : 240,
+          "ownerId" : -1,
+          "rent" : 20
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Property",
+          "name" : "Atlantic Avenue",
+          "price" : 260,
+          "ownerId" : -1,
+          "rent" : 22
+        }, {
+          "class" : "Property",
+          "name" : "Ventor Avenue",
+          "price" : 260,
+          "ownerId" : -1,
+          "rent" : 22
+        }, {
+          "class" : "WaterWorks"
+        }, {
+          "class" : "Property",
+          "name" : "Marvis Gardens",
+          "price" : 280,
+          "ownerId" : -1,
+          "rent" : 24
+        }, {
+          "class" : "GoToJail"
+        }, {
+          "class" : "Property",
+          "name" : "Pacific Avenue",
+          "price" : 300,
+          "ownerId" : -1,
+          "rent" : 26
+        }, {
+          "class" : "Property",
+          "name" : "North Carolina Avenue",
+          "price" : 300,
+          "ownerId" : -1,
+          "rent" : 26
+        }, {
+          "class" : "CommunityChest"
+        }, {
+          "class" : "Property",
+          "name" : "Pennsylvania Avenue",
+          "price" : 320,
+          "ownerId" : -1,
+          "rent" : 28
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Chance"
+        }, {
+          "class" : "Property",
+          "name" : "Park Palace",
+          "price" : 350,
+          "ownerId" : -1,
+          "rent" : 35
+        }, {
+          "class" : "Tax"
+        }, {
+          "class" : "Property",
+          "name" : "Boardwalk",
+          "price" : 400,
+          "ownerId" : -1,
+          "rent" : 40
+        } ]
+      }
+    },
+    "gameState" : {
+      "stateindex" : 1,
+      "currentPlayer" : 0,
+      "numberOfPlayers" : 2
+    }
+  }
+}

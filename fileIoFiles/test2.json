@@ -1,0 +1,109 @@
+{
+  "Monopoly" : {
+    "board" : {
+      "numberOfSpaces" : 0,
+      "numberOfPlayers" : 2,
+      "playerList" : {
+        "player" : [ {
+          "id" : 1,
+          "location" : 0,
+          "jailed" : false,
+          "money" : 1500
+        }, {
+          "id" : 2,
+          "location" : 0,
+          "jailed" : false,
+          "money" : 1500
+        } ]
+      },
+      "spaces" : {
+        "space" : [ {
+          "class" : "Go"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "CommunityChest"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Tax"
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Chance"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Jail"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "ElectricCompany"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "CommunityChest"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "FreeParking"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Chance"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "WaterWorks"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "GoToJail"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "CommunityChest"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Railroad"
+        }, {
+          "class" : "Chance"
+        }, {
+          "class" : "Property"
+        }, {
+          "class" : "Tax"
+        }, {
+          "class" : "Property"
+        } ]
+      }
+    },
+    "gameState" : {
+      "stateindex" : 1,
+      "currentPlayer" : 0,
+      "numberOfPlayers" : 2
+    }
+  }
+}
