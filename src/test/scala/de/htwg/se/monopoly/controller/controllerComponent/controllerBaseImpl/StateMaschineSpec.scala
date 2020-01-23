@@ -72,7 +72,7 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.setCurrentPlayer(0)
         controller.board = controller.board.movePlayer(9, 0)
         controller.stateMachine.nextState()
-        controller.stateMachine.state.state should be (controller.stateMachine.state.BUY_PROPERTY)
+        controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
         controller.stateMachine.setState("FINISHED_GAME")
         controller.stateMachine.nextState()
         controller.stateMachine.state.state should be (controller.stateMachine.state.FINISHED_GAME)

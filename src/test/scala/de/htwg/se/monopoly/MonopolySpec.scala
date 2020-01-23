@@ -6,7 +6,7 @@ class MonopolySpec extends WordSpec with Matchers {
 
   "The Monopoly main class" should {
     "accept text input as argument without readline loop, to test commands" in {
-      Monopoly.main(Array[String]("1", "2"))
+      Monopoly.main(Array[String]("1", "1"))
     }
   }
 }
