@@ -58,7 +58,7 @@ class ControllerSpec extends WordSpec with Matchers {
       }
       "have a method ExitGameMenu and exitMainMenu" in {
         controller.initializeGame()
-        controller.exitGameMenu()
+        //controller.exitGameMenu()
         controller.exitMainMenu()
       }
       "have a method getPlayerList" in {

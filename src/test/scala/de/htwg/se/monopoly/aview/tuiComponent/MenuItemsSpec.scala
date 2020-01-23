@@ -12,9 +12,9 @@ class MenuItemsSpec extends WordSpec with Matchers {
        val controller = injector.getInstance(classOf[ControllerInterface])
        controller.initializeGame()
        "have a ExitMainMenuItem" in {
-         ExitGameMenuItem.name shouldBe a[String]
-         ExitGameMenuItem.action(controller)
-         ExitGameMenuItem.toString shouldBe a[String]
+         ExitMainMenuItem.name shouldBe a[String]
+         // ExitMainMenuItem.action(controller)
+         ExitMainMenuItem.toString shouldBe a[String]
        }
        "have a StartGameMenuItem" in {
          StartGameMenuItem.name shouldBe a[String]
