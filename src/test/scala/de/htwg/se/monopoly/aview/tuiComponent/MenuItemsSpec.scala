@@ -13,7 +13,7 @@ class MenuItemsSpec extends WordSpec with Matchers {
        controller.initializeGame()
        "have a ExitMainMenuItem" in {
          ExitMainMenuItem.name shouldBe a[String]
-         ExitMainMenuItem.action(controller)
+         // ExitMainMenuItem.action(controller)
          ExitMainMenuItem.toString shouldBe a[String]
        }
        "have a StartGameMenuItem" in {
@@ -33,7 +33,7 @@ class MenuItemsSpec extends WordSpec with Matchers {
        }
        "have a ExitGameMenuItem" in {
          ExitGameMenuItem.name shouldBe a[String]
-         // ExitGameMenuItem.action(controller)
+         ExitGameMenuItem.action(controller)
          ExitGameMenuItem.toString shouldBe a[String]
        }
        "have a UndoMenuItem" in {
