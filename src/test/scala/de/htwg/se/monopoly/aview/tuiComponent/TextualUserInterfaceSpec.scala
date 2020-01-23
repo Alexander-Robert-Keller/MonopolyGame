@@ -11,7 +11,7 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
   "A TextualUSerInterface" when {
     "new" should {
       val injector = Guice.createInjector(new MonopolyModule)
-      val controller = injector.getInstance(classOf[ControllerInterface])
+      var controller = injector.getInstance(classOf[ControllerInterface])
       val tui: TextualUserInterface = new TextualUserInterface(controller)
       "have a tui Menu variable" in {
         tui.tuiMenu should be (MainMenu)
@@ -26,6 +26,7 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.stateMachine.state.getStateIndex should be (1)
       }
       "have reactions for Specific events" in {
+        controller = injector.getInstance(classOf[ControllerInterface])
         controller.initializeGame()
         controller.board = controller.board.movePlayer(9, 0)
         controller.buyProperty()
@@ -39,7 +40,7 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.saveGame()
         controller.loadGame()
         controller.playerInfo()
-        controller.board = controller.board.decreasePlayerMoney(-1600, 0)
+        controller.board = controller.board.decreasePlayerMoney(-40000, 0)
         controller.endFinishedGame()
         controller.initializeGame()
         controller.exitGameMenu()

@@ -18,7 +18,7 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.state shouldBe a[GameState]
       }
 
-      "have a method getCurrentPlayer/-gteNumberOfPlayers" in {
+      "have a method getCurrentPlayer/-getNumberOfPlayers" in {
         controller.stateMachine.getCurrentPlayer should be (0)
         controller.stateMachine.getNumberOfPlayers should be (2)
       }
@@ -42,6 +42,7 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.setState("BUY_PROPERTY")
         controller.stateMachine.currentGameStateMessage should be ("Buy or Upgrade your property now!")
         controller.stateMachine.setState("FINISHED_GAME")
+        controller.board = controller.board.decreasePlayerMoney(2000, 0)
         controller.stateMachine.currentGameStateMessage shouldBe a[String]
       }
 

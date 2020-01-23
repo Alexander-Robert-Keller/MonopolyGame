@@ -11,7 +11,7 @@ import org.scalatest.{Matchers, WordSpec}
 class ControllerSpec extends WordSpec with Matchers {
   "A controller" when {
     "new" should {
-      val controller = new Controller
+      var controller = new Controller
       "have a value numberOfPlayers, numberOfSpaces and wentOverGoValue" in {
         controller.numberOfPlayers should be (2)
         controller.numberOfSpaces should be (40)
@@ -70,8 +70,10 @@ class ControllerSpec extends WordSpec with Matchers {
         controller.board.spaces.isEmpty should be (false)
       }
       "have a method undoCommand and redo Command" in {
-        controller.doStep(new BuyCommand(controller))
+        controller = new Controller
+        controller.initializeGame()
         controller.undoCommand()
+        controller.doStep(new BuyCommand(controller))
         controller.undoCommand()
         controller.redoCommand()
         controller.redoCommand()
@@ -112,7 +114,9 @@ class ControllerSpec extends WordSpec with Matchers {
       }
       "have a method playerInfo and getPlayerInfo" in {
         controller.initializeGame()
+        controller.board.buySpace(1, 0)
         controller.getPlayerInfo(0)(0) shouldBe a[String]
+        controller.getPlayerInfo(1)(0) shouldBe a[String]
         controller.playerInfo()
       }
       "have a method buyProperty and dontBuyProperty" in {
