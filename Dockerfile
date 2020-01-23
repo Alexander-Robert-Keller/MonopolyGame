@@ -14,4 +14,7 @@ ADD . /monopoly
 CMD sbt run
 
 # docker build -t monopoly .    <- build Image Command
-# docker run -ti --rm -e DISPLAY=(eigene IP):0.0 monopoly     <- run command (192.168.1.12)
+# docker run -ti -e DISPLAY=(eigene IP):0.0 monopoly     <- run command (192.168.1.12)
+
+
+
