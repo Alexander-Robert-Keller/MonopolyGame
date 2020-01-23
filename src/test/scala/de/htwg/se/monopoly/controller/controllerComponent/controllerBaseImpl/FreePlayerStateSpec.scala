@@ -8,7 +8,7 @@ class FreePlayerStateSpec extends WordSpec with Matchers {
 
     val controller = new Controller
     controller.board = controller.board.init()
-    controller.board = controller.board.setPlayerJailedOrUnJailed(0, jailed = true)
+    controller.board = controller.board.setPlayerJailedOrUnJailed(1, jailed = true)
 
     "have a method to determine the current palyerState" in {
       controller.playerState.determinePlayerState(controller.board.playerList(0)) == JailedPlayerState

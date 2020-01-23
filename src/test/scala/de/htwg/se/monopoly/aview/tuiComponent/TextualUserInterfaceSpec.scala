@@ -31,18 +31,19 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.buyProperty()
         controller.dontBuyProperty()
         controller.rollDice()
+        controller.redoCommand()
         controller.undoCommand()
         controller.undoCommand()
         controller.redoCommand()
-        controller.redoCommand()
+        controller.initializeGame()
         controller.saveGame()
         controller.loadGame()
         controller.playerInfo()
-        controller.board.decreasePlayerMoney(-1600, 0)
+        controller.board = controller.board.decreasePlayerMoney(-1600, 0)
         controller.endFinishedGame()
         controller.initializeGame()
         controller.exitGameMenu()
-        //controller.exitMainMenu()
+        controller.exitMainMenu()
       }
     }
   }

@@ -74,6 +74,21 @@ class BoardSpec extends WordSpec with Matchers {
         gameBoard.playerList(0).isJailed should be(false)
       }
 
+      "have a method setPayedRent" in {
+        gameBoard = gameBoard.init()
+        gameBoard = gameBoard.movePlayer(9, 1)
+        gameBoard = gameBoard.buySpace(1, 9)
+        gameBoard = gameBoard.setPayedRent(gameBoard.playerList(0), 9)
+        gameBoard.playerList(0).getMoney should be < 1500
+      }
+
+      "have a method buySpace" in {
+        gameBoard = gameBoard.init()
+        gameBoard = gameBoard.movePlayer(9, 1)
+        gameBoard = gameBoard.buySpace(1, 9)
+        gameBoard.spaces(9).asInstanceOf[Property].ownerId should be (2)
+      }
+
       "have a toString Method which returns the Board as a String" in {
         val test1 = gameBoard.init()
         test1.toString shouldBe a[String]
