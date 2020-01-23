@@ -42,8 +42,8 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.board = controller.board.decreasePlayerMoney(-1600, 0)
         controller.endFinishedGame()
         controller.initializeGame()
-        controller.exitGameMenu()
-        // controller.exitMainMenu()
+        // controller.exitGameMenu()
+        controller.exitMainMenu()
       }
     }
   }
