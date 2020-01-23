@@ -10,10 +10,6 @@ class MonopolyModule extends AbstractModule with ScalaModule {
 
   override def configure(): Unit = {
     bind[ControllerInterface].to[controllerBaseImpl.Controller]
-
-    //TODO: implement Board over dependency Injection
-    //bind[BoardInterface].to[boardBaseImpl.Board]
-
     bind[FileIOInterface].to[fileIoJasonImpl.FileIO]
   }
 }
