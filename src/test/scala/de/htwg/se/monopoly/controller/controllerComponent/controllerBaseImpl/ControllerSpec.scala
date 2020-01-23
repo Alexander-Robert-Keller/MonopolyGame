@@ -113,8 +113,9 @@ class ControllerSpec extends WordSpec with Matchers {
         controller.publishSpaceAction(Chance())
       }
       "have a method playerInfo and getPlayerInfo" in {
+        controller = new Controller
         controller.initializeGame()
-        controller.board.buySpace(1, 0)
+        controller.board.buySpace(1, 9)
         controller.getPlayerInfo(0)(0) shouldBe a[String]
         controller.getPlayerInfo(1)(0) shouldBe a[String]
         controller.playerInfo()
