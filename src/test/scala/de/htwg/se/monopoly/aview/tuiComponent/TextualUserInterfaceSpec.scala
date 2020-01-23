@@ -43,7 +43,7 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.endFinishedGame()
         controller.initializeGame()
         controller.exitGameMenu()
-        controller.exitMainMenu()
+        // controller.exitMainMenu()
       }
     }
   }
