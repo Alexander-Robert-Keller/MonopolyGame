@@ -141,8 +141,6 @@ case class Board(newSpaceList: Vector[Space], newPlayerList: Vector[Player], tot
       if (spaceId == location) {
         spaces(spaceId) match {
           case property: Property => newSpaces = newSpaces:+ Property(property.name, property.price, playerIndex + 1, property.rent)
-          //TODO: add Railroads
-          case _ => newSpaces = newSpaces:+ spaces(spaceId)
         }
       } else {
         newSpaces = newSpaces:+ spaces(spaceId)

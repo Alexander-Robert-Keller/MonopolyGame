@@ -30,6 +30,8 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.state.state should be (controller.stateMachine.state.MAIN_MENU)
         controller.stateMachine.setState("BUY_PROPERTY")
         controller.stateMachine.state.state should be (controller.stateMachine.state.BUY_PROPERTY)
+        controller.stateMachine.setState("FINISHED_GAME")
+        controller.stateMachine.state.state should be (controller.stateMachine.state.FINISHED_GAME)
       }
 
       "have a message for the current gameState" in {
@@ -39,6 +41,8 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.currentGameStateMessage should be ("Main Menu:")
         controller.stateMachine.setState("BUY_PROPERTY")
         controller.stateMachine.currentGameStateMessage should be ("Buy or Upgrade your property now!")
+        controller.stateMachine.setState("FINISHED_GAME")
+        controller.stateMachine.currentGameStateMessage shouldBe a[String]
       }
 
       "have a method to start the game" in {
@@ -64,12 +68,29 @@ class StateMaschineSpec extends WordSpec with Matchers {
         controller.stateMachine.setState("BUY_PROPERTY")
         controller.stateMachine.nextState()
         controller.stateMachine.state.state should be (controller.stateMachine.state.ROLL_DICE)
+        controller.stateMachine.setState("BUY_PROPERTY")
+        controller.stateMachine.setCurrentPlayer(0)
+        controller.board = controller.board.movePlayer(9, 0)
+        controller.stateMachine.nextState()
+        controller.stateMachine.state.state should be (controller.stateMachine.state.BUY_PROPERTY)
+        controller.stateMachine.setState("FINISHED_GAME")
+        controller.stateMachine.nextState()
+        controller.stateMachine.state.state should be (controller.stateMachine.state.FINISHED_GAME)
       }
 
       "have a method to get the next player" in {
         controller.board = controller.board.init()
         controller.stateMachine.startGame(2)
         controller.stateMachine.nextPlayer() should be (1)
+        controller.board.decreasePlayerMoney(2000,0)
+        controller.stateMachine.nextPlayer() should be (1)
+      }
+
+      "have a method buyProperty" in {
+        controller.board = controller.board.init()
+        controller.stateMachine.buyProperty()
+        controller.board = controller.board.movePlayer(9, 0)
+        controller.stateMachine.buyProperty()
       }
     }
   }

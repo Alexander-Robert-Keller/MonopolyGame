@@ -59,6 +59,7 @@ class ControllerSpec extends WordSpec with Matchers {
       "have a method ExitGameMenu and exitMainMenu" in {
         controller.initializeGame()
         controller.exitGameMenu()
+        controller.exitMainMenu()
       }
       "have a method getPlayerList" in {
         controller.initializeGame()
@@ -71,6 +72,8 @@ class ControllerSpec extends WordSpec with Matchers {
       "have a method undoCommand and redo Command" in {
         controller.doStep(new BuyCommand(controller))
         controller.undoCommand()
+        controller.undoCommand()
+        controller.redoCommand()
         controller.redoCommand()
         controller.undoManager.redoStackEmpty() should be (true)
       }
@@ -85,6 +88,8 @@ class ControllerSpec extends WordSpec with Matchers {
         controller.initializeGame()
         controller.spaceAction()
         controller.board = controller.board.movePlayer(9, 0)
+        controller.board = controller.board.buySpace(1, 9)
+        controller.spaceAction()
         controller.board = controller.board.buySpace(0, 9)
         controller.spaceAction()
         controller.board.playerList(0).getMoney should be < 1500
