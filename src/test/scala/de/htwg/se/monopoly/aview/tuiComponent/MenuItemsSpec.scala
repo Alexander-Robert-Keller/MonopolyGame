@@ -63,6 +63,7 @@ class MenuItemsSpec extends WordSpec with Matchers {
        }
        "have a BuyPropertyMenuItem" in {
          BuyPropertyMenuItem.name shouldBe a[String]
+         controller.initializeGame()
          controller.board = controller.board.movePlayer(9, 0)
          BuyPropertyMenuItem.action(controller)
          BuyPropertyMenuItem.toString shouldBe a[String]

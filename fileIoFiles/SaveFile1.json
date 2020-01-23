@@ -6,7 +6,7 @@
       "playerList" : {
         "player" : [ {
           "id" : 1,
-          "location" : 9,
+          "location" : 0,
           "jailed" : false,
           "money" : 1500
         }, {
@@ -189,7 +189,7 @@
       }
     },
     "gameState" : {
-      "stateindex" : 0,
+      "stateindex" : 1,
       "currentPlayer" : 0,
       "numberOfPlayers" : 2
     }
