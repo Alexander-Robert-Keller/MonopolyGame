@@ -27,9 +27,10 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
       }
       "have reactions for Specific events" in {
         controller.initializeGame()
-        controller.rollDice()
+        controller.board = controller.board.movePlayer(9, 0)
         controller.buyProperty()
         controller.dontBuyProperty()
+        controller.rollDice()
         controller.undoCommand()
         controller.undoCommand()
         controller.redoCommand()
@@ -41,7 +42,7 @@ class TextualUserInterfaceSpec extends WordSpec with Matchers {
         controller.endFinishedGame()
         controller.initializeGame()
         controller.exitGameMenu()
-        controller.exitMainMenu()
+        //controller.exitMainMenu()
       }
     }
   }

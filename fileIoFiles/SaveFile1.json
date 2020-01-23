@@ -6,9 +6,9 @@
       "playerList" : {
         "player" : [ {
           "id" : 1,
-          "location" : 5,
+          "location" : 17,
           "jailed" : false,
-          "money" : 1500
+          "money" : 1380
         }, {
           "id" : 2,
           "location" : 0,
@@ -55,7 +55,7 @@
           "class" : "Property",
           "name" : "Connecticut Avenue",
           "price" : 120,
-          "ownerId" : -1,
+          "ownerId" : 1,
           "rent" : 8
         }, {
           "class" : "Jail"
@@ -189,7 +189,7 @@
       }
     },
     "gameState" : {
-      "stateindex" : 0,
+      "stateindex" : 1,
       "currentPlayer" : 1,
       "numberOfPlayers" : 2
     }
