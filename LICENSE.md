@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2019 - 2020 Daniel Ozyurt, Alexander-Robert Keller
+Copyright (c) 2019 - 2020 [d03](https://github.com/d03 "d03's GitHub profile"), [Alexander-Robert Keller](https://github.com/Alexander-Robert-Keller/MonopolyGame "Alexander's GitHub profile")
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
